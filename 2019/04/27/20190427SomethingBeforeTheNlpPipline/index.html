@@ -1,0 +1,419 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>实施NLP流水线之前干点什么 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="实施NLP流水线之前干点什么"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NLP%E6%B5%81%E6%B0%B4%E7%BA%BF%E6%80%BB%E8%A7%88"><span class="toc-number">1.</span> <span class="toc-text">NLP流水线总览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9C%AC%E8%BA%AB%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">数据本身处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA"><span class="toc-number">3.</span> <span class="toc-text">数据增强</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E8%AF%86%E5%88%AB%E7%9A%84%E5%88%86%E7%B1%BB"><span class="toc-number">4.</span> <span class="toc-text">实体识别的分类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number"></span> <span class="toc-text">参考</span></a>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-04-26T16:00:00.000Z"><a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">2019-04-27</a></time>
+      
+      
+  
+    <h1 class="title">实施NLP流水线之前干点什么</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="NLP流水线总览"><a href="#NLP流水线总览" class="headerlink" title="NLP流水线总览"></a>NLP流水线总览</h2><p>NLP处理套路无非以下该图中描述</p>
+<p><img src="https://stanfordnlp.github.io/CoreNLP/images/AnnotationPipeline.png" alt></p>
+<p>该文的重点则对所有该流水线之前的任务进行补充</p>
+<h2 id="数据本身处理"><a href="#数据本身处理" class="headerlink" title="数据本身处理"></a>数据本身处理</h2><ul>
+<li>简繁体转换或其他同义转换(中文)</li>
+<li>全角半角转换</li>
+<li>不在dictionary(正则与替换对照词典)以内的单词就用UNK取代</li>
+<li>可以在句首加上<bos>，在句末加上<eos></eos></bos></li>
+<li>url，at，表情符号等统一替换</li>
+<li>稀有词替换为 <unk>(词频小于某一个阈值)</unk></li>
+<li>编码转换</li>
+<li>小写转换</li>
+<li>去除标点符号(根据具体的任务也可替换)</li>
+<li>去除停用词</li>
+<li>去除频现词</li>
+<li>去除稀疏词</li>
+<li>略缩词替换</li>
+<li>错词纠正(将词替换为词典中最近的词或者<unk>)</unk></li>
+<li>单位替换(将文本中的单位替换为统一格式如：将4kgs、4kg统一替换为4 kg，将4k替换为4000，将100或100 100或100100或100替换为100 dollar)</li>
+<li>词形还原(lemmatization)</li>
+<li>其他语言进行翻译(比如对于中文中的英文单词归一化为<_e_>)<!--_e_--></li>
+<li>数字归一化(比如将小于10的为<如果在之后的实体识别中需要对应的原始数字则跳过该步骤.1:NUM> 大于10<2:num>)<!--2:num--></li>
+</ul>
+<h2 id="数据增强"><a href="#数据增强" class="headerlink" title="数据增强"></a>数据增强</h2><ul>
+<li>长句截断</li>
+<li>dropout</li>
+<li>shuffle<br><img src="https://pic3.zhimg.com/80/v2-d3aaee7f330d475a0643abd5199a1f16_hd.png" alt></li>
+<li>文档裁减(这样我将获得更多的数据。开始的时候我尝试从文档中抽取几个句子并创建10个新文档。这些新创建的文档句子间没有逻辑关系，所以用它们训练得到的分类器性能很差。第二次，我尝试将每篇文章分成若干段，每段由文章中五个连续的句子组成。这个方法就运行得非常好，让分类器的性能提升很大)</li>
+<li>文本对齐</li>
+<li>同义词替换</li>
+<li>回译</li>
+<li>迁移学习</li>
+<li>GAN</li>
+<li>BERT</li>
+</ul>
+<h2 id="实体识别的分类"><a href="#实体识别的分类" class="headerlink" title="实体识别的分类"></a>实体识别的分类</h2><p>PERSON People, including fictional.<br>NORP Nationalities or religious or political groups.<br>FAC Buildings, airports, highways, bridges, etc.<br>ORG Companies, agencies, institutions, etc.<br>GPE Countries, cities, states.<br>LOC Non-GPE locations, mountain ranges, bodies of water.<br>PRODUCT Objects, vehicles, foods, etc. (Not services.)<br>EVENT Named hurricanes, battles, wars, sports events, etc.<br>WORK_OF_ART Titles of books, songs, etc.<br>LAW Named documents made into laws.<br>LANGUAGE Any named language.<br>DATE Absolute or relative dates or periods.<br>TIME Times smaller than a day.<br>PERCENT Percentage, including ”%“.<br>MONEY Monetary values, including unit.<br>QUANTITY Measurements, as of weight or distance.<br>ORDINAL “first”, “second”, etc.<br>CARDINAL Numerals that do not fall under another type. </p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://stanfordnlp.github.io/CoreNLP/pipelines.html" target="_blank" rel="noopener">Introdecton to pipelines</a><br><a href="https://juejin.im/entry/5aa34b10f265da2381553b87" target="_blank" rel="noopener">文本数据处理的终极指南-NLP入门</a><br><a href="https://blog.csdn.net/wmq104/article/details/82931352" target="_blank" rel="noopener">使用re正则化进行文本清理</a><br><a href="https://www.zhihu.com/question/268849350" target="_blank" rel="noopener">自然语言处理时，通常的文本清理流程是什么？</a><br><a href="https://www.zhihu.com/question/295519283" target="_blank" rel="noopener">中文自然语言处理时，英文单词和数字怎么处理？</a><br><a href="https://www.jiqizhixin.com/articles/2018-11-19-20" target="_blank" rel="noopener">几千条文本库也能做机器学习！NLP小数据集训练指南</a><br><a href="https://zhuanlan.zhihu.com/p/28923961" target="_blank" rel="noopener">知乎“看山杯” 夺冠记</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2019/04/27/20190427SomethingBeforeTheNlpPipline/">https://blog.littleji.com/2019/04/27/20190427SomethingBeforeTheNlpPipline/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2019-04/">2019-04</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/NLP/">NLP</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

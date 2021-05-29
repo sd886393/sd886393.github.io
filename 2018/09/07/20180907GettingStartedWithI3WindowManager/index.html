@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在Linux上使用 i3 作为窗口管理器的入门教程 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="在Linux上使用 i3 作为窗口管理器的入门教程"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1. 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%99%BB%E5%BD%95%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">2. 登录与初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">3.</span> <span class="toc-text">3. 基本的快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%9B%BF%E6%8D%A2GDM"><span class="toc-number">4.</span> <span class="toc-text">4. 替换GDM</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-09-06T16:00:00.000Z"><a href="/2018/09/07/20180907GettingStartedWithI3WindowManager/">2018-09-07</a></time>
+      
+      
+  
+    <h1 class="title">在Linux上使用 i3 作为窗口管理器的入门教程</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>注：本文首发于linux中国<br>本篇文章会介绍如何在Fedora系统中，安装、配置、使用i3桌面管理器。</p>
+<p><img src="https://opensource.com/sites/default/files/styles/image-full-size/public/lead-images/windows-tiling-windows-wall.png?itok=mTH7uVrn" alt></p>
+<p>在我的文章<a href="https://opensource.com/article/18/8/i3-tiling-window-manager" target="_blank" rel="noopener">i3 桌面让Linux更好的5个理由</a>，我分享了选择 <a href="https://i3wm.org" target="_blank" rel="noopener">i3 桌面管理器</a> 作为一种Linux桌面替代方案的最主要五个理由。<br>在本篇文章中，我将向大家展示，如何在 Fedora 28 上安装与配置 i3。</p>
+<h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>首先进入 Fedora 系统中，打开一个终端。使用 <code>dnf</code> 来安装需要的软件包，如下：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[ricardo@f28i3 ~]$ sudo dnf install -y i3 i3-ipc i3status i3lock dmenu terminator --exclude=rxvt-unicode</span><br><span class="line">Last metadata expiration check: 1:36:15 ago on Wed 08 Aug 2018 12:04:31 PM EDT.</span><br><span class="line">Dependencies resolved.</span><br><span class="line">================================================================================================</span><br><span class="line"> Package                     Arch         Version                           Repository     Size</span><br><span class="line">================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> dmenu                       x86_64       4.8-1.fc28                        fedora         33 k</span><br><span class="line"> i3                          x86_64       4.15-1.fc28                       fedora        323 k</span><br><span class="line"> i3-ipc                      noarch       0.1.4-12.fc28                     fedora         14 k</span><br><span class="line"> i3lock                      x86_64       2.9.1-2.fc28                      fedora         33 k</span><br><span class="line"> i3status                    x86_64       2.12-1.fc28                       updates        62 k</span><br><span class="line"> terminator                  noarch       1.91-4.fc28                       fedora        570 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> dzen2                       x86_64       0.8.5-21.20100104svn.fc28         fedora         60 k</span><br><span class="line"></span><br><span class="line">... Skipping dependencies/install messages</span><br><span class="line"></span><br><span class="line">Complete!</span><br><span class="line">[ricardo@f28i3 ~]$</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>注意：在这个命令中，我排除了 <code>rxvt-unicode</code> 这个包，因为我更喜欢 <code>terminator</code> 作为我的终端模拟器。</p>
+<p>据用户目前的系统状态，在命令执行过程中可能会安装很多依赖。等待所有的依赖安装完成，之后重启你的电脑。</p>
+<h3 id="2-登录与初始化"><a href="#2-登录与初始化" class="headerlink" title="2. 登录与初始化"></a>2. 登录与初始化</h3><p>在你的机器重启之后，你便可以第一次体验 i3 了。在 GNOME Display Manager （GDM），选择你的用户名，之后先别着急输密码，点击下方的密码输入框下方的小齿轮，之后选择 i3 ，像下方这样：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_first_login_small.png" alt></p>
+<p>输入你的密码，并点击 <code>Sign In</code>。在你第一次登入之后，会先看到 i3 的配置界面：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_first_configuration_small.png" alt></p>
+<p>点击 <code>ENTER</code> 就会在 <code>$HOME/.config/i3</code> 生成一个配置文件，之后你可以通过这个配置文件来定制化 i3’s 的一些行为。</p>
+<p>在下一屏，你需要选择你的 <code>Mod</code> 键。这一步很关键，因为 <code>Mod</code> 键通常都会作为 i3’s 命令快捷键的发起键。按 <code>ENTER</code> 会选择 <code>Win</code> 键作为默认的 <code>Mod</code> 键。如果你的键盘没有 <code>Win</code> 键，用 <code>Alt</code> 键做替代，用方向键键选择后按 <code>ENTER</code> 确认。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_generate_config_small.png" alt></p>
+<p>现在你就登录到了 i3 的系统中。由于 i3 是一个最小化的窗口管理器，你会看到一个黑屏窗口，以及屏幕底端显式的状态栏：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_start_small.png" alt></p>
+<p>接下来，让我们看看 i3 的如何实际使用。</p>
+<h3 id="3-基本的快捷键"><a href="#3-基本的快捷键" class="headerlink" title="3. 基本的快捷键"></a>3. 基本的快捷键</h3><p>现在你已经登录到了 i3 的会话中，你需要几个基本的快捷键来应对基本的操作。</p>
+<p>大多数的 i3 快捷键都会用到之前配置的 <code>Mod</code> 键。在下面的例子中，当我提到 <code>Mod</code> 键，请根据情况使用你定义的做替换。通常使用 <code>Win</code> 键或者 <code>Alt</code> 键。</p>
+<p>首先，打开一个终端，使用 <code>Mod+ENTER</code>。重复打开几个终端，观察 i3 是如何自动将它们在桌面中排列。默认情况下， i3 会在水平的方向分割屏幕；使用 <code>Mod + v</code> 来垂直分割，再按 <code>Mod + h</code> 会恢复水平分割模式。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_3terminal_tiled_small.png" alt></p>
+<p>当需要启动其他的应用，按 <code>Mod + d</code> 来打开 <code>dmenu</code>，一个简单的文字应用菜单。默认情况下，<code>dmenu</code> 会呈现出所有在你 <code>$PATH</code> 中设置的应用。使用方向键来选择你想启动的应用，同时你可以键入应用的名称，来缩小选择的范围，之后按 <code>ENTER</code> 来启动选择的应用。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_dmenu.png" alt></p>
+<p>如果你的应用没有提供退出的方法，你可以使用 i3 来关闭对应的窗口，通过按 <code>Mod + Shift +q</code>。注意，你可能会丢失未保存的工作内容。</p>
+<p>最后，当你想关闭会话并退出 i3，按 <code>Mod + Shift +e</code>。之后会在窗口的上方提示你是否退出。点击 <code>Yes, exit i3</code> 退出，或选择 <code>X</code> 来取消。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_exit_small.png" alt></p>
+<p>这些就是 i3 中最基本的快捷键，如果想了解更多，请查阅官方文档 <a href="https://i3wm.org/docs/userguide.html#_default_keybindings" target="_blank" rel="noopener">documentation</a>。</p>
+<h3 id="4-替换GDM"><a href="#4-替换GDM" class="headerlink" title="4. 替换GDM"></a>4. 替换GDM</h3><p>使用 i3 window manager 会降低你操作系统的内存占用；然而，Fedora 依然会使用 GDM 作为登录的窗口。GDM 会载入几个与 GNOME 相关的库从而占用内存。</p>
+<p>如果你想进一步的降低你的内存占用，你可以使用一些更轻量级的窗口管理器来替换 GDM，比如 <code>lightdm</code>：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ricardo@f28i3 ~]$ sudo dnf install -y lightdm</span><br><span class="line">[ricardo@f28i3 ~]$ sudo systemctl disable gdm</span><br><span class="line">Removed /etc/systemd/system/display-manager.service.</span><br><span class="line">[ricardo@f28i3 ~]$ sudo systemctl enable lightdm</span><br><span class="line">Created symlink /etc/systemd/system/display-manager.service -> /usr/lib/systemd/system/lightdm.service.</span><br><span class="line">[ricardo@f28i3 ~]$</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>之后重启你的机器来使用 Lightdm 的登录界面。</p>
+<p>现在你可以继续登录并使用 i3了。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_lightdm_small.png" alt></p>
+<hr>
+<p>via: <a href="https://opensource.com/article/18/8/getting-started-i3-window-manager" target="_blank" rel="noopener">https://opensource.com/article/18/8/getting-started-i3-window-manager</a></p>
+<p>作者：<a href="https://opensource.com/users/rgerardi" target="_blank" rel="noopener">Ricardo Gerardi</a><br>选题：<a href="https://github.com/lujun9972" target="_blank" rel="noopener">lujun9972</a><br>译者：<a href="https://github.com/littleji" target="_blank" rel="noopener">littleji</a><br>校对：<a href="https://github.com/校对者ID" target="_blank" rel="noopener">校对者ID</a></p>
+<p>本文由 <a href="https://github.com/LCTT/TranslateProject" target="_blank" rel="noopener">LCTT</a> 原创编译，<a href="https://linux.cn/" target="_blank" rel="noopener">Linux中国</a> 荣誉推出</p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/">https://blog.littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2018-09/">2018-09</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

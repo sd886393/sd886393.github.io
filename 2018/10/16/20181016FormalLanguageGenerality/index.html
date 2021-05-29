@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>形式语法概述 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="形式语法概述"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%8E%E7%AC%A6%E5%8F%B7%E4%B8%B2"><span class="toc-number">2.</span> <span class="toc-text">符号与符号串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AF%8D%E8%A1%A8%EF%BC%8C%E7%AC%A6%E5%8F%B7%E9%9B%86"><span class="toc-number">2.1.</span> <span class="toc-text">字母表，符号集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2"><span class="toc-number">2.2.</span> <span class="toc-text">符号串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.3.</span> <span class="toc-text">空字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2%E7%9A%84%E5%A4%B4%E3%80%81%E5%B0%BE%E3%80%81%E5%9B%BA%E6%9C%89%E5%A4%B4%E3%80%81%E5%9B%BA%E6%9C%89%E5%B0%BE"><span class="toc-number">2.4.</span> <span class="toc-text">符号串的头、尾、固有头、固有尾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.5.</span> <span class="toc-text">符号串连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2%E7%9A%84%E6%96%B9%E5%B9%82"><span class="toc-number">2.6.</span> <span class="toc-text">符号串的方幂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2%E7%9A%84%E7%9B%B8%E4%B9%98"><span class="toc-number">2.7.</span> <span class="toc-text">符号串的相乘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-number">2.8.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E5%92%8C%E8%AF%AD%E8%A8%80%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">3.</span> <span class="toc-text">文法和语言的形式定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%99"><span class="toc-number">3.1.</span> <span class="toc-text">规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">文法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A5%E5%9E%8B"><span class="toc-number">3.3.</span> <span class="toc-text">句型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E8%A8%80"><span class="toc-number">3.4.</span> <span class="toc-text">语言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">文法类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">上下文无关文法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E8%A7%84%E6%96%87%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">正规文法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E6%A0%91"><span class="toc-number">4.3.</span> <span class="toc-text">语法树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E4%BA%8C%E4%B9%89%E6%80%A7"><span class="toc-number">4.4.</span> <span class="toc-text">文法的二义性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%A5%E5%9E%8B%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">句型分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E4%B8%8A%E8%80%8C%E4%B8%8B%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">自上而下分析法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E4%B8%8B%E8%80%8C%E4%B8%8A%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text">自下而上分析法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%BA%AF%E6%B3%95"><span class="toc-number">5.3.</span> <span class="toc-text">回溯法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E6%96%87%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">简化文法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%AE%B3%E8%A7%84%E5%88%99"><span class="toc-number">6.1.</span> <span class="toc-text">有害规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-10-15T16:00:00.000Z"><a href="/2018/10/16/20181016FormalLanguageGenerality/">2018-10-16</a></time>
+      
+      
+  
+    <h1 class="title">形式语法概述</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>形式语言作为精确描述语言的工具，广泛的应用在机器翻译等自然语言处理的领域</p>
+<p>描述语言的常用三个方法：</p>
+<ol>
+<li>穷举法，对于句子数目有限的语言可以使用这种方法将所有的句子进行枚举，从而定义。</li>
+<li>文法，可以理解为我们在英文、中文中学习的语法，通过严格定义规则，来生成合法的句子，<strong>重点</strong>在于生成句子。</li>
+<li>自动机，不同于文法，自动机<strong>更偏向</strong>与对于输入句子的合法性检测，从而区分哪些是语言中的句子，哪些不是。</li>
+</ol>
+<p>文法与自动机二者皆有所长，一定条件下可以相互转换。</p>
+<h2 id="符号与符号串"><a href="#符号与符号串" class="headerlink" title="符号与符号串"></a>符号与符号串</h2><h3 id="字母表，符号集"><a href="#字母表，符号集" class="headerlink" title="字母表，符号集"></a>字母表，符号集</h3><p>字母或者符号的又穷非空集合。<br>例：汉语字母表为汉字、数字、标点符号。</p>
+<h3 id="符号串"><a href="#符号串" class="headerlink" title="符号串"></a>符号串</h3><p>字母表中的符号组成的任何有穷序列。<br>例：有符号集<br><img src="https://user-images.githubusercontent.com/7655877/46996847-9314c180-d150-11e8-9367-fca90bcc4c86.png" alt="image"><br>符号串为：0，1，01，10，11，00</p>
+<h3 id="空字符串"><a href="#空字符串" class="headerlink" title="空字符串"></a>空字符串</h3><p><img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">表示，长度为0</p>
+<h3 id="符号串的头、尾、固有头、固有尾"><a href="#符号串的头、尾、固有头、固有尾" class="headerlink" title="符号串的头、尾、固有头、固有尾"></a>符号串的头、尾、固有头、固有尾</h3><p>例：如果z=abc，则<br>z的头为：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，a，ab，abc<br>z的尾为：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，c，bc，cba<br>z的固有头：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，a，ab<br>z的固有尾：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，c，bc</p>
+<h3 id="符号串连接"><a href="#符号串连接" class="headerlink" title="符号串连接"></a>符号串连接</h3><p>有符号串x，y，连接xy指y符号串写在x符号串之后<br>例：x=ab，y=cd，xy=abcd</p>
+<h3 id="符号串的方幂"><a href="#符号串的方幂" class="headerlink" title="符号串的方幂"></a>符号串的方幂</h3><p>有符号串x，z=xxxx….，称z为x的方幂，记为<img src="https://user-images.githubusercontent.com/7655877/46997369-1aaf0000-d152-11e8-9fe2-15669611d07f.png" alt="image"><br>且<br><img src="https://user-images.githubusercontent.com/7655877/46997436-44682700-d152-11e8-81b0-2e666a016eda.png" alt="image"></p>
+<h3 id="符号串的相乘"><a href="#符号串的相乘" class="headerlink" title="符号串的相乘"></a>符号串的相乘</h3><p>有符号串<img src="https://user-images.githubusercontent.com/7655877/46997662-d6702f80-d152-11e8-8624-c2bd89787f26.png" alt="image"><br>例：有A={a,b} B={c,d},则AB={ac,ad,bc,bd}</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>字母表<img src="https://user-images.githubusercontent.com/7655877/46999201-98c1d580-d157-11e8-9f72-e44129b97319.png" alt="image">上所有又穷长的字符串的集合用<img src="https://user-images.githubusercontent.com/7655877/46999213-a0817a00-d157-11e8-9da5-49f7d12b8df4.png" alt="image"><br>来表示，其中正闭包<img src="https://user-images.githubusercontent.com/7655877/46999164-7af47080-d157-11e8-82d2-88a9f3c888a5.png" alt="image">不包括空集</p>
+<h2 id="文法和语言的形式定义"><a href="#文法和语言的形式定义" class="headerlink" title="文法和语言的形式定义"></a>文法和语言的形式定义</h2><h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><p>也称为产生式：<br><img src="https://user-images.githubusercontent.com/7655877/46999289-d6bef980-d157-11e8-8607-e0407655604f.png" alt="image"><br>其中，<img src="https://user-images.githubusercontent.com/7655877/46999328-f5bd8b80-d157-11e8-9468-08b46507690a.png" alt="image"></p>
+<h3 id="文法"><a href="#文法" class="headerlink" title="文法"></a>文法</h3><p>定义：G定义为四元组<img src="https://user-images.githubusercontent.com/7655877/46999397-28678400-d158-11e8-9dc1-bfbdfac5462e.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7655877/46999410-30bfbf00-d158-11e8-8c83-d1f35dc4d3d8.png" alt="image"></p>
+<h3 id="句型"><a href="#句型" class="headerlink" title="句型"></a>句型</h3><p><img src="https://user-images.githubusercontent.com/7655877/46999714-0a4e5380-d159-11e8-8a22-4cac5e52f986.png" alt="image"><br>句子一定是句型，句型不一定是句子</p>
+<h3 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h3><p><img src="https://user-images.githubusercontent.com/7655877/46999780-336ee400-d159-11e8-8067-05c802ea65bb.png" alt="image">记为L(G)</p>
+<h2 id="文法类型"><a href="#文法类型" class="headerlink" title="文法类型"></a>文法类型</h2><p><img src="https://user-images.githubusercontent.com/7655877/47000450-e2f88600-d15a-11e8-9f6f-2c76109410e1.png" alt="image"></p>
+<h3 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47001280-aa59ac00-d15c-11e8-89ba-c9a2200b1f17.png" alt="image"><br>重点是在规则的左部只有一个非终结字符</p>
+<h3 id="正规文法"><a href="#正规文法" class="headerlink" title="正规文法"></a>正规文法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47001685-a0847880-d15d-11e8-87f0-fe81ca258def.png" alt="image"></p>
+<h3 id="语法树"><a href="#语法树" class="headerlink" title="语法树"></a>语法树</h3><p>语法树表明了推倒过程中使用了什么样的产生式和用到了哪些非终结字符，并不表明顺序。<br>例：有下图<br><img src="https://user-images.githubusercontent.com/7655877/47007060-f9f2a480-d169-11e8-8f60-9e1edf81a9ad.png" alt="image"><br>构造aabbaa的语法树，步骤如下<br><img src="https://user-images.githubusercontent.com/7655877/47007084-07a82a00-d16a-11e8-9aaa-8fc4df075698.png" alt="image"></p>
+<h3 id="文法的二义性"><a href="#文法的二义性" class="headerlink" title="文法的二义性"></a>文法的二义性</h3><p><img src="https://user-images.githubusercontent.com/7655877/47002932-c0696b80-d160-11e8-9759-84258745460f.png" alt="image"></p>
+<h2 id="句型分析"><a href="#句型分析" class="headerlink" title="句型分析"></a>句型分析</h2><p>识别一个符号串是否为某文法的句型是整个推导的构建过程</p>
+<h3 id="自上而下分析法"><a href="#自上而下分析法" class="headerlink" title="自上而下分析法"></a>自上而下分析法</h3><p>由非终结字符串推导至终结字符串，并查看该终结字符串是否匹配</p>
+<h3 id="自下而上分析法"><a href="#自下而上分析法" class="headerlink" title="自下而上分析法"></a>自下而上分析法</h3><p>有终结字符串进行规约，最终生成的非终结字符串，是否符合规则</p>
+<h3 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47004899-2657f200-d165-11e8-94fb-5463a90dd1f7.png" alt="image"><br>这时候使用回溯法进行计算</p>
+<h2 id="简化文法"><a href="#简化文法" class="headerlink" title="简化文法"></a>简化文法</h2><p>主要是去除规则中的两种类型的规则，有害规则和多与规则</p>
+<h3 id="有害规则"><a href="#有害规则" class="headerlink" title="有害规则"></a>有害规则</h3><p>例如：<br>U->U这种产生式，会引起文法的二义性。<br>多余规则：指文法中任何句子的推倒都不会用到的规则，主要有两种：</p>
+<ol>
+<li>非终结字符不在任何规则的右部出现。</li>
+<li>非终结字符无法推出终结符号串</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>宗成庆. 统计自然语言处理[M]. 清华大学出版社, 2008.<br><a href="http://ccl.pku.edu.cn/ALCourse/Compiling/" target="_blank" rel="noopener">北京大学编译原理课程</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/16/20181016FormalLanguageGenerality/">https://blog.littleji.com/2018/10/16/20181016FormalLanguageGenerality/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2018-10/">2018-10</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/NLP/">NLP</a>, <a href="/tags/DataMining/">DataMining</a>, <a href="/tags/自然语言处理/">自然语言处理</a>, <a href="/tags/数据挖掘/">数据挖掘</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

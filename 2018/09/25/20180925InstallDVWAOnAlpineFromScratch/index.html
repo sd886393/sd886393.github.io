@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在alpine上，从零开始安装DVWA | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="在alpine上，从零开始安装DVWA"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#alpine%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">alpine系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DVWA"><span class="toc-number">1.2.</span> <span class="toc-text">DVWA</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85alpine%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.</span> <span class="toc-text">安装alpine系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%BF%85%E5%A4%87%E7%BB%84%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">安装系统必备组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Bash%E3%80%81Vim"><span class="toc-number">3.1.</span> <span class="toc-text">安装Bash、Vim</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8Broot%E7%99%BB%E5%BD%95%E7%9A%84%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%89%A9%E5%B1%95%E7%9A%84%E5%8C%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-number">4.</span> <span class="toc-text">开启远程root登录的权限以及扩展的包镜像源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%90%AFcommunity-testing-edge%E5%8C%85%E4%BB%93%E5%BA%93"><span class="toc-number">5.</span> <span class="toc-text">开启community testing edge包仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE-MySQL-MariaDB"><span class="toc-number">6.</span> <span class="toc-text">安装配置 MySQL&#x2F;MariaDB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85MariaDB"><span class="toc-number">6.1.</span> <span class="toc-text">安装MariaDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEMariaDB"><span class="toc-number">6.2.</span> <span class="toc-text">配置MariaDB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%AE%9A%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%8C%E7%A8%8D%E5%90%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">6.2.1.</span> <span class="toc-text">设定环境变量，稍后使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AEMariaDB"><span class="toc-number">6.3.</span> <span class="toc-text">启动配置MariaDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-MariaDB-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E9%BB%98%E8%AE%A4%E5%90%AF%E5%8A%A8"><span class="toc-number">6.4.</span> <span class="toc-text">启动 MariaDB 并添加默认启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9-root-%E5%AF%86%E7%A0%81"><span class="toc-number">6.5.</span> <span class="toc-text">改 root 密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAdvwa%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BB%A5%E5%8F%8Advwa%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.6.</span> <span class="toc-text">创建一个dvwa用户，以及dvwa数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E4%B8%BB%E6%9C%BA%EF%BC%8C%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90"><span class="toc-number">6.7.</span> <span class="toc-text">重启主机，验证是否安装完成</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85PHP-%E4%BB%A5%E5%8F%8A%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E5%BA%93%E7%BB%84%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">安装PHP 以及所需要的库组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE-lighttp"><span class="toc-number">8.</span> <span class="toc-text">安装配置 lighttp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE-DVWA"><span class="toc-number">9.</span> <span class="toc-text">安装配置 DVWA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">9.1.</span> <span class="toc-text">创建项目文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDDVWA"><span class="toc-number">9.2.</span> <span class="toc-text">下载DVWA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86DVWA%E6%94%BE%E5%88%B0%E6%8C%87%E5%AE%9A%E7%9A%84web%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%AD"><span class="toc-number">9.3.</span> <span class="toc-text">将DVWA放到指定的web项目目录中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEDVWA"><span class="toc-number">9.4.</span> <span class="toc-text">配置DVWA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85%E6%83%85%E5%86%B5"><span class="toc-number">9.5.</span> <span class="toc-text">验证安装情况</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">10.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-09-24T16:00:00.000Z"><a href="/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">2018-09-25</a></time>
+      
+      
+  
+    <h1 class="title">在alpine上，从零开始安装DVWA</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><h2 id="alpine系统"><a href="#alpine系统" class="headerlink" title="alpine系统"></a>alpine系统</h2><p>目前 alpine 系统已经作为 docker 容器的默认安装系统，其最大的特点是安装的体积非常小，镜像的大小最少只有 5M ，这对于在 docker 集群中大规模使用容器的情况下，极大的降低了磁盘占用，并且其还有：</p>
+<ol>
+<li>因体积较小，从而提升了启动速度<br>2.因体积小，组件少，从而暴露面降低，最终提升系统的安全</li>
+</ol>
+<p>当我们能够熟练的配置该系统之后，可以大大加快 devops 的整体流程，迅速搭建原型系统，提高资源的利用率。</p>
+<h2 id="DVWA"><a href="#DVWA" class="headerlink" title="DVWA"></a>DVWA</h2><p>DVWA:Damn Vulnerable Web Application</p>
+<p>老牌的安全测试靶场，后端使用的是 PHP + MySQL 的组合，可以方便快捷的让安全从业者，对常见的安全漏洞的原理进行学习，并在实践中巩固自己的学习成果。</p>
+<p>DVWA的官网在<a href="2">这里</a>。</p>
+<h1 id="安装alpine系统"><a href="#安装alpine系统" class="headerlink" title="安装alpine系统"></a>安装alpine系统</h1><p>首先从 alpine 的<a href="1">官网</a>，根据需要下载指定的alpine安装包，这里选择了 3.8.1 的Extend版本。</p>
+<p>之后，可以将下载的iso文件制作成U盘启动器进行安装，这里由于演示使用 VMware Fusion 进行安装演示。</p>
+<p>虚拟机的配置为默认配置如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/45987778-f5285c80-c0a5-11e8-8fbe-b63975cc7999.png" alt="image"></p>
+<p>启动后直接使用 root 账号登录，并输入 <code>setup-alpine</code> ，进入配置界面，这里的操作的目的是将目前运行在内存中的系统，配置完整后安装至实际的硬盘上，如下图所示：</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/45991497-c6b37d00-c0b7-11e8-9e4e-93541bb790f3.png" alt="image"></p>
+<p>图中可根据自己的需要配置，如键盘的布局、主机名、网卡信息、时间服务器组件、root密码、时区等，本文选择时区为Asia/Shanghai，重点是选择安装的实际物理磁盘（ sda ）以及安装的用途（ sys ）</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/45996293-48aea080-c0ce-11e8-99da-a06a52475a94.png" alt="image"></p>
+<p>安装完成后 reboot</p>
+<h1 id="安装系统必备组件"><a href="#安装系统必备组件" class="headerlink" title="安装系统必备组件"></a>安装系统必备组件</h1><h2 id="安装Bash、Vim"><a href="#安装Bash、Vim" class="headerlink" title="安装Bash、Vim"></a>安装Bash、Vim</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add bash vim</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="开启远程root登录的权限以及扩展的包镜像源"><a href="#开启远程root登录的权限以及扩展的包镜像源" class="headerlink" title="开启远程root登录的权限以及扩展的包镜像源"></a>开启远程root登录的权限以及扩展的包镜像源</h1><p>方便直接通过远程终端进行操作，打开<code>vim /etc/ssh/sshd_config</code>，在配置文件的末尾添加：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin yes</span><br></pre></td></tr></tbody></table></figure>
+<p>重启 ssh 服务，<code>service sshd restart</code></p>
+<h1 id="开启community-testing-edge包仓库"><a href="#开启community-testing-edge包仓库" class="headerlink" title="开启community testing edge包仓库"></a>开启community testing edge包仓库</h1><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/apk/repositories</span><br></pre></td></tr></tbody></table></figure>
+<p>将其中所有对应的库链接注释打开</p>
+<h1 id="安装配置-MySQL-MariaDB"><a href="#安装配置-MySQL-MariaDB" class="headerlink" title="安装配置 MySQL/MariaDB"></a>安装配置 MySQL/MariaDB</h1><h2 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add mariadb mariadb-client</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置MariaDB"><a href="#配置MariaDB" class="headerlink" title="配置MariaDB"></a>配置MariaDB</h2><p>MariaDB安装后还不能直接使用，需要创建用户等配置工作</p>
+<h3 id="设定环境变量，稍后使用"><a href="#设定环境变量，稍后使用" class="headerlink" title="设定环境变量，稍后使用"></a>设定环境变量，稍后使用</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export DB_DATA_PATH=/var/lib/mysql</span><br><span class="line">export DB_ROOT_PASS=root_password</span><br><span class="line">export DB_USER=dvwa</span><br><span class="line">export DB_PASS=dvwa_password</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="启动配置MariaDB"><a href="#启动配置MariaDB" class="headerlink" title="启动配置MariaDB"></a>启动配置MariaDB</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql_install_db --user=mysql --datadir=${DB_DATA_PATH} &&\</span><br><span class="line">chown -R mysql:mysql ${DB_DATA_PATH}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="启动-MariaDB-并添加默认启动"><a href="#启动-MariaDB-并添加默认启动" class="headerlink" title="启动 MariaDB 并添加默认启动"></a>启动 MariaDB 并添加默认启动</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rc-service mariadb start</span><br><span class="line">rc-update add mariadb default</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="改-root-密码"><a href="#改-root-密码" class="headerlink" title="改 root 密码"></a>改 root 密码</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password "${DB_ROOT_PASS}"</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="创建一个dvwa用户，以及dvwa数据库"><a href="#创建一个dvwa用户，以及dvwa数据库" class="headerlink" title="创建一个dvwa用户，以及dvwa数据库"></a>创建一个dvwa用户，以及dvwa数据库</h2><p><em>建议添加该用户，不建议使用 MariaDB 的 root 账户登录MariaDB</em><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo "CREATE DATABASE dvwa;" >> /tmp/sql</span><br><span class="line">echo "GRANT ALL ON *.* TO ${DB_USER}@'127.0.0.1' IDENTIFIED BY '${DB_PASS}' WITH GRANT OPTION;" > /tmp/sql</span><br><span class="line">echo "GRANT ALL ON *.* TO ${DB_USER}@'localhost' IDENTIFIED BY '${DB_PASS}' WITH GRANT OPTION;" >> /tmp/sql</span><br><span class="line">echo "GRANT ALL ON *.* TO ${DB_USER}@'::1' IDENTIFIED BY '${DB_PASS}' WITH GRANT OPTION;" >> /tmp/sql</span><br><span class="line">echo "DELETE FROM mysql.user WHERE User='';" >> /tmp/sql</span><br><span class="line">echo "DROP DATABASE test;" >> /tmp/sql</span><br><span class="line">echo "FLUSH PRIVILEGES;" >> /tmp/sql</span><br><span class="line">cat /tmp/sql | mysql -u root --password="${DB_ROOT_PASS}"</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="重启主机，验证是否安装完成"><a href="#重启主机，验证是否安装完成" class="headerlink" title="重启主机，验证是否安装完成"></a>重启主机，验证是否安装完成</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br><span class="line">ps -ef | grep mysql</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="安装PHP-以及所需要的库组件"><a href="#安装PHP-以及所需要的库组件" class="headerlink" title="安装PHP 以及所需要的库组件"></a>安装PHP 以及所需要的库组件</h1><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add lighttpd php5-common php5-iconv php5-json php5-gd php5-curl php5-xml php5-pgsql php5-mysql php5-imap php5-cgi fcgi php5-pdo php5-pdo_pgsql  php5-pdo_mysql  php5-soap php5-xmlrpc php5-posix php5-mcrypt php5-gettext php5-ldap php5-ctype php5-dom</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="安装配置-lighttp"><a href="#安装配置-lighttp" class="headerlink" title="安装配置 lighttp"></a>安装配置 lighttp</h1><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/lighttpd/lighttpd.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>取消掉注释<code>include "mod_fastcgi.conf"</code></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/lighttpd/mod_fastcgi.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>替换<code>/usr/bin/php-cgi</code> 为 <code>/usr/bin/php-cgi5</code></p>
+<p>打开对应的选项，便于漏洞学习<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/php5/php.ini</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>找到<code>allow_url_open</code> 和 <code>allow_url_include</code> 均设置为 <code>On</code></p>
+<p>启动Lighttpd<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc-service lighttpd start && rc-update add lighttpd default</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1 id="安装配置-DVWA"><a href="#安装配置-DVWA" class="headerlink" title="安装配置 DVWA"></a>安装配置 DVWA</h1><h2 id="创建项目文件夹"><a href="#创建项目文件夹" class="headerlink" title="创建项目文件夹"></a>创建项目文件夹</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/webapps/</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="下载DVWA"><a href="#下载DVWA" class="headerlink" title="下载DVWA"></a>下载DVWA</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/webapps/</span><br><span class="line">wget https://github.com/RandomStorm/DVWA/archive/v1.9.zip</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="将DVWA放到指定的web项目目录中"><a href="#将DVWA放到指定的web项目目录中" class="headerlink" title="将DVWA放到指定的web项目目录中"></a>将DVWA放到指定的web项目目录中</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unzip v1.9.zip</span><br><span class="line">rm v1.9.zip</span><br><span class="line">chmod -R 777 /usr/share/webapps/</span><br><span class="line">ln -s /usr/share/webapps/DVWA-1.9/ /var/www/localhost/htdocs/dvwa</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置DVWA"><a href="#配置DVWA" class="headerlink" title="配置DVWA"></a>配置DVWA</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/webapps/DVWA-1.9/config/config.inc.php</span><br></pre></td></tr></tbody></table></figure>
+<p>设置用户名 密码 以及端口号</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/46000851-53703200-c0dc-11e8-91ad-9afe94ab15fb.png" alt="image"></p>
+<h2 id="验证安装情况"><a href="#验证安装情况" class="headerlink" title="验证安装情况"></a>验证安装情况</h2><p>打开<code>http://IP/dvwa/setup.php</code><br>查看 Setup Check  各项应均为绿色</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/46001168-3b4ce280-c0dd-11e8-902d-f4516d0f6439.png" alt="image"></p>
+<p>点击Create/Reset Database，创建对应的数据库，安装完成</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://wiki.alpinelinux.org/wiki/Damn_Vulnerable_Web_Application_(DVWA" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/Damn<em>Vulnerable_Web_Application</em>(DVWA)</a>)<br><a href="https://wiki.alpinelinux.org/wiki/MariaDB" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/MariaDB</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">https://blog.littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2018-09/">2018-09</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Linux/">Linux</a>, <a href="/tags/信息安全/">信息安全</a>, <a href="/tags/Security/">Security</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

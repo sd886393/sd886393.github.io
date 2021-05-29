@@ -1,0 +1,442 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>七天算法梳理之线性回归 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="七天算法梳理之线性回归"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">1 机器学习的一些概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 什么是机器学习?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%89%E7%9B%91%E7%9D%A3%E4%B8%8E%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 什么是有监督与无监督学习？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%8C%96%E8%83%BD%E5%8A%9B%EF%BC%9F"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 什么是泛化能力？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E%E6%AC%A0%E6%8B%9F%E5%90%88%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">1.4 什么是过拟合与欠拟合？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E8%BF%87%E6%8B%9F%E5%90%88%E4%B8%8E%E6%AC%A0%E6%8B%9F%E5%90%88%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="toc-number">1.5.</span> <span class="toc-text">1.5 过拟合与欠拟合如何解决？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E4%BB%80%E4%B9%88%E6%98%AF%E6%96%B9%E5%B7%AEVariance%E5%92%8C%E5%81%8F%E5%B7%AEBias%EF%BC%9F"><span class="toc-number">1.6.</span> <span class="toc-text">1.6 什么是方差Variance和偏差Bias？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="toc-number">1.7.</span> <span class="toc-text">1.7 交叉验证</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">2 线性模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 线性回归的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E3%80%81%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E3%80%81%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 线性回归损失函数、代价函数、目标函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">3 线性模型的优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 随机梯度下降法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E7%89%9B%E9%A1%BF%E6%B3%95"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 牛顿法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 拟牛顿法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E5%85%B6%E4%BB%96%E8%87%AA%E9%80%82%E5%BA%94%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95"><span class="toc-number">3.5.</span> <span class="toc-text">3.5 其他自适应学习方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">4.</span> <span class="toc-text">4 线性回归的评估指标</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1%E6%9F%A5%E5%87%86%E7%8E%87-%E5%85%A8%E6%9F%A5%E7%8E%87%E4%B8%8EF1"><span class="toc-number">4.1.</span> <span class="toc-text">4.1查准率 全查率与F1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-ROC%E4%B8%8EAUC"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 ROC与AUC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-ROC%E7%BB%98%E5%88%B6%E8%BF%87%E7%A8%8B"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 ROC绘制过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-sklearn%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3"><span class="toc-number">5.</span> <span class="toc-text">5 sklearn参数详解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A8%E8%AE%BA"><span class="toc-number">6.</span> <span class="toc-text">讨论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87%E6%B3%9B%E5%8C%96%E8%83%BD%E5%8A%9B"><span class="toc-number">6.1.</span> <span class="toc-text">如何提升泛化能力?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-12-17T16:00:00.000Z"><a href="/2018/12/18/20181218MLReview1/">2018-12-18</a></time>
+      
+      
+  
+    <h1 class="title">七天算法梳理之线性回归</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="1-机器学习的一些概念"><a href="#1-机器学习的一些概念" class="headerlink" title="1 机器学习的一些概念"></a>1 机器学习的一些概念</h1><h2 id="1-1-什么是机器学习"><a href="#1-1-什么是机器学习" class="headerlink" title="1.1 什么是机器学习?"></a>1.1 什么是机器学习?</h2><p>计算机系统能够通过现有的数据，不断地改进其解决某一问题的性能，称为机器学习。</p>
+<h2 id="1-2-什么是有监督与无监督学习？"><a href="#1-2-什么是有监督与无监督学习？" class="headerlink" title="1.2 什么是有监督与无监督学习？"></a>1.2 什么是有监督与无监督学习？</h2><p>对于机器学习的过程中，对于所要学习的数据，如果其为标注的数据则称为有监督学习，否则称为无监督学习。</p>
+<h2 id="1-3-什么是泛化能力？"><a href="#1-3-什么是泛化能力？" class="headerlink" title="1.3 什么是泛化能力？"></a>1.3 什么是泛化能力？</h2><p>泛化能力指一个经过学习后的模型，能够适应与处理新样本的能力，这也是机器学习的主要目标。</p>
+<h2 id="1-4-什么是过拟合与欠拟合？"><a href="#1-4-什么是过拟合与欠拟合？" class="headerlink" title="1.4 什么是过拟合与欠拟合？"></a>1.4 什么是过拟合与欠拟合？</h2><ul>
+<li>过拟合：过拟合指在学习的过程中，模型把样本本身的特点而非目标模型的特点进行了学习，导致整体性能下降的情况。</li>
+<li>欠拟合：欠拟合则是对目标模型的一般性质还没有习得，主要是由于模型本身的学习与表达能力不够。</li>
+</ul>
+<h2 id="1-5-过拟合与欠拟合如何解决？"><a href="#1-5-过拟合与欠拟合如何解决？" class="headerlink" title="1.5 过拟合与欠拟合如何解决？"></a>1.5 过拟合与欠拟合如何解决？</h2><ul>
+<li>欠拟合的解决：通过增加模型的学习能力，如：增加学习轮数、增加神经网络的复杂度以提升其表现能力等。</li>
+<li>过拟合的解决：过拟合一般来说是只可缓解无法彻底解决，通过对学习使用的模型进行改进，如 ：减少相应的模型参数、降低神经网络复杂度等。</li>
+</ul>
+<h2 id="1-6-什么是方差Variance和偏差Bias？"><a href="#1-6-什么是方差Variance和偏差Bias？" class="headerlink" title="1.6 什么是方差Variance和偏差Bias？"></a>1.6 什么是方差Variance和偏差Bias？</h2><p>方差与偏差是解释学习算法泛化性能的一种重要的工具，下面我们来说明二者的侧重点。<br>首先,我们将所得到的训练数据等分成A,B,C3份,再借由这3份训练数据分别得出3个训练模型,那么”方差”指的是向这3个模型输入同样的测试样本,得出的输出结果的方差,借此来判断我们选择的模型对于不同的学习样本展现出的”模型本身训练的稳定性”.</p>
+<p>其次,如果我们将上面的所有训练数据进行训练,并输入同样的测试样本,得到对应的输出结果X,将输出结果与真实的结果T进行比较,得到的差值就为偏差, 偏差则侧重于”模型本身预测的精准度”的衡量.</p>
+<p>方差,偏差,噪声三者共同主导了学习模型的误差,在学习初期由于模型的拟合能力不强,这个时候主要是由偏差主导了误差,当学习后期模型的拟合能力增强后,微小的数据扰动都会被模型所捕捉到,此时由方差来主导模型的误差.</p>
+<h2 id="1-7-交叉验证"><a href="#1-7-交叉验证" class="headerlink" title="1.7 交叉验证"></a>1.7 交叉验证</h2><p>为了能够具体的衡量模型的性能,交叉验证提供了这样一种性能评测的手段.</p>
+<p>交叉验证的思想是重复的利用数据,把数据进行切分为训练数据集与测试数据集,并在这个基础上进行反复的训练与测试,选取具有较好性能指标的模型.</p>
+<p>具体的思想是,在数据集上划分k个大小相同且互斥的子集,使用k-1个子集进行训练,最后一个进行测试,得出结果后,再选择不同的k-1个自己训练,最后一个进行测试,容易看出上面可最终得到k个模型,通过求取其平均误差得到该模型的测试误差.</p>
+<p>其中典型的k值为10.</p>
+<h1 id="2-线性模型"><a href="#2-线性模型" class="headerlink" title="2 线性模型"></a>2 线性模型</h1><h2 id="2-1-线性回归的原理"><a href="#2-1-线性回归的原理" class="headerlink" title="2.1 线性回归的原理"></a>2.1 线性回归的原理</h2><ul>
+<li>线性模型:即通过将给定的一些特征进行线性组合所得到的模型.</li>
+<li>线性回归:通过学习得到一个线性的模型能够尽可能准确的预测输入数据的真实标记.</li>
+<li>线性回归的原理:使用了均方误差最小化的方法也就是常说的最小二乘法,即试图找到这么一条直线,使样本到直线上的欧氏距离之和最小.</li>
+</ul>
+<h2 id="2-2-线性回归损失函数、代价函数、目标函数"><a href="#2-2-线性回归损失函数、代价函数、目标函数" class="headerlink" title="2.2 线性回归损失函数、代价函数、目标函数"></a>2.2 线性回归损失函数、代价函数、目标函数</h2><ol>
+<li>损失函数指的是单一训练集上产生的误差.</li>
+<li>代价函数则值得是模型在整个训练集上产生的平均误差.</li>
+<li><p>设学习后的模型f,面对测试样本X,模型对应的模拟输出f(X)以及X实际的输出Y,拟合的程度.有如下的表示方式</p>
+<script type="math/tex; mode=display">
+L(Y, f(X))=(Y-f(X))^2</script></li>
+<li><p>但是仅仅通过损失函数来就纠正拟合误差并非我们的目标,我们的是目标是是让模型精确地同时,又尽量的减少模型的复杂度,于是就引入了正则化函数来衡量模型的复杂度,最终我们的目标函数是最小化误差与最小化模型复杂度之和也就是</p>
+<script type="math/tex; mode=display">
+\frac{1}{N} \sum_{i=1}^{N}L(y_i,f(x_i))+\lambda J(f)</script><p>前者是最小化经验风险,后者则是最小化结构风险</p>
+</li>
+</ol>
+<h1 id="3-线性模型的优化方法"><a href="#3-线性模型的优化方法" class="headerlink" title="3 线性模型的优化方法"></a>3 线性模型的优化方法</h1><p>当我们得到了对应目标函数后,那么就需要具体的对该模型各个参数求最优解,也就是常见的最优化问题,这里有以下这么几个主要的算法.</p>
+<h2 id="3-1-梯度下降法"><a href="#3-1-梯度下降法" class="headerlink" title="3.1 梯度下降法"></a>3.1 梯度下降法</h2><p>梯度下降法的优化思想是用当前位置负梯度方向作为搜索方向，因为该方向为当前位置的最快下降方向.</p>
+<h2 id="3-2-随机梯度下降法"><a href="#3-2-随机梯度下降法" class="headerlink" title="3.2 随机梯度下降法"></a>3.2 随机梯度下降法</h2><p>由于梯度下降法使用了固定步长的,这样带来了后期收敛慢,其进入极小点的情况,这里通过选用随机梯度的下降,更容易突破局部极小点,从而收敛至全局极值点,不过也有迭代次数增加等缺点.</p>
+<h2 id="3-3-牛顿法"><a href="#3-3-牛顿法" class="headerlink" title="3.3 牛顿法"></a>3.3 牛顿法</h2><p>牛顿法不同于梯度向量,而是使用了二阶海森矩阵的逆矩阵来求解,相对来说比普通的梯度下降算法收敛速度更快,但是其要求必须具有二阶海森矩阵的逆矩阵条件,其计算非常复杂,该条件在大规模数据下往往无法保证.</p>
+<h2 id="3-4-拟牛顿法"><a href="#3-4-拟牛顿法" class="headerlink" title="3.4 拟牛顿法"></a>3.4 拟牛顿法</h2><p>拟牛顿法则是通过找到一个与海森矩阵类似性质的矩阵来替代,从而让计算更为容易.<br>其中DFP BFGS L-BFGS都是比较重要的拟牛顿方法.</p>
+<h2 id="3-5-其他自适应学习方法"><a href="#3-5-其他自适应学习方法" class="headerlink" title="3.5 其他自适应学习方法"></a>3.5 其他自适应学习方法</h2><p>adagrad,adadelta,rmsprop,adam等一系列adaptive learning rate方法</p>
+<h1 id="4-线性回归的评估指标"><a href="#4-线性回归的评估指标" class="headerlink" title="4 线性回归的评估指标"></a>4 线性回归的评估指标</h1><h2 id="4-1查准率-全查率与F1"><a href="#4-1查准率-全查率与F1" class="headerlink" title="4.1查准率 全查率与F1"></a>4.1查准率 全查率与F1</h2><p>二分类问题有四种预测的情况:<br>真正例:true positive<br>假正例:false positive<br>真反例:true negative<br>假反例:false negative<br>查准率P与全查率R为</p>
+<script type="math/tex; mode=display">
+P=\frac{TP}{TP+FP}</script><script type="math/tex; mode=display">
+ R=\frac{TP}{TP+FN}</script><p> 二者一般矛盾,因为查全率高意味着查的个数多,这样又会导致查准率下降<br>由查全率作为横轴,查准率作为纵轴形成P-R曲线,比较学习期的的性能时,比较该曲线的面积是一个方法<br>平衡点(Break-Event Point)是查准率等于查全率的取值,这样可以权衡查全率和查准率<br>BEP还是有些简化,更常用的是F1度量,目的是为了找出更好的学习器<br>F1:基于查准率和查全率的调和平均值(harmonic mean):</p>
+<script type="math/tex; mode=display">
+F1=\frac{2*P*R}{P+R}=\frac{2*TP}{样例总数+TP-TN}</script><script type="math/tex; mode=display">
+F_\beta=\frac{(1+\beta^{2})*P*R}{\beta^2*P +R}</script><p> 其中β>0, β=1时就退化为标准的F1,β<1时则查准更重要,β>1则查全更重要<br>很多时候我们有多个二分类混淆矩阵,例如进行多次训练和测试,每次都有一个,或者执行多分类任务,每每两个组合都对应一个混淆矩阵<br>一种直接的做法是在所有的混淆矩阵都计算,然后计算所有的平均值也就是宏查重率macro-P和macro-R以及对应的macro F1<!--1时则查准更重要,β--></p>
+<h2 id="4-2-ROC与AUC"><a href="#4-2-ROC与AUC" class="headerlink" title="4.2 ROC与AUC"></a>4.2 ROC与AUC</h2><p>学习预测就是将样本进行排序,最可能是正例的排在前面<br>神经网络一般情形下对每个测试样本预测出一个0-1的实值,然后将这个值作为截断点,大于这个截断点的样本为正例,其他的为反例,如果更重视查准率则可选择排序中靠前的位置,重视查全率则选择较后的截断点<br>排序本身的质量好环则是体现了学习器在不同任务下的期望泛化性能,ROC曲线就是从这个角度来研究学习器泛化性能</p>
+<p>ROC(Receiver Operating Characteristic)的操作方式与之前的P-R图类似,并提出了两个概念,真正利率TPR,假正利率FPR</p>
+<script type="math/tex; mode=display">
+TPR=TP/(TP+FN)</script><script type="math/tex; mode=display">
+FPR=FP/(FP+TN)</script><h2 id="4-3-ROC绘制过程"><a href="#4-3-ROC绘制过程" class="headerlink" title="4.3 ROC绘制过程"></a>4.3 ROC绘制过程</h2><p>设正例数目为m+ 反例数目为m-</p>
+<ol>
+<li>均是先对所有的样例根据学习器的结果进行排序,然后将分类的阀值设置为最大,这时候均是反例,TPR=FPR=0<br>2.调整阀值为依次每个样例的值,然后观察次样本是否为真正例,如果是坐标为(x,y+1/m+),如果不是坐标为(x+1/m-,y)</li>
+<li>比较ROC曲线的面积也就是AUC</li>
+</ol>
+<p>AUC更考虑的是样本预测的排序质量</p>
+<h1 id="5-sklearn参数详解"><a href="#5-sklearn参数详解" class="headerlink" title="5 sklearn参数详解"></a>5 sklearn参数详解</h1><p>下面对于一个最普通的sklearn 线性模型的使用方式进行说明<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个普通的线性模型</span><br><span class="line">regr = linear_model.LinearRegression()</span><br><span class="line"></span><br><span class="line"># 输入对应的训练数据x,以及对应的标签数据y</span><br><span class="line">regr.fit(datasets_train_x, datasets_train_y)</span><br><span class="line"></span><br><span class="line"># 输入对对应的测试数据x,得出模型的预测输出</span><br><span class="line">pred_y = regr.predict(datasets_test_x)</span><br><span class="line"></span><br><span class="line"># 最终使用下面的命令轲输出对应的w 与 b</span><br><span class="line">reg.coef_</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>除了上面的模型还有包括 lasso ridge等回归模型在<code>linear_model</code>包内</p>
+<h1 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h1><h2 id="如何提升泛化能力"><a href="#如何提升泛化能力" class="headerlink" title="如何提升泛化能力?"></a>如何提升泛化能力?</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://scikit-learn.org/stable/modules/linear_model.html" target="_blank" rel="noopener">scikit-learn 0.20 document</a><br><a href="https://docs.microsoft.com/en-us/azure/machine-learning/studio-module-reference/linear-regression" target="_blank" rel="noopener">azure machine-learning-reference</a><br><a href="https://www.deeplearningbook.org/" target="_blank" rel="noopener">deeplearning</a><br><a href="https://www.amazon.cn/dp/B01ARKEV1G/ref=sr_1_1?ie=UTF8&qid=1545063695&sr=8-1&keywords=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0+%E5%91%A8%E5%BF%97%E5%8D%8E" target="_blank" rel="noopener">机器学习-周志华</a><br><a href="https://www.amazon.cn/dp/B007TSFMTA/ref=pd_sbs_14_3?_encoding=UTF8&pd_rd_i=B007TSFMTA&pd_rd_r=d8a70aa5-0217-11e9-a072-e9dfeb7db3a3&pd_rd_w=PIcAR&pd_rd_wg=9xBdB&pf_rd_p=2d9f2e80-85a0-476d-89d7-9e61ddceb885&pf_rd_r=WPZZ4JN9QDGJN49CCH7G&psc=1&refRID=WPZZ4JN9QDGJN49CCH7G" target="_blank" rel="noopener">统计学习方法-李航</a><br><a href="(https://www.zhihu.com/question/27068705">机器学习中的Bias(偏差,Error(误差)和Variance(方差))有什么区别与联系</a><br><a href="http://oath2yangmen.online/2018/01/29/%E7%90%86%E8%A7%A3%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E5%B8%B8%E7%94%A8%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/" target="_blank" rel="noopener">理解机器学习中常用优化方法</a><br><a href="https://www.zhihu.com/question/52398145/answer/209358209" target="_blank" rel="noopener">机器学习中的目标函数\损失函数\代价函数</a><br><a href="https://www.zhihu.com/question/46441403" target="_blank" rel="noopener">梯度下降or拟牛顿法?</a><br><a href="https://zhuanlan.zhihu.com/p/37524275" target="_blank" rel="noopener">梯度下降法\牛顿法和拟牛顿法</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/12/18/20181218MLReview1/">https://blog.littleji.com/2018/12/18/20181218MLReview1/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2018-12/">2018-12</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/MachineLearning/">MachineLearning</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

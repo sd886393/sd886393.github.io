@@ -1,0 +1,519 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Gitlab 入门与 工作流 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Gitlab 入门与 工作流"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GitLab-%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">GitLab 入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E4%B8%8D%E6%83%B3%E5%86%8D%E5%B0%B4%E5%B0%AC%E4%B8%8B%E5%8E%BB%E4%BA%86"><span class="toc-number">1.1.</span> <span class="toc-text">我不想再尴尬下去了</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E9%9D%A2%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">上面到底是什么问题？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E6%B8%B8%E5%87%BB%E9%98%9F%E8%BD%AC%E5%90%91%E6%AD%A3%E8%A7%84%E5%86%9B"><span class="toc-number">1.3.</span> <span class="toc-text">从游击队转向正规军</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8GitLab%E6%90%9E%E8%BF%99%E4%B8%80%E5%A5%97%E4%B8%9C%E8%A5%BF"><span class="toc-number">1.4.</span> <span class="toc-text">为什么使用GitLab搞这一套东西</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitLab%E4%B8%AD%E7%9A%84%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84"><span class="toc-number">1.5.</span> <span class="toc-text">GitLab中的组织结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#team"><span class="toc-number">1.6.</span> <span class="toc-text">team</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E6%97%B6%E9%97%B4%E7%9A%84%E9%95%BF%E5%BA%A6"><span class="toc-number">1.7.</span> <span class="toc-text">迭代时间的长度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E7%82%B9%E5%AD%90%E5%88%B0%E4%BA%A7%E5%93%81"><span class="toc-number">1.8.</span> <span class="toc-text">从点子到产品</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AF%B4%E8%A6%81%E4%BD%BF%E7%94%A8%E4%B8%80%E4%B8%AAissue%E5%BC%80%E5%A7%8B%E4%B8%80%E5%88%87"><span class="toc-number">1.9.</span> <span class="toc-text">为什么说要使用一个issue开始一切</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#issue%E6%9C%AC%E8%BA%AB%E9%9C%80%E8%A6%81%E5%8C%85%E5%90%AB%E5%93%AA%E4%BA%9B%E4%B8%9C%E8%A5%BF"><span class="toc-number">1.9.1.</span> <span class="toc-text">issue本身需要包含哪些东西</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#issue%E7%9A%84type"><span class="toc-number">1.9.2.</span> <span class="toc-text">issue的type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9issues%E8%BF%9B%E8%A1%8Cplan"><span class="toc-number">1.9.3.</span> <span class="toc-text">对issues进行plan</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.9.4.</span> <span class="toc-text">优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A5%E9%87%8D%E6%80%A7"><span class="toc-number">1.9.5.</span> <span class="toc-text">严重性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#issue-board%EF%BC%8C%E5%B7%A5%E4%BD%9C%E7%9C%8B%E6%9D%BF"><span class="toc-number">1.10.</span> <span class="toc-text">issue board，工作看板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FQA"><span class="toc-number">1.11.</span> <span class="toc-text">FQA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.12.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-03-14T16:00:00.000Z"><a href="/2019/03/15/20190318HeadFirstForGitLab/">2019-03-15</a></time>
+      
+      
+  
+    <h1 class="title">Gitlab 入门与 工作流</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="GitLab-入门"><a href="#GitLab-入门" class="headerlink" title="GitLab 入门"></a>GitLab 入门</h1><h2 id="我不想再尴尬下去了"><a href="#我不想再尴尬下去了" class="headerlink" title="我不想再尴尬下去了"></a>我不想再尴尬下去了</h2><p>当你在照镜子时</p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12df7ykf1j308c06ymy2.jpg" alt></p>
+<p>当你觉得在正常地开发用户的需求时</p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dcp8yrdj30hs0e27am.jpg" alt></p>
+<p>当你作为一个萌新准备接手别人的代码时</p>
+<p><img src="http://ww1.sinaimg.cn/large/007yzqYtly1g12dk9hvifj312l0qrb29.jpg" alt></p>
+<p>当你在准备跟用户进行展示你开发的产品时</p>
+<p><img src="https://media.giphy.com/media/t507tv4kA94B2/giphy.gif" alt></p>
+<p>当你在咆哮这段恶心的代码是谁写的时候</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12laay4fpg308c0544qp.gif" alt></p>
+<p>当你准备跟甲方好好唠嗑的时候</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12l7ofivag30dw05qhdu.gif" alt></p>
+<h2 id="上面到底是什么问题？"><a href="#上面到底是什么问题？" class="headerlink" title="上面到底是什么问题？"></a>上面到底是什么问题？</h2><ol>
+<li>软件开发进度难以预测</li>
+<li>用户对产品功能难以满足</li>
+<li>软件产品质量无法保证</li>
+<li>软件产品难以维护</li>
+<li>软件缺少适当的文档资料</li>
+</ol>
+<p>归根结底是因为我们使用了一种小作坊式/游击队式地开发方式</p>
+<h2 id="从游击队转向正规军"><a href="#从游击队转向正规军" class="headerlink" title="从游击队转向正规军"></a>从游击队转向正规军</h2><p>以前在游击队里面人们在无数次的管理混乱导致项目搁浅（钱没了，什么都没做出来）的教训下，逐渐摸索出了一些“办事流程”，这些办事流程在实践中被证明效果还不错，被广泛采用，借以提高项目的成功率，以及<strong>降低掉头发的速率</strong>。</p>
+<p>技术思维得有，工程思维也少不了</p>
+<p>工程思维的起点是流程。流程的背后是科学，以既定的步骤、阶段性的输入/输出去完成价值创造，通过过程控制确保最终结果让人满意。</p>
+<h2 id="为什么使用GitLab搞这一套东西"><a href="#为什么使用GitLab搞这一套东西" class="headerlink" title="为什么使用GitLab搞这一套东西"></a>为什么使用GitLab搞这一套东西</h2><p>GitLab 本身是一个工具,是一个让大家达成共识的工具，帮助各位进行工程化地软件开发与管理，最终目的是<strong>拯救程序员们日益稀少的头发</strong>。</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rtguxtxj30ku0kuqhj.jpg" alt></p>
+<h2 id="GitLab中的组织结构"><a href="#GitLab中的组织结构" class="headerlink" title="GitLab中的组织结构"></a>GitLab中的组织结构</h2><p>主要使用group subgroup project的方式进行组织,一个典型的人员组织结构如下所示:</p>
+<ul>
+<li>Organization Group - GitLab<ul>
+<li>Category Subgroup - Marketing<ul>
+<li>(project) Design</li>
+<li>(project) General</li>
+</ul>
+</li>
+<li>Category Subgroup - Software<ul>
+<li>(project) GitLab CE</li>
+<li>(project) GitLab EE</li>
+<li>(project) Omnibus GitLab</li>
+<li>(project) GitLab Runner</li>
+<li>(project) GitLab Pages daemon</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>group的作用是让团队人员可以一次性授权并访问多个项目</p>
+<p>再比如我现在建立的一个示范性的<br><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12rgllc7kj323o175qer.jpg" alt></p>
+<h2 id="team"><a href="#team" class="headerlink" title="team"></a>team</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s0x6k8oj319v0la0zn.jpg" alt></p>
+<ul>
+<li>产品/用研user_research/UR</li>
+<li>用户体验user_experience/UE</li>
+<li>用户界面user_interface/UI</li>
+<li>开发develop/DEV</li>
+<li>质量quality_assurance/QA</li>
+<li>运维operation_maintenance/OP</li>
+<li>文档documentation/DOC</li>
+<li>开发经理pproject_manager/PM</li>
+</ul>
+<h2 id="迭代时间的长度"><a href="#迭代时间的长度" class="headerlink" title="迭代时间的长度"></a>迭代时间的长度</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12s98kdwej30lo0drmyy.jpg" alt></p>
+<p>sprint:译作短跑,指一个迭代,一般包括几个功能和bug修复,开发周期为2-4周</p>
+<p>milestone:译作里程碑,为了便于大家进行回顾是否偏离的航道或者进度,一般为3个sprint,也就是之后的一个季度</p>
+<p>release:一般是一个产品的deadline</p>
+<h2 id="从点子到产品"><a href="#从点子到产品" class="headerlink" title="从点子到产品"></a>从点子到产品</h2><p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g12se1elqsj30mr0ap44h.jpg" alt></p>
+<ul>
+<li>IDEA： 每一个从点子开始的项目，通常来源于一次闲聊。在这个阶段，项目组内的所有人对需求提出自己的想法.</li>
+<li>ISSUE： 最有效的讨论一个点子的方法，就是为这个点子建立一个工单讨论。你的团队和你的合作伙伴可以在 工单追踪器issue tracker 中帮助你去提升这个点子</li>
+<li>PLAN： 一旦讨论得到一致的同意，就是开始编码的时候了。首先，我们需要优先考虑组织我们的工作流。对于此，我们可以使用 工单看板Issue Board。</li>
+<li>CODE： 现在，当一切准备就绪，我们可以开始写代码了。</li>
+<li>COMMIT： 当我们为我们的初步成果欢呼的时候，我们就可以在版本控制下，提交代码到功能分支了。</li>
+<li>TEST： 通过 GitLab CI，我们可以运行脚本来构建和测试我们的应用。</li>
+<li>REVIEW： 一旦脚本成功运行，我们测试和构建成功，我们就可以进行 代码复审code review 以及批准。</li>
+<li>STAGING：： 现在是时候将我们的代码部署到演示环境来检查一下，看看是否一切就像我们预估的那样顺畅——或者我们可能仍然需要修改。</li>
+<li>PRODUCTION： 当一切都如预期，就是部署到生产环境的时候了！</li>
+<li>FEEDBACK： 现在是时候返回去看我们项目中需要提升的部分了。我们使用周期分析 Cycle Analytics来对当前项目中关键的部分进行的反馈。</li>
+</ul>
+<h2 id="为什么说要使用一个issue开始一切"><a href="#为什么说要使用一个issue开始一切" class="headerlink" title="为什么说要使用一个issue开始一切"></a>为什么说要使用一个issue开始一切</h2><ul>
+<li>在issue中,通过规范化的模板,项目中的任何人可以知道这个需求或者bug的任何详细信息和讨论以及历史</li>
+<li>通过issue中的文档信息,开发者与项目经理可以进行实时交流某一个feature的最新设计思路,这个可以作为一份实时的共享编辑文档</li>
+<li>使用issue的label功能可以实现工作流\时间估计等较复杂的功能</li>
+</ul>
+<h3 id="issue本身需要包含哪些东西"><a href="#issue本身需要包含哪些东西" class="headerlink" title="issue本身需要包含哪些东西"></a>issue本身需要包含哪些东西</h3><p>一个 feature类型 issue基本上长成这个样子</p>
+<figure class="highlight markdown"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 概述</span></span><br><span class="line"><!--- 说明该变更主要完成了什么事情 --></span><br><span class="line"></span><br><span class="line"><span class="section">## feature ID</span></span><br><span class="line"><!--- 对应在某个项目中的需求文档中的需求ID比如 AD-100 --></span><br><span class="line"></span><br><span class="line"><span class="section">## 其他相关feature和bug链接</span></span><br><span class="line"><!--- 为需要变更的模块列表 --></span><br><span class="line"><!--- 别忘了前面的# --></span><br><span class="line"><span class="bullet">* </span>#XX1</span><br><span class="line"><span class="bullet">* </span>#XX2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 估计花费的时间和实际花费的时间</span></span><br><span class="line"></span><br><span class="line">/estimate 1mo 1w 1d 1h 1m</span><br><span class="line"></span><br><span class="line">/spend 1mo 1w 1d 1h 1m</span><br><span class="line"> </span><br><span class="line"><span class="section">## 更新的具体类型</span></span><br><span class="line"><!--- 请在指定的括号中填入'x'--></span><br><span class="line"><span class="bullet">* </span>[ ] 非影响各个接口输出的功能更新（单纯的增加功能，不变更已有的功能）</span><br><span class="line"><span class="bullet">* </span>[ ] 影响接口的功能更新（已有的部分功能会失效）</span><br><span class="line"></span><br><span class="line"><span class="section">## 检查项</span></span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 代码符合本项目的代码风格</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 单元测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-DEV" 针对于该功能的概要、详细等设计文档进行更新</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  测试用例通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  集成测试通过</span><br><span class="line"><span class="bullet">* </span>[ ]  ~"team-QA"  针对于该功能的相关测试文档进行更新</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">## 修改的功能</span></span><br><span class="line"><!--- 说明如何进行修改的 --></span><br><span class="line"><!--- 功能列表可以作为子任务列表 --></span><br><span class="line"><!--- 如果完成了指定的功能,请在指定的括号中填入'x'--></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 添加的功能</span></span><br><span class="line"><!--- 说明如何进行添加的 --></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 删除的功能</span></span><br><span class="line"><!--- 说明如何进行添加的 --></span><br><span class="line"><span class="bullet">* </span>[ ] 功能1</span><br><span class="line"><span class="bullet">* </span>[ ] 功能2</span><br><span class="line"></span><br><span class="line"><span class="section">## 如何对该功能进行验证</span></span><br><span class="line"><!--- 包括测试环境，如何运行测试 --></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="issue的type"><a href="#issue的type" class="headerlink" title="issue的type"></a>issue的type</h3><ul>
+<li>feature:开发功能点</li>
+<li>bug: 软件缺陷</li>
+<li>tech debt:不改变功能的情况下增强产品性能</li>
+<li>ux debt:用户体验需要提升</li>
+</ul>
+<h3 id="对issues进行plan"><a href="#对issues进行plan" class="headerlink" title="对issues进行plan"></a>对issues进行plan</h3><p>plan说是计划，实则是沟通</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136hkdncdj30cg04saa1.jpg" alt></p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g1360hafquj30yt04s74k.jpg" alt></p>
+<ul>
+<li>process-needs confirmed</li>
+<li>process-reject(拒绝)</li>
+<li>process-doing</li>
+</ul>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>优先级的意义是便于在同时处理大量需求的时候有一个计划。</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g135z5zvv8j30z50613yy.jpg" alt></p>
+<ul>
+<li>P1 特高级 目前的sprint搞定</li>
+<li>P2 高级 下个sprint搞定</li>
+<li>P3 中级 目前的里程碑再搞定</li>
+<li>P4 低级 下个里程碑再搞定</li>
+</ul>
+<h3 id="严重性"><a href="#严重性" class="headerlink" title="严重性"></a>严重性</h3><ul>
+<li>S1 完蛋 系统崩溃/数据丢失/数据泄漏/coredump 没有数据可用性</li>
+<li>S2 严重 无法在前台查询数据,但是数据库完整 部分数据可用性丢失</li>
+<li>S3 中级 前台显示错位 数据无丢失可用性受损</li>
+<li>S4 初级 前台颜色显示错误 数据无丢失 可用性也无受损</li>
+</ul>
+<h2 id="issue-board，工作看板"><a href="#issue-board，工作看板" class="headerlink" title="issue board，工作看板"></a>issue board，工作看板</h2><p>我们做了这么多准备，都是为了这个，让整个项目组成员清晰的了解到，目前的计划与进度，加快信息的传递</p>
+<p><img src="https://ws1.sinaimg.cn/large/007yzqYtly1g136mkcyttj30t10glk0v.jpg" alt></p>
+<p>正儿八经的issue应该有三个标签、责任人、截止时间：</p>
+<ul>
+<li>process-*</li>
+<li>优先级</li>
+<li>团队，以团队为基础建立起来的看板可以通过拖拽自动加上团队标签</li>
+</ul>
+<h2 id="FQA"><a href="#FQA" class="headerlink" title="FQA"></a>FQA</h2><ul>
+<li><p>问：能不能想svn那样单独的文件夹设置权限？</p>
+<ul>
+<li>答：不可以,同一个repo的每个文件夹的权限是一致,如果想根据人来设置请使用两个repo</li>
+</ul>
+</li>
+<li><p>问：分支权限可以做什么？</p>
+<ul>
+<li>答：只允许部分人进行merge、只允许部分人进行push。</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href>程序员的那些事儿</a></p>
+<p><a href="https://zh.wikipedia.org/zh/%E5%A5%B6%E5%A4%B4%E4%B9%90" target="_blank" rel="noopener">奶头乐维基百科</a></p>
+<p><a href="https://www.cnhzz.com/gitlab-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%A6%82%E8%A7%88/" target="_blank" rel="noopener">GitLab工作流概览</a></p>
+<p><a href="https://about.gitlab.com/2016/10/25/gitlab-workflow-an-overview/#gitlab-workflow-use-case-scenario" target="_blank" rel="noopener">GitLab Workflow: An Overview</a></p>
+<p><a href="https://about.gitlab.com/2016/03/03/start-with-an-issue/" target="_blank" rel="noopener">Always start with an issue </a></p>
+<p><a href="https://pm.stackexchange.com/questions/22510/scrum-sprint-vs-milestone-vs-release" target="_blank" rel="noopener">scrum-sprint-vs-milestone-vs-release</a></p>
+<p><a href="https://www.cnblogs.com/baiyanhuang/archive/2010/11/29/1890728.html" target="_blank" rel="noopener">我们是怎么scrum</a></p>
+<p><a href="https://medium.com/@shaky.girl/%E5%88%A5%E5%86%8D%E5%82%BB%E5%82%BB%E5%88%86%E4%B8%8D%E6%B8%85-%E7%A9%B6%E7%AB%9Fpm-ux-ui-web-designer-front-end-developer%E7%9A%84%E5%B0%88%E6%A5%AD%E5%B7%AE%E5%9C%A8%E5%93%AA-b8206dd49d32" target="_blank" rel="noopener">別再傻傻分不清，究竟PM, UX, UI, Web designer, Front-End Developer的專業差在哪？</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2019/03/15/20190318HeadFirstForGitLab/">https://blog.littleji.com/2019/03/15/20190318HeadFirstForGitLab/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2019-03/">2019-03</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/SoftwareEngineering/">SoftwareEngineering</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

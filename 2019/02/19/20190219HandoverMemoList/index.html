@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>软件项目交接清单 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="软件项目交接清单"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%A1%B9%E7%9B%AE%E4%BA%A4%E6%8E%A5%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">1 项目交接的场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%96%87%E6%A1%A3%E7%9B%B8%E5%85%B3%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">2 文档相关注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%A1%B9%E7%9B%AE%E6%BA%90%E7%A0%81%E7%9B%B8%E5%85%B3%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">3.</span> <span class="toc-text">3 项目源码相关注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text">4 数据库相关注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E7%8E%AF%E5%A2%83%E7%9B%B8%E5%85%B3%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">5.</span> <span class="toc-text">5 环境相关注意点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 本地开发环境配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 测试环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E9%A2%84%E4%B8%8A%E7%BA%BF%E7%8E%AF%E5%A2%83"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 预上线环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E6%AD%A3%E5%BC%8F%E7%8E%AF%E5%A2%83"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 正式环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%AF%B9%E6%8E%A5%E4%BA%BA%E7%9B%B8%E5%85%B3%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-number">6.</span> <span class="toc-text">6 对接人相关注意点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E4%BA%A4%E6%8E%A5%E7%9A%84%E5%BD%A2%E5%BC%8F"><span class="toc-number">7.</span> <span class="toc-text">7 交接的形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%87%E6%B3%A8"><span class="toc-number">8.</span> <span class="toc-text">备注</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">9.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-02-18T16:00:00.000Z"><a href="/2019/02/19/20190219HandoverMemoList/">2019-02-19</a></time>
+      
+      
+  
+    <h1 class="title">软件项目交接清单</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="1-项目交接的场景"><a href="#1-项目交接的场景" class="headerlink" title="1 项目交接的场景"></a>1 项目交接的场景</h2><ul>
+<li>由于同事离职，将工作交接给自己。</li>
+<li>由于自己离职，将工作交接给同事。</li>
+<li>由于项目变动，将工作交给其他项目组。</li>
+</ul>
+<h2 id="2-文档相关注意点"><a href="#2-文档相关注意点" class="headerlink" title="2 文档相关注意点"></a>2 文档相关注意点</h2><ul>
+<li>确定每一期的产品需求文档，PRD文档，概要设计文档，详细设计文档（流程图、设计框架图、上下游组件交互图），接口设计文档。</li>
+<li>确定开发过程中可能使用到的PSD等视觉稿或切图。</li>
+<li>确定每一期的测试覆盖文档，单元测试文档，遗留Bug。</li>
+<li>确定目前这一期的开发进度文档，包括尚未开发，开发过程中，开发完成。</li>
+<li>确定每一期的使用说明文档。</li>
+<li>确定FAQ文档。</li>
+<li>确定每一期的产品人员，开发人员，测试人员。</li>
+<li>确定每一期的开始开发时间，提测时间，上线时间。</li>
+<li>确定之前所编写的专利、软件著作权等文档。</li>
+<li>了解相关程序风险，遗留问题等。</li>
+<li>其他的一些约定如Scrum、XP、瀑布等软件开发方法。</li>
+</ul>
+<h2 id="3-项目源码相关注意点"><a href="#3-项目源码相关注意点" class="headerlink" title="3 项目源码相关注意点"></a>3 项目源码相关注意点</h2><ul>
+<li>将开发人员最后修改的代码提交。</li>
+<li>确定项目源码且需要有规范的详细注释。</li>
+<li>确定源码目录结构说明，明确结构中各个部分的意义。</li>
+<li>确定项目对外API。</li>
+<li>确定项目定时脚本。</li>
+<li>确定项目日志查看平台。</li>
+<li>开通SVN的权限。</li>
+<li>开通GIT的权限。</li>
+<li>开通涉及交接的任何系统权限。</li>
+<li>了解上线部署脚本、流程。</li>
+<li>了解代码规范。</li>
+</ul>
+<h2 id="4-数据库相关注意点"><a href="#4-数据库相关注意点" class="headerlink" title="4 数据库相关注意点"></a>4 数据库相关注意点</h2><ul>
+<li>相关数据库与数据表结构</li>
+<li>查看是否有未注释的库名、表名、字段名，将其确定。</li>
+<li>最好了解每一个数据库、表、字段的意义，更新到文档。</li>
+<li>最好将每一个表涉及到哪一个模块进行确认，更新到文档。</li>
+</ul>
+<h2 id="5-环境相关注意点"><a href="#5-环境相关注意点" class="headerlink" title="5 环境相关注意点"></a>5 环境相关注意点</h2><h3 id="5-1-本地开发环境配置"><a href="#5-1-本地开发环境配置" class="headerlink" title="5.1 本地开发环境配置"></a>5.1 本地开发环境配置</h3><ul>
+<li>在自己本地电脑上配置环境，将项目在自己机器上运行成功。</li>
+<li>确认是否有其他的扩展，如需账号、端口，记得做记录。</li>
+<li>确认是否有配置文件，如果有则对于所有的配置项进行说明。</li>
+</ul>
+<h3 id="5-2-测试环境"><a href="#5-2-测试环境" class="headerlink" title="5.2 测试环境"></a>5.2 测试环境</h3><p>开通测试账号。</p>
+<h3 id="5-3-预上线环境"><a href="#5-3-预上线环境" class="headerlink" title="5.3 预上线环境"></a>5.3 预上线环境</h3><ul>
+<li>开通预上线环境账号</li>
+<li>确定预上线环境的域名地址，是否需要指定的Host等等。</li>
+</ul>
+<h3 id="5-4-正式环境"><a href="#5-4-正式环境" class="headerlink" title="5.4 正式环境"></a>5.4 正式环境</h3><p>开通正式环境账号</p>
+<h2 id="6-对接人相关注意点"><a href="#6-对接人相关注意点" class="headerlink" title="6 对接人相关注意点"></a>6 对接人相关注意点</h2><ul>
+<li>确定测试对接人。</li>
+<li>确定产品对接人。</li>
+<li>确定项目跨部门对接人。</li>
+<li>确定运维和DBA对接人。</li>
+</ul>
+<h2 id="7-交接的形式"><a href="#7-交接的形式" class="headerlink" title="7 交接的形式"></a>7 交接的形式</h2><ul>
+<li>具体的形式最好为举行一个交接会议，叫上相关产品、开发、测试，对于交接人员提出的问题，仔细逐一讲解、解答。</li>
+<li>使用交接双方共同参与,代码讲解的方式</li>
+</ul>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><ul>
+<li>最好能在员工提离职的时候就开始项目交接，而不是员工走的时候再做交接。</li>
+<li>离职要提前与上级领导沟通，给领导留出找对接人的时间。</li>
+<li>交接过程中遇到有疑问的地方，一定要确认清楚，做好记录。</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://zhuanlan.zhihu.com/p/29297794" target="_blank" rel="noopener">程序员如何做好交接</a><br><a href="http://www.kuqin.com/projectmanage/20110824/263959.html" target="_blank" rel="noopener">项目交接小总结</a><br><a href="https://blog.csdn.net/shehun1/article/details/7788875" target="_blank" rel="noopener">文档交接说明书</a><br><a href="https://www.jianshu.com/p/00490a9ae109" target="_blank" rel="noopener">前端项目交接文档</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2019/02/19/20190219HandoverMemoList/">https://blog.littleji.com/2019/02/19/20190219HandoverMemoList/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2019-02/">2019-02</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/SoftwareEngineering/">SoftwareEngineering</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

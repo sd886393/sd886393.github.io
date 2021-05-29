@@ -1,0 +1,479 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Logstash Grok 概览 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Logstash Grok 概览"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%BD%A0%E7%9A%84-Grok-pattern"><span class="toc-number">2.</span> <span class="toc-text">测试你的 Grok pattern</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grok-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E8%AE%BE%E5%AE%9A"><span class="toc-number">3.</span> <span class="toc-text">Grok 的一些基本设定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%9E%E9%99%85%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">3.2.</span> <span class="toc-text">一个实际的例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">正则表达式库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-pattern"><span class="toc-number">5.</span> <span class="toc-text">自定义 pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89-pattern"><span class="toc-number">5.1.</span> <span class="toc-text">第一种方式添加自定义 pattern</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89-pattern"><span class="toc-number">5.2.</span> <span class="toc-text">第二种方式添加自定义 pattern</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grok-%E6%8F%92%E4%BB%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="toc-number">6.</span> <span class="toc-text">Grok 插件的一些配置项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#named-captures-only"><span class="toc-number">6.1.</span> <span class="toc-text">named_captures_only</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#overwrite"><span class="toc-number">6.2.</span> <span class="toc-text">overwrite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pattern-definitions"><span class="toc-number">6.3.</span> <span class="toc-text">pattern_definitions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#timeout-millis"><span class="toc-number">6.4.</span> <span class="toc-text">timeout_millis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#add-tag"><span class="toc-number">6.5.</span> <span class="toc-text">add_tag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#add-field"><span class="toc-number">6.6.</span> <span class="toc-text">add_field</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-10-24T16:00:00.000Z"><a href="/2018/10/25/20181025LogstashGrokOverview/">2018-10-25</a></time>
+      
+      
+  
+    <h1 class="title">Logstash Grok 概览</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Grok 插件让 Logstash 在处理一定格式的日志文件的时候有了一定程度“正则表达”的功能。<br>特别适用于解析一些非结构化的数据，并从中提取真正相关的信息至一些结构化 field 中。</p>
+<p>主要的使用场景在 syslog、apache 与其他的 webserver 具有这样特点的日志：这些日志都具有易人读但不易机读的特点。</p>
+<p>Logstash 默认有很多 patterns，你可以在 <a href="https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns" target="_blank" rel="noopener">https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns</a> 找到。当然你也可以添加你自己的 pattern，这点我们稍后就会讲到。</p>
+<h1 id="测试你的-Grok-pattern"><a href="#测试你的-Grok-pattern" class="headerlink" title="测试你的 Grok pattern"></a>测试你的 Grok pattern</h1><p>Debug 是人类进步的阶梯，想起来当时被正则表达式支配的恐惧了么？那时我们有一些工具来测试我们的正则表达式是否足够“强壮”，grok 的作者也提供了两个网站，允许你通过这个来测试你的 grok 表达式，就跟你在测试正表达式的时候一样。分别是 <a href="http://grokdebug.herokuapp.com" target="_blank" rel="noopener">http://grokdebug.herokuapp.com </a> 和 <a href="http://grokconstructor.appspot.com/" target="_blank" rel="noopener"> http://grokconstructor.appspot.com/</a></p>
+<h1 id="Grok-的一些基本设定"><a href="#Grok-的一些基本设定" class="headerlink" title="Grok 的一些基本设定"></a>Grok 的一些基本设定</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>Grok 使用如下的语法进行匹配操作。<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%{SYNTAX:SEMANTIC}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>其中 <code>SYNTAX</code>是你想匹配的表达式的名称，SEMANTIC 则是存储匹配后的文本的变量名，比如：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 待匹配的文本为</span><br><span class="line">192.168.1.1 2016-04-26T19:55:15Z</span><br><span class="line"># 一个完整的匹配式</span><br><span class="line">%{IPV4:ip} %{TIMESTAMP_ISO8601:time}</span><br><span class="line"># pattern 为</span><br><span class="line">IPV4 (?<![0-9])(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))(?![0-9])</span><br><span class="line"></span><br><span class="line">TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>那么 <code>IPV4</code> 和 <code>TIMESTAMP_ISO8601</code>就是 <code>SYNTAX</code>，<code>ip</code> 和 <code>time</code> 就是 SEMANTIC。</p>
+<h2 id="一个实际的例子"><a href="#一个实际的例子" class="headerlink" title="一个实际的例子"></a>一个实际的例子</h2><p>一个 logstash 的配置文件，内容如下：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input {</span><br><span class="line">  file {</span><br><span class="line">    path => "/var/log/http.log"</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    match => { "message" => "%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}" }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>运行后，这条 message 将会在 grok 过滤之后上报一条 event，内容如下：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">client: 55.3.244.1</span><br><span class="line">method: GET</span><br><span class="line">request: /index.html</span><br><span class="line">bytes: 15824</span><br><span class="line">duration: 0.043</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1 id="正则表达式库"><a href="#正则表达式库" class="headerlink" title="正则表达式库"></a>正则表达式库</h1><p>Grok 使用了 <a href="https://github.com/kkos/oniguruma/blob/master/doc/RE" target="_blank" rel="noopener">oniguruma</a> 的正则表达式，所以所有在该文档中出现的匹配语法都可以使用。</p>
+<h1 id="自定义-pattern"><a href="#自定义-pattern" class="headerlink" title="自定义 pattern"></a>自定义 pattern</h1><p>Grok 自带了一些常用的匹配规则，比如：IPV4、IPV6、YEAR等，但是当我们想要写一些自己的规则的时候，grok 也提供了支持，这里主要有两种方式：</p>
+<h2 id="第一种方式添加自定义-pattern"><a href="#第一种方式添加自定义-pattern" class="headerlink" title="第一种方式添加自定义 pattern"></a>第一种方式添加自定义 pattern</h2><p>直接使用下面的 pattern 结构：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?<field_name>the pattern here)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>其中 field_name 可以理解为上文的 SEMANTIC，后面则跟的是实际的匹配表达式，比如这样：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?<queue_id>[0-9A-F]{10,11})</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="第二种方式添加自定义-pattern"><a href="#第二种方式添加自定义-pattern" class="headerlink" title="第二种方式添加自定义 pattern"></a>第二种方式添加自定义 pattern</h2><p>第二种方式就如同我们一开始使用的一样，在指定的 pattern 文件夹，添加即可比如：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 在 ./pattern/postfix 添加</span><br><span class="line">POSTFIX_QUEUEID [0-9A-F]{10,11}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>在实际匹配的时候写入<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%{POSTFIX_QUEUEID:queue_id}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>使用的效果与第一种方式完全一致。</p>
+<p>Logstash 的配置文件中可以指定 自定义 pattern 的位置，比如：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    patterns_dir => ["./patterns"]</span><br><span class="line">    match => { "message" => "%{SYSLOGBASE} %{POSTFIX_QUEUEID:queue_id}: %{GREEDYDATA:syslog_message}" }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>就是读取当前目录下的 patterns 文件。</p>
+<h1 id="Grok-插件的一些配置项"><a href="#Grok-插件的一些配置项" class="headerlink" title="Grok 插件的一些配置项"></a>Grok 插件的一些配置项</h1><p>如果需要定制化 Grok 插件的一些匹配配置</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>配置项名称</th>
+<th>匹配项类型</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>break_on_match</td>
+<td>boolean</td>
+<td>no</td>
+</tr>
+<tr>
+<td>keep_empty_capture</td>
+<td>boolean</td>
+<td>no</td>
+</tr>
+<tr>
+<td>match</td>
+<td>hash</td>
+<td>no</td>
+</tr>
+<tr>
+<td>named_captures_only</td>
+<td>boolean</td>
+<td>no</td>
+</tr>
+<tr>
+<td>overwrite</td>
+<td>array</td>
+<td>no</td>
+</tr>
+<tr>
+<td>pattern_definitions</td>
+<td>hash</td>
+<td>no</td>
+</tr>
+<tr>
+<td>patterns_dir</td>
+<td>array</td>
+<td>no</td>
+</tr>
+<tr>
+<td>patterns_files_glob</td>
+<td>string</td>
+<td>no</td>
+</tr>
+<tr>
+<td>tag_on_failure</td>
+<td>array</td>
+<td>no</td>
+</tr>
+<tr>
+<td>tag_on_timeout</td>
+<td>string</td>
+<td>no</td>
+</tr>
+<tr>
+<td>timeout_millis</td>
+<td>number</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="named-captures-only"><a href="#named-captures-only" class="headerlink" title="named_captures_only"></a>named_captures_only</h2><p>默认值： <code>true</code><br>意义：当该值为 <code>true</code> 时，只会从数据中捕获有 <code>SEMANTIC</code> 的信息，其他的匹配项不存储。</p>
+<h2 id="overwrite"><a href="#overwrite" class="headerlink" title="overwrite"></a>overwrite</h2><p>默认值：[]<br>意义：这个属性允许你在输出匹配结果之前，重写该匹配结果中的一项或多项，比如：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 原始数据</span><br><span class="line">734742416494845952,Android,"In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",2016-05-23T13:46:57Z</span><br><span class="line"># 配置文件</span><br><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    patterns_dir => ["/root/custom-patterns.txt"]</span><br><span class="line">    match => { "message" => "%{ID:id},%{DEVICE:device},%{MESSAGE_BODY:message},%{TIMESTAMP_ISO8601:timestamp}" }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"># 结果1 没有overwrite选项</span><br><span class="line">"message": [</span><br><span class="line">"734742416494845952,Android,"In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",2016-05-23T13:46:57Z"</span><br><span class="line">,</span><br><span class="line">""In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!""</span><br><span class="line">]，</span><br><span class="line">"host": "localhost",</span><br><span class="line">"@timestamp": "2018-10-21T01:09:04.089Z",</span><br><span class="line">"device": "Android",</span><br><span class="line">"id": "734742416494845952",</span><br><span class="line">"timestamp": "2016-05-23T13:46:57Z",</span><br><span class="line">"path": "/root/trump-test.csv",</span><br><span class="line">"@version": "1"</span><br><span class="line"></span><br><span class="line"># 结果2 设置overwrite选项     overwrite => ["message"]</span><br><span class="line">"message": "In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",</span><br><span class="line">"host": "localhost",</span><br><span class="line">"@timestamp": "2018-10-21T01:09:04.089Z",</span><br><span class="line">"device": "Android",</span><br><span class="line">"id": "734742416494845952",</span><br><span class="line">"timestamp": "2016-05-23T13:46:57Z",</span><br><span class="line">"path": "/root/trump-test.csv",</span><br><span class="line">"@version": "1"</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到，原来的 <code>message</code> 属性存储的是原始的输入信息，增加了 overwrite 选项后，则由匹配到的 message 信息将其替换。</p>
+<h2 id="pattern-definitions"><a href="#pattern-definitions" class="headerlink" title="pattern_definitions"></a>pattern_definitions</h2><p>默认值：空<br>意义：可以再该项中，以键值对的方式输入 grok 表达式，也就是把patterns_dir 文件内的 pattern 写在这个属性里，比如：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pattern_definitions => {</span><br><span class="line">     "ID" => "\d+(?=,)"</span><br><span class="line">     "DEVICE" => "[a-zA-Z]+(?=,)"</span><br><span class="line">     "MESSAGE_BODY" => ".+(?=,2)"</span><br><span class="line">   }</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="timeout-millis"><a href="#timeout-millis" class="headerlink" title="timeout_millis"></a>timeout_millis</h2><p>默认值：30000<br>意义：在执行了所定义的时间后，终止正则匹配，设置为0则没有超时时间。</p>
+<h2 id="add-tag"><a href="#add-tag" class="headerlink" title="add_tag"></a>add_tag</h2><p>默认值：[]<br>意义：在匹配成功后，增加一个或多个 tag 字段</p>
+<h2 id="add-field"><a href="#add-field" class="headerlink" title="add_field"></a>add_field</h2><p>默认值：{}<br>意义：在匹配成功后，增加一个或多个 field、value对，例如：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># 输入</span><br><span class="line">依然是上文中使用的例子</span><br><span class="line"></span><br><span class="line"># Logstash 配置文件如下</span><br><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    pattern_definitions => {</span><br><span class="line">      "ID" => "\d+(?=,)"</span><br><span class="line">      "DEVICE" => "[a-zA-Z]+(?=,)"</span><br><span class="line">      "MESSAGE_BODY" => ".+(?=,2)"</span><br><span class="line">    }</span><br><span class="line">    #patterns_dir => ["/root/custom-patterns.txt"]</span><br><span class="line">    match => { "message" => "%{ID:id},%{DEVICE:device},%{MESSAGE_BODY:message},%{TIMESTAMP_ISO8601:timestamp}" }</span><br><span class="line">    overwrite => ["message"]</span><br><span class="line">    add_tag => [ "test_%{id}"]</span><br><span class="line">    add_field => {</span><br><span class="line">      "test_%{timestamp}" => "test"</span><br><span class="line">      }</span><br><span class="line">    remove_field => ["device"]</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># 结果如下</span><br><span class="line">"host": "localhost",</span><br><span class="line">"timestamp": "2016-05-23T13:46:57Z",</span><br><span class="line">"id": "734742416494845952",</span><br><span class="line">"tags": [</span><br><span class="line">"test_734742416494845952"</span><br><span class="line">],</span><br><span class="line">"@version": "1",</span><br><span class="line">"@timestamp": "2018-10-21T01:47:31.552Z",</span><br><span class="line">"message": "In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",</span><br><span class="line">"path": "/root/trump-test.csv",</span><br><span class="line">"test_2016-05-23T13:46:57Z": "test"</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html" target="_blank" rel="noopener">grok manual</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/25/20181025LogstashGrokOverview/">https://blog.littleji.com/2018/10/25/20181025LogstashGrokOverview/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2018-10/">2018-10</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/Logstash/">Logstash</a>, <a href="/tags/框架/">框架</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

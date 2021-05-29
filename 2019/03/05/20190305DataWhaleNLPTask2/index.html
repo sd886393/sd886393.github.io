@@ -1,0 +1,418 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>常见的分词方法与文本向量化 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="常见的分词方法与文本向量化"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%AF%8D%E5%85%B8%E5%88%86%E8%AF%8D%E7%AE%97%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">1 词典分词算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%89%8D%E5%90%91%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95%E3%80%81%E5%90%8E%E5%90%91%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E3%80%81%E5%8F%8C%E5%90%91%E5%8C%B9%E9%85%8D%E3%80%81%E6%9C%80%E5%B0%8F%E5%88%87%E5%88%86"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 前向最大匹配算法、后向最大匹配、双向匹配、最小切分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%9F%BA%E4%BA%8E%E7%BB%9F%E8%AE%A1%E7%9A%84%E5%88%86%E8%AF%8D%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">2 基于统计的分词算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-NGram"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 NGram</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%AF%8D%E8%A2%8B%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%96%87%E6%9C%AC%E5%90%91%E9%87%8F%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">3 词袋模型与文本向量化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E8%AF%8D%E8%A2%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 词袋模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-03-04T16:00:00.000Z"><a href="/2019/03/05/20190305DataWhaleNLPTask2/">2019-03-05</a></time>
+      
+      
+  
+    <h1 class="title">常见的分词方法与文本向量化</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>[toc]</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>文本分词作为自然语言处理(NLP)的基本任务之一，是很多上层任务（命名实体识别、情感分析、自动文摘等）的基础，那么从事相关行业的人员自然需要对其中涉及到的一些概念做进一步的了解，本文会从目前主流的分词算法、分词难点等展开进行简要的说明。</p>
+<p>分词理论主要包含三个部分：分词算法、中文分词消歧、未登录词识别，而分词算法又包括词典分词、理解分词、统计分词、组合分词等几大类。下面的说明重点就是基于分词算法。</p>
+<h2 id="1-词典分词算法"><a href="#1-词典分词算法" class="headerlink" title="1 词典分词算法"></a>1 词典分词算法</h2><p>基于词典的分词核心要确定两个内容：分词的算法与词典的结构，其中主要使用的集中基于词典的方法有正向最大匹配、逆向最大匹配、双向最大匹配、最少切分等。</p>
+<h3 id="1-1-前向最大匹配算法、后向最大匹配、双向匹配、最小切分"><a href="#1-1-前向最大匹配算法、后向最大匹配、双向匹配、最小切分" class="headerlink" title="1.1 前向最大匹配算法、后向最大匹配、双向匹配、最小切分"></a>1.1 前向最大匹配算法、后向最大匹配、双向匹配、最小切分</h3><p>前向最大切词，是以可变滑动窗口对文本进行顺序取词，若改词在词典中存在，则进行一次切分；否则，缩小窗口大小，继续取词与词典库进行搜索，知道窗口词长为1。后向切词原理相似，只不过是从后面开始进行窗口滑动。</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ustring = string_need_to_be_segmented</span><br><span class="line">while :</span><br><span class="line">if sentence_len < word_max_len:</span><br><span class="line">    word_max_len = sentence_len</span><br><span class="line">for i in range(word_max_len, 0, -1):</span><br><span class="line">    if ustring[:i] in word_set or i == 1:</span><br><span class="line">        wordList.append(ustring[:i])</span><br><span class="line">        ustring = ustring[i:]</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        i -= 1</span><br><span class="line">return wordList</span><br></pre></td></tr></tbody></table></figure>
+<p>后向匹配与前向类似只不过方向从后往前进行匹配，双向匹配利用了前后两方面的信息,并从中选择词数最少的作为分词依据。</p>
+<p>最小切分方法使用这样一条原则即:”每一句中切出的词数最小”</p>
+<p>基于这种匹配的方法有这样的优点：</p>
+<ol>
+<li>程序简单易行，开发周期短；</li>
+<li>没有任何复杂计算，分词速度快；</li>
+</ol>
+<p>缺点有：</p>
+<ol>
+<li>不能处理歧义；</li>
+<li>不能识别新词；</li>
+<li>分词准确率不高，不能满足实际的需要；</li>
+</ol>
+<h2 id="2-基于统计的分词算法"><a href="#2-基于统计的分词算法" class="headerlink" title="2 基于统计的分词算法"></a>2 基于统计的分词算法</h2><h3 id="2-1-NGram"><a href="#2-1-NGram" class="headerlink" title="2.1 NGram"></a>2.1 NGram</h3><p>基于N-gram语言模型的方法是一个典型的生成式模型，早期很多统计分词均是以它为基本模型，然后配合其他未登录词识别模块进行扩展。其基本思想是：首先根据词典对句子进行简单匹配，找出所有可能的词典词，然后将它们和所有单个字作为结点，构造n元切分词图，图中的结点表示可能的此候选，边表示路径，边上的n元概率表示代价，最后利用相关搜索算法从中找到代价最小的路径作为最后的分词结果。</p>
+<p>假设随机变量S为一个汉字序列，W是S上所有可能切分路径，对于分词，实际上就是求解使条件概率P(W|S)最大的切分路径W，即:<br>W=argmaxWP(W|s)</p>
+<p>根据贝叶斯公式：<br>W=argmaxWP(W)P(S|W)P(S)</p>
+<p>由于P(S)为归一化因子，P(S|W)恒为1，因此只需要求解P(W)。P(W)使用N-gram语言模型建模，定义如下(以Bi-gram为例)：<br>P(W)=P(w1w2…wT)=P(w1)P(w2|w1)…P(wT|wT−1)</p>
+<p>这样，各种切分路径的好坏程度(条件概率P(W|S))可以求解。简单的，可以根据DAG枚举全路径，暴力求解最优路径；也可以使用动态规划的方法的求解，jieba分词中不带HMM新词发现的分词，就是DAG+Uni-gram语言模型+后向动态规划的方式进行求解的</p>
+<h2 id="3-词袋模型与文本向量化"><a href="#3-词袋模型与文本向量化" class="headerlink" title="3 词袋模型与文本向量化"></a>3 词袋模型与文本向量化</h2><h3 id="3-1-词袋模型"><a href="#3-1-词袋模型" class="headerlink" title="3.1 词袋模型"></a>3.1 词袋模型</h3><p>Bag-of-words model (BoW model) 最早出现在自然语言处理（Natural Language Processing）和信息检索（Information Retrieval）领域.。该模型忽略掉文本的语法和语序等要素，将其仅仅看作是若干个词汇的集合，文档中每个单词的出现都是独立的。BoW使用一组无序的单词(words)来表达一段文字或一个文档.。近年来，BoW模型被广泛应用于计算机视觉中。</p>
+<p>基于文本的BoW模型的一个简单例子如下：</p>
+<p>首先给出两个简单的文本文档如下：</p>
+<pre><code>    John likes to watch movies. Mary likes too.
+
+    John also likes to watch football games.
+</code></pre><p>基于上述两个文档中出现的单词，构建如下一个词典 (dictionary)：</p>
+<pre><code>   {"John": 1, "likes": 2,"to": 3, "watch": 4, "movies": 5,"also": 6, "football": 7, "games": 8,"Mary": 9, "too": 10}
+</code></pre><p>上面的词典中包含10个单词, 每个单词有唯一的索引, 那么每个文本我们可以使用一个10维的向量来表示。如下：<br>       [1, 2, 1, 1, 1, 0, 0, 0, 1, 1]<br>       [1, 1,1, 1, 0, 1, 1, 1, 0, 0]</p>
+<p>该向量与原来文本中单词出现的顺序没有关系，而是词典中每个单词在文本中出现的频率。</p>
+<p>一个bow与ngram的python例子:<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env python3</span><br><span class="line"></span><br><span class="line">from __future__ import print_function</span><br><span class="line"></span><br><span class="line">from collections import deque</span><br><span class="line">from itertools import islice</span><br><span class="line">from itertools import tee</span><br><span class="line"></span><br><span class="line">try:</span><br><span class="line">    from itertools import izip as zip</span><br><span class="line">except ImportError:</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line"># </span><br><span class="line">def ngram(iterable, n=2):</span><br><span class="line">    """s -> (s0,s1), (s1,s2), (s2, s3), ..."""</span><br><span class="line">    assert n > 0, 'Cannot create negative n-grams.'</span><br><span class="line">    l = tee(iterable, n)</span><br><span class="line">    for i, s in enumerate(l):</span><br><span class="line">        for _ in range(i):</span><br><span class="line">            next(s, None)</span><br><span class="line">    return zip(*l)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def ngram_generator(words, n=2):</span><br><span class="line">    "s -> (s0,s1), (s1,s2), (s2, s3), ..."</span><br><span class="line">    assert n > 0, "n is not in (0,inf)"</span><br><span class="line">    for i in range(len(words)-n+1):</span><br><span class="line">        yield tuple(words[i:i+n])</span><br><span class="line"></span><br><span class="line">def cbow(iterable, window=1):</span><br><span class="line">    "s -> ((s0,s2), s1), ((s1,s3), s2), ((s2, s4), s3), ..."</span><br><span class="line">    context = [consume(s, i) for i, s in enumerate(tee(iterable, 2*window+1))]</span><br><span class="line">    target = context[window]</span><br><span class="line">    del context[window]</span><br><span class="line">    return zip(zip(*context), target)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.lis.ac.cn/CN/article/downloadArticleFile.do?attachType=PDF&id=11361" target="_blank" rel="noopener">奉国和, 郑伟. 国内中文自动分词技术研究综述. 图书情报工作, 2011, 54(02): 41-45.</a><br><a href>自然语言处理综述</a><br><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">结巴分词</a><br><a href="http://www.cnblogs.com/xlturing/p/8467021.html" target="_blank" rel="noopener">谈分词算法（2）基于词典的分词方法</a><br><a href="https://zhuanlan.zhihu.com/p/33261835" target="_blank" rel="noopener">中文分词算法简介</a><br><a href="https://blog.csdn.net/u010213393/article/details/40987945" target="_blank" rel="noopener">BoW（词袋）模型详细介绍</a><br><a href="https://ilewseu.github.io/2018/06/16/%E4%B8%AD%E6%96%87%E5%88%86%E8%AF%8D/" target="_blank" rel="noopener">自然语言处理基础-中文分词</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2019/03/05/20190305DataWhaleNLPTask2/">https://blog.littleji.com/2019/03/05/20190305DataWhaleNLPTask2/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2019-03/">2019-03</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/NLP/">NLP</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>概率图模型之一 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="概率图模型之一"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概率图概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%9C%89%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.</span> <span class="toc-text">无向图模型和有向图模型的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">生成式模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E5%88%AB%E5%BC%8F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">判别式模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C"><span class="toc-number">2.</span> <span class="toc-text">贝叶斯网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C"><span class="toc-number">2.1.</span> <span class="toc-text">构造贝叶斯网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.1.1.</span> <span class="toc-text">表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E6%96%AD"><span class="toc-number">2.1.2.</span> <span class="toc-text">推断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.1.3.</span> <span class="toc-text">学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MLE-MAP-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.2.</span> <span class="toc-text">MLE MAP 贝叶斯估计之间的关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-10-21T16:00:00.000Z"><a href="/2018/10/22/20181022ProbabilisticGraphicalModels1/">2018-10-22</a></time>
+      
+      
+  
+    <h1 class="title">概率图模型之一</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概率图概述"><a href="#概率图概述" class="headerlink" title="概率图概述"></a>概率图概述</h1><p>概率图模型使用图的方法来表示概率分布，在该模型中，结点表示变量，节点之间的边表示变量之间的概略关系。</p>
+<p>根据图模型中的边是否有向，将概率图的代表模型如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/47288361-5f420c00-d628-11e8-9ad1-555e47176c16.png" alt="image"></p>
+<h2 id="无向图模型和有向图模型的区别"><a href="#无向图模型和有向图模型的区别" class="headerlink" title="无向图模型和有向图模型的区别"></a>无向图模型和有向图模型的区别</h2><p>这里要说明的是,采用有向图的贝叶斯网络的”有向”表示的是依存关系,具有因果推断,即A->B->C,反之则不可.<br>而无向图的代表马尔科夫网络,采用的无向图</p>
+<p>各个图模型的演变关系如下：</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/47288381-7a148080-d628-11e8-836a-fbe66c555d01.png" alt="image"></p>
+<p>其中横向，由点到线（序列结构），最终到面。<br>纵向则是在一定的条件下生成式模型转换为判别式模型。<br>下面假设有观测序列x，状态序列y，并依次来说明生成式与判别式模型的区别。</p>
+<h2 id="生成式模型"><a href="#生成式模型" class="headerlink" title="生成式模型"></a>生成式模型</h2><p>生成式模型的定义是：“状态（输出）序列y按照一定的规律生成观测（输入）序列x”。生成式模型的本质是对于联合概率分布p(x,y)进行建模，并根据生成概率最大的生成序列来获取y。</p>
+<p>这类模型中，一般有严格的独立性假设，模型变量之间的关系清楚，处理单类问题时较为灵活。</p>
+<p>弱点是模型的推导与学习较为复杂。</p>
+<p>主要的模型有：n-gram，HMM、朴素贝叶斯、概率上下文无关文法。</p>
+<h2 id="判别式模型"><a href="#判别式模型" class="headerlink" title="判别式模型"></a>判别式模型</h2><p>判别式模型的定义是：“状态（输出）序列y是由观测序列（输入）所决定的。”判别式模型的本质是对后验概率p（y|x）进行建模，优点是处理多累问题或分辨某一类与其他类差异时更为灵活，模型构造简单。</p>
+<p>缺点是模型的描述能力有限，变量之间的关系不清楚。大多数模型都是有监督学习，不能很好地扩展为无监督学习。</p>
+<p>主要模型有：最大熵模型、最大熵马尔科夫模型、支持向量机、条件随机场、感知机。</p>
+<h1 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h1><p>贝叶斯网络也称为belief networks，是一种基于概率推理的数学模型，理论基础为贝叶斯公式。</p>
+<p>贝叶斯网络形式上是一个有向无环图（DAG directed acyclic graph），结点表示随机变量，结点之间的边表示条件依存关系，箭头出发的节点为父节点，箭头到达的节点为子节点，子节点依存于父节点。</p>
+<p>如果两个节点没有连接关系，表示两个随机变量能够在某些特定情况下条件独立。</p>
+<h2 id="构造贝叶斯网络"><a href="#构造贝叶斯网络" class="headerlink" title="构造贝叶斯网络"></a>构造贝叶斯网络</h2><p>构造贝叶斯网络是一个复杂的任务，其主要有三个方面的问题：表示、推断、学习</p>
+<h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><p>在简单某一随机变量的组合上<br><img src="https://user-images.githubusercontent.com/7655877/47356431-a4cd0a80-d6f6-11e8-9304-e72390800815.png" alt="image"><br>即便是随机变量只有两个取值，那么联合概率分布P需要对 2^n 种不同取值下的概率情况进行说明，然而这件事的计算代价非常高。</p>
+<h3 id="推断"><a href="#推断" class="headerlink" title="推断"></a>推断</h3><p>由于贝叶斯网络是变量以及关系的完整模型，那么在观测到某些变量变化的时候就需要使用一些推断方法，来得知另一些变量子集的变化。<br>概率推理：在已知某些证据的情况下，计算变量的后验分布的过程。<br>常用的精确推理方法有两种</p>
+<ul>
+<li>变量消除法 variable elimination</li>
+<li>团树法 clique tree</li>
+</ul>
+<p>常用的近似推理</p>
+<ul>
+<li>重要性抽样 importance sampling</li>
+<li>随机马尔科夫链蒙特卡洛模拟法 Markov chain Monte Carlo，MCMC</li>
+<li>循环信念传播法 loopy belief propagation</li>
+<li>泛化信念传播法 generalized belief propagation</li>
+</ul>
+<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>参数学习的目的就是得知各个变量结点之间相互依存的强度。<br>比如给定某个节点X，需要计算 P(X|父节点1，父节点2…)，这些概率分布可以是任意形式，通常是离散分布与高斯分布。</p>
+<p>常用的参数学习方法包括：</p>
+<ul>
+<li>最大似然估计 MLE</li>
+<li>最大后验概率 MAP</li>
+<li>期望最大 EM</li>
+<li>贝叶斯估计方法，贝叶斯图模型中，使用较多的是该种方法</li>
+</ul>
+<p>除了参数学习，还需要结构学习来学习各个变量之间的图关系，简单的贝叶斯可以由有经验的专家来构造，但一般情况下人工构造一个贝叶斯网络的结构几乎不可能，所以自动结构学习是一项颇具挑战的任务。</p>
+<h2 id="MLE-MAP-贝叶斯估计之间的关系"><a href="#MLE-MAP-贝叶斯估计之间的关系" class="headerlink" title="MLE MAP 贝叶斯估计之间的关系"></a>MLE MAP 贝叶斯估计之间的关系</h2><p>其中，最大似然估计（MLE）是频率派的代表，贝叶斯估计（Bayes）是贝叶斯派的代表，最大后验估计是频率派和贝叶斯派的合成，是一种规则化后的最大似然估计。</p>
+<p>一般来说，在我们对于先验概率一无所知时，只能假设每种猜测的先验概率是均等的（其实这也是人类经验的结果），这个时候就只有用最大似然了，但不能忘记一个重要的前提是所有的采样都是独立同分布。</p>
+<p>如果我们有足够的自信，训练集中的样本分布的确很接近真实的情况，这时就应该用贝叶斯方法。贝叶斯学派强调的是“靠谱的先验概率”。所以说贝叶斯学派的适用范围更广，关键要先验概率靠谱，而频率学派有效的前提也是他们的先验概率同样是经验统计的结果。但也说明了贝叶斯计算要更为复杂，因为需要选择一个常用分布，并确定一个初始参数集作为先验分布。</p>
+<p>再者，MAP与MLE最大区别是MAP中加入了模型参数本身的概率分布，即是否考虑了先验知识。或者说。MLE中认为模型参数本身的概率的是均匀的，即该概率为一个固定值。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>统计自然语言处理（第2版）<br><a href="https://blog.csdn.net/Mr_tyting/article/details/62882162?utm_source=blogxgwz1" target="_blank" rel="noopener">1</a><br><a href="https://blog.csdn.net/juanjuan1314/article/details/78189527" target="_blank" rel="noopener">2</a><br><a href="https://zhuanlan.zhihu.com/p/32568242" target="_blank" rel="noopener">3</a><br><a href="https://zhuanlan.zhihu.com/p/32616870" target="_blank" rel="noopener">4</a><br><a href="https://blog.csdn.net/guohecang/article/details/52313046" target="_blank" rel="noopener">5</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/">https://blog.littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2018-10/">2018-10</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/NLP/">NLP</a>, <a href="/tags/MachineLearning/">MachineLearning</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

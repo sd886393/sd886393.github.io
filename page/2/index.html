@@ -1,0 +1,1315 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 2 页 | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95%E4%BD%A0%E7%9A%84-Grok-pattern"><span class="toc-number">2.</span> <span class="toc-text">测试你的 Grok pattern</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grok-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E6%9C%AC%E8%AE%BE%E5%AE%9A"><span class="toc-number">3.</span> <span class="toc-text">Grok 的一些基本设定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-number">3.1.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E5%AE%9E%E9%99%85%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">3.2.</span> <span class="toc-text">一个实际的例子</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%BA%93"><span class="toc-number">4.</span> <span class="toc-text">正则表达式库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-pattern"><span class="toc-number">5.</span> <span class="toc-text">自定义 pattern</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89-pattern"><span class="toc-number">5.1.</span> <span class="toc-text">第一种方式添加自定义 pattern</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E5%BC%8F%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89-pattern"><span class="toc-number">5.2.</span> <span class="toc-text">第二种方式添加自定义 pattern</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Grok-%E6%8F%92%E4%BB%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="toc-number">6.</span> <span class="toc-text">Grok 插件的一些配置项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#named-captures-only"><span class="toc-number">6.1.</span> <span class="toc-text">named_captures_only</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#overwrite"><span class="toc-number">6.2.</span> <span class="toc-text">overwrite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pattern-definitions"><span class="toc-number">6.3.</span> <span class="toc-text">pattern_definitions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#timeout-millis"><span class="toc-number">6.4.</span> <span class="toc-text">timeout_millis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#add-tag"><span class="toc-number">6.5.</span> <span class="toc-text">add_tag</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#add-field"><span class="toc-number">6.6.</span> <span class="toc-text">add_field</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-10-24T16:00:00.000Z"><a href="/2018/10/25/20181025LogstashGrokOverview/">2018-10-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/10/25/20181025LogstashGrokOverview/">Logstash Grok 概览</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>Grok 插件让 Logstash 在处理一定格式的日志文件的时候有了一定程度“正则表达”的功能。<br>特别适用于解析一些非结构化的数据，并从中提取真正相关的信息至一些结构化 field 中。</p>
+<p>主要的使用场景在 syslog、apache 与其他的 webserver 具有这样特点的日志：这些日志都具有易人读但不易机读的特点。</p>
+<p>Logstash 默认有很多 patterns，你可以在 <a href="https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns" target="_blank" rel="noopener">https://github.com/logstash-plugins/logstash-patterns-core/tree/master/patterns</a> 找到。当然你也可以添加你自己的 pattern，这点我们稍后就会讲到。</p>
+<h1 id="测试你的-Grok-pattern"><a href="#测试你的-Grok-pattern" class="headerlink" title="测试你的 Grok pattern"></a>测试你的 Grok pattern</h1><p>Debug 是人类进步的阶梯，想起来当时被正则表达式支配的恐惧了么？那时我们有一些工具来测试我们的正则表达式是否足够“强壮”，grok 的作者也提供了两个网站，允许你通过这个来测试你的 grok 表达式，就跟你在测试正表达式的时候一样。分别是 <a href="http://grokdebug.herokuapp.com" target="_blank" rel="noopener">http://grokdebug.herokuapp.com </a> 和 <a href="http://grokconstructor.appspot.com/" target="_blank" rel="noopener"> http://grokconstructor.appspot.com/</a></p>
+<h1 id="Grok-的一些基本设定"><a href="#Grok-的一些基本设定" class="headerlink" title="Grok 的一些基本设定"></a>Grok 的一些基本设定</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>Grok 使用如下的语法进行匹配操作。<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%{SYNTAX:SEMANTIC}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>其中 <code>SYNTAX</code>是你想匹配的表达式的名称，SEMANTIC 则是存储匹配后的文本的变量名，比如：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 待匹配的文本为</span><br><span class="line">192.168.1.1 2016-04-26T19:55:15Z</span><br><span class="line"># 一个完整的匹配式</span><br><span class="line">%{IPV4:ip} %{TIMESTAMP_ISO8601:time}</span><br><span class="line"># pattern 为</span><br><span class="line">IPV4 (?<![0-9])(?:(?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})[.](?:25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2}))(?![0-9])</span><br><span class="line"></span><br><span class="line">TIMESTAMP_ISO8601 %{YEAR}-%{MONTHNUM}-%{MONTHDAY}[T ]%{HOUR}:?%{MINUTE}(?::?%{SECOND})?%{ISO8601_TIMEZONE}?</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>那么 <code>IPV4</code> 和 <code>TIMESTAMP_ISO8601</code>就是 <code>SYNTAX</code>，<code>ip</code> 和 <code>time</code> 就是 SEMANTIC。</p>
+<h2 id="一个实际的例子"><a href="#一个实际的例子" class="headerlink" title="一个实际的例子"></a>一个实际的例子</h2><p>一个 logstash 的配置文件，内容如下：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">input {</span><br><span class="line">  file {</span><br><span class="line">    path => "/var/log/http.log"</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    match => { "message" => "%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}" }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>运行后，这条 message 将会在 grok 过滤之后上报一条 event，内容如下：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">client: 55.3.244.1</span><br><span class="line">method: GET</span><br><span class="line">request: /index.html</span><br><span class="line">bytes: 15824</span><br><span class="line">duration: 0.043</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1 id="正则表达式库"><a href="#正则表达式库" class="headerlink" title="正则表达式库"></a>正则表达式库</h1><p>Grok 使用了 <a href="https://github.com/kkos/oniguruma/blob/master/doc/RE" target="_blank" rel="noopener">oniguruma</a> 的正则表达式，所以所有在该文档中出现的匹配语法都可以使用。</p>
+<h1 id="自定义-pattern"><a href="#自定义-pattern" class="headerlink" title="自定义 pattern"></a>自定义 pattern</h1><p>Grok 自带了一些常用的匹配规则，比如：IPV4、IPV6、YEAR等，但是当我们想要写一些自己的规则的时候，grok 也提供了支持，这里主要有两种方式：</p>
+<h2 id="第一种方式添加自定义-pattern"><a href="#第一种方式添加自定义-pattern" class="headerlink" title="第一种方式添加自定义 pattern"></a>第一种方式添加自定义 pattern</h2><p>直接使用下面的 pattern 结构：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?<field_name>the pattern here)</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>其中 field_name 可以理解为上文的 SEMANTIC，后面则跟的是实际的匹配表达式，比如这样：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?<queue_id>[0-9A-F]{10,11})</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="第二种方式添加自定义-pattern"><a href="#第二种方式添加自定义-pattern" class="headerlink" title="第二种方式添加自定义 pattern"></a>第二种方式添加自定义 pattern</h2><p>第二种方式就如同我们一开始使用的一样，在指定的 pattern 文件夹，添加即可比如：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 在 ./pattern/postfix 添加</span><br><span class="line">POSTFIX_QUEUEID [0-9A-F]{10,11}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>在实际匹配的时候写入<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%{POSTFIX_QUEUEID:queue_id}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>使用的效果与第一种方式完全一致。</p>
+<p>Logstash 的配置文件中可以指定 自定义 pattern 的位置，比如：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    patterns_dir => ["./patterns"]</span><br><span class="line">    match => { "message" => "%{SYSLOGBASE} %{POSTFIX_QUEUEID:queue_id}: %{GREEDYDATA:syslog_message}" }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>就是读取当前目录下的 patterns 文件。</p>
+<h1 id="Grok-插件的一些配置项"><a href="#Grok-插件的一些配置项" class="headerlink" title="Grok 插件的一些配置项"></a>Grok 插件的一些配置项</h1><p>如果需要定制化 Grok 插件的一些匹配配置</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>配置项名称</th>
+<th>匹配项类型</th>
+<th>是否必须</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>break_on_match</td>
+<td>boolean</td>
+<td>no</td>
+</tr>
+<tr>
+<td>keep_empty_capture</td>
+<td>boolean</td>
+<td>no</td>
+</tr>
+<tr>
+<td>match</td>
+<td>hash</td>
+<td>no</td>
+</tr>
+<tr>
+<td>named_captures_only</td>
+<td>boolean</td>
+<td>no</td>
+</tr>
+<tr>
+<td>overwrite</td>
+<td>array</td>
+<td>no</td>
+</tr>
+<tr>
+<td>pattern_definitions</td>
+<td>hash</td>
+<td>no</td>
+</tr>
+<tr>
+<td>patterns_dir</td>
+<td>array</td>
+<td>no</td>
+</tr>
+<tr>
+<td>patterns_files_glob</td>
+<td>string</td>
+<td>no</td>
+</tr>
+<tr>
+<td>tag_on_failure</td>
+<td>array</td>
+<td>no</td>
+</tr>
+<tr>
+<td>tag_on_timeout</td>
+<td>string</td>
+<td>no</td>
+</tr>
+<tr>
+<td>timeout_millis</td>
+<td>number</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="named-captures-only"><a href="#named-captures-only" class="headerlink" title="named_captures_only"></a>named_captures_only</h2><p>默认值： <code>true</code><br>意义：当该值为 <code>true</code> 时，只会从数据中捕获有 <code>SEMANTIC</code> 的信息，其他的匹配项不存储。</p>
+<h2 id="overwrite"><a href="#overwrite" class="headerlink" title="overwrite"></a>overwrite</h2><p>默认值：[]<br>意义：这个属性允许你在输出匹配结果之前，重写该匹配结果中的一项或多项，比如：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># 原始数据</span><br><span class="line">734742416494845952,Android,"In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",2016-05-23T13:46:57Z</span><br><span class="line"># 配置文件</span><br><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    patterns_dir => ["/root/custom-patterns.txt"]</span><br><span class="line">    match => { "message" => "%{ID:id},%{DEVICE:device},%{MESSAGE_BODY:message},%{TIMESTAMP_ISO8601:timestamp}" }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"># 结果1 没有overwrite选项</span><br><span class="line">"message": [</span><br><span class="line">"734742416494845952,Android,"In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",2016-05-23T13:46:57Z"</span><br><span class="line">,</span><br><span class="line">""In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!""</span><br><span class="line">]，</span><br><span class="line">"host": "localhost",</span><br><span class="line">"@timestamp": "2018-10-21T01:09:04.089Z",</span><br><span class="line">"device": "Android",</span><br><span class="line">"id": "734742416494845952",</span><br><span class="line">"timestamp": "2016-05-23T13:46:57Z",</span><br><span class="line">"path": "/root/trump-test.csv",</span><br><span class="line">"@version": "1"</span><br><span class="line"></span><br><span class="line"># 结果2 设置overwrite选项     overwrite => ["message"]</span><br><span class="line">"message": "In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",</span><br><span class="line">"host": "localhost",</span><br><span class="line">"@timestamp": "2018-10-21T01:09:04.089Z",</span><br><span class="line">"device": "Android",</span><br><span class="line">"id": "734742416494845952",</span><br><span class="line">"timestamp": "2016-05-23T13:46:57Z",</span><br><span class="line">"path": "/root/trump-test.csv",</span><br><span class="line">"@version": "1"</span><br></pre></td></tr></tbody></table></figure>
+<p>可以看到，原来的 <code>message</code> 属性存储的是原始的输入信息，增加了 overwrite 选项后，则由匹配到的 message 信息将其替换。</p>
+<h2 id="pattern-definitions"><a href="#pattern-definitions" class="headerlink" title="pattern_definitions"></a>pattern_definitions</h2><p>默认值：空<br>意义：可以再该项中，以键值对的方式输入 grok 表达式，也就是把patterns_dir 文件内的 pattern 写在这个属性里，比如：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pattern_definitions => {</span><br><span class="line">     "ID" => "\d+(?=,)"</span><br><span class="line">     "DEVICE" => "[a-zA-Z]+(?=,)"</span><br><span class="line">     "MESSAGE_BODY" => ".+(?=,2)"</span><br><span class="line">   }</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="timeout-millis"><a href="#timeout-millis" class="headerlink" title="timeout_millis"></a>timeout_millis</h2><p>默认值：30000<br>意义：在执行了所定义的时间后，终止正则匹配，设置为0则没有超时时间。</p>
+<h2 id="add-tag"><a href="#add-tag" class="headerlink" title="add_tag"></a>add_tag</h2><p>默认值：[]<br>意义：在匹配成功后，增加一个或多个 tag 字段</p>
+<h2 id="add-field"><a href="#add-field" class="headerlink" title="add_field"></a>add_field</h2><p>默认值：{}<br>意义：在匹配成功后，增加一个或多个 field、value对，例如：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># 输入</span><br><span class="line">依然是上文中使用的例子</span><br><span class="line"></span><br><span class="line"># Logstash 配置文件如下</span><br><span class="line">filter {</span><br><span class="line">  grok {</span><br><span class="line">    pattern_definitions => {</span><br><span class="line">      "ID" => "\d+(?=,)"</span><br><span class="line">      "DEVICE" => "[a-zA-Z]+(?=,)"</span><br><span class="line">      "MESSAGE_BODY" => ".+(?=,2)"</span><br><span class="line">    }</span><br><span class="line">    #patterns_dir => ["/root/custom-patterns.txt"]</span><br><span class="line">    match => { "message" => "%{ID:id},%{DEVICE:device},%{MESSAGE_BODY:message},%{TIMESTAMP_ISO8601:timestamp}" }</span><br><span class="line">    overwrite => ["message"]</span><br><span class="line">    add_tag => [ "test_%{id}"]</span><br><span class="line">    add_field => {</span><br><span class="line">      "test_%{timestamp}" => "test"</span><br><span class="line">      }</span><br><span class="line">    remove_field => ["device"]</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"># 结果如下</span><br><span class="line">"host": "localhost",</span><br><span class="line">"timestamp": "2016-05-23T13:46:57Z",</span><br><span class="line">"id": "734742416494845952",</span><br><span class="line">"tags": [</span><br><span class="line">"test_734742416494845952"</span><br><span class="line">],</span><br><span class="line">"@version": "1",</span><br><span class="line">"@timestamp": "2018-10-21T01:47:31.552Z",</span><br><span class="line">"message": "In trade, military and EVERYTHING else, it will be AMERICA FIRST! This will quickly lead to our ultimate goal: MAKE AMERICA GREAT AGAIN!",</span><br><span class="line">"path": "/root/trump-test.csv",</span><br><span class="line">"test_2016-05-23T13:46:57Z": "test"</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-grok.html" target="_blank" rel="noopener">grok manual</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/25/20181025LogstashGrokOverview/">https://blog.littleji.com/2018/10/25/20181025LogstashGrokOverview/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概率图概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%9C%89%E5%90%91%E5%9B%BE%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.</span> <span class="toc-text">无向图模型和有向图模型的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">生成式模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A4%E5%88%AB%E5%BC%8F%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">判别式模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C"><span class="toc-number">2.</span> <span class="toc-text">贝叶斯网络</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%BD%91%E7%BB%9C"><span class="toc-number">2.1.</span> <span class="toc-text">构造贝叶斯网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A8%E7%A4%BA"><span class="toc-number">2.1.1.</span> <span class="toc-text">表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A8%E6%96%AD"><span class="toc-number">2.1.2.</span> <span class="toc-text">推断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.1.3.</span> <span class="toc-text">学习</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MLE-MAP-%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">2.2.</span> <span class="toc-text">MLE MAP 贝叶斯估计之间的关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-10-21T16:00:00.000Z"><a href="/2018/10/22/20181022ProbabilisticGraphicalModels1/">2018-10-22</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/10/22/20181022ProbabilisticGraphicalModels1/">概率图模型之一</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概率图概述"><a href="#概率图概述" class="headerlink" title="概率图概述"></a>概率图概述</h1><p>概率图模型使用图的方法来表示概率分布，在该模型中，结点表示变量，节点之间的边表示变量之间的概略关系。</p>
+<p>根据图模型中的边是否有向，将概率图的代表模型如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/47288361-5f420c00-d628-11e8-9ad1-555e47176c16.png" alt="image"></p>
+<h2 id="无向图模型和有向图模型的区别"><a href="#无向图模型和有向图模型的区别" class="headerlink" title="无向图模型和有向图模型的区别"></a>无向图模型和有向图模型的区别</h2><p>这里要说明的是,采用有向图的贝叶斯网络的”有向”表示的是依存关系,具有因果推断,即A->B->C,反之则不可.<br>而无向图的代表马尔科夫网络,采用的无向图</p>
+<p>各个图模型的演变关系如下：</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/47288381-7a148080-d628-11e8-836a-fbe66c555d01.png" alt="image"></p>
+<p>其中横向，由点到线（序列结构），最终到面。<br>纵向则是在一定的条件下生成式模型转换为判别式模型。<br>下面假设有观测序列x，状态序列y，并依次来说明生成式与判别式模型的区别。</p>
+<h2 id="生成式模型"><a href="#生成式模型" class="headerlink" title="生成式模型"></a>生成式模型</h2><p>生成式模型的定义是：“状态（输出）序列y按照一定的规律生成观测（输入）序列x”。生成式模型的本质是对于联合概率分布p(x,y)进行建模，并根据生成概率最大的生成序列来获取y。</p>
+<p>这类模型中，一般有严格的独立性假设，模型变量之间的关系清楚，处理单类问题时较为灵活。</p>
+<p>弱点是模型的推导与学习较为复杂。</p>
+<p>主要的模型有：n-gram，HMM、朴素贝叶斯、概率上下文无关文法。</p>
+<h2 id="判别式模型"><a href="#判别式模型" class="headerlink" title="判别式模型"></a>判别式模型</h2><p>判别式模型的定义是：“状态（输出）序列y是由观测序列（输入）所决定的。”判别式模型的本质是对后验概率p（y|x）进行建模，优点是处理多累问题或分辨某一类与其他类差异时更为灵活，模型构造简单。</p>
+<p>缺点是模型的描述能力有限，变量之间的关系不清楚。大多数模型都是有监督学习，不能很好地扩展为无监督学习。</p>
+<p>主要模型有：最大熵模型、最大熵马尔科夫模型、支持向量机、条件随机场、感知机。</p>
+<h1 id="贝叶斯网络"><a href="#贝叶斯网络" class="headerlink" title="贝叶斯网络"></a>贝叶斯网络</h1><p>贝叶斯网络也称为belief networks，是一种基于概率推理的数学模型，理论基础为贝叶斯公式。</p>
+<p>贝叶斯网络形式上是一个有向无环图（DAG directed acyclic graph），结点表示随机变量，结点之间的边表示条件依存关系，箭头出发的节点为父节点，箭头到达的节点为子节点，子节点依存于父节点。</p>
+<p>如果两个节点没有连接关系，表示两个随机变量能够在某些特定情况下条件独立。</p>
+<h2 id="构造贝叶斯网络"><a href="#构造贝叶斯网络" class="headerlink" title="构造贝叶斯网络"></a>构造贝叶斯网络</h2><p>构造贝叶斯网络是一个复杂的任务，其主要有三个方面的问题：表示、推断、学习</p>
+<h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><p>在简单某一随机变量的组合上<br><img src="https://user-images.githubusercontent.com/7655877/47356431-a4cd0a80-d6f6-11e8-9304-e72390800815.png" alt="image"><br>即便是随机变量只有两个取值，那么联合概率分布P需要对 2^n 种不同取值下的概率情况进行说明，然而这件事的计算代价非常高。</p>
+<h3 id="推断"><a href="#推断" class="headerlink" title="推断"></a>推断</h3><p>由于贝叶斯网络是变量以及关系的完整模型，那么在观测到某些变量变化的时候就需要使用一些推断方法，来得知另一些变量子集的变化。<br>概率推理：在已知某些证据的情况下，计算变量的后验分布的过程。<br>常用的精确推理方法有两种</p>
+<ul>
+<li>变量消除法 variable elimination</li>
+<li>团树法 clique tree</li>
+</ul>
+<p>常用的近似推理</p>
+<ul>
+<li>重要性抽样 importance sampling</li>
+<li>随机马尔科夫链蒙特卡洛模拟法 Markov chain Monte Carlo，MCMC</li>
+<li>循环信念传播法 loopy belief propagation</li>
+<li>泛化信念传播法 generalized belief propagation</li>
+</ul>
+<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>参数学习的目的就是得知各个变量结点之间相互依存的强度。<br>比如给定某个节点X，需要计算 P(X|父节点1，父节点2…)，这些概率分布可以是任意形式，通常是离散分布与高斯分布。</p>
+<p>常用的参数学习方法包括：</p>
+<ul>
+<li>最大似然估计 MLE</li>
+<li>最大后验概率 MAP</li>
+<li>期望最大 EM</li>
+<li>贝叶斯估计方法，贝叶斯图模型中，使用较多的是该种方法</li>
+</ul>
+<p>除了参数学习，还需要结构学习来学习各个变量之间的图关系，简单的贝叶斯可以由有经验的专家来构造，但一般情况下人工构造一个贝叶斯网络的结构几乎不可能，所以自动结构学习是一项颇具挑战的任务。</p>
+<h2 id="MLE-MAP-贝叶斯估计之间的关系"><a href="#MLE-MAP-贝叶斯估计之间的关系" class="headerlink" title="MLE MAP 贝叶斯估计之间的关系"></a>MLE MAP 贝叶斯估计之间的关系</h2><p>其中，最大似然估计（MLE）是频率派的代表，贝叶斯估计（Bayes）是贝叶斯派的代表，最大后验估计是频率派和贝叶斯派的合成，是一种规则化后的最大似然估计。</p>
+<p>一般来说，在我们对于先验概率一无所知时，只能假设每种猜测的先验概率是均等的（其实这也是人类经验的结果），这个时候就只有用最大似然了，但不能忘记一个重要的前提是所有的采样都是独立同分布。</p>
+<p>如果我们有足够的自信，训练集中的样本分布的确很接近真实的情况，这时就应该用贝叶斯方法。贝叶斯学派强调的是“靠谱的先验概率”。所以说贝叶斯学派的适用范围更广，关键要先验概率靠谱，而频率学派有效的前提也是他们的先验概率同样是经验统计的结果。但也说明了贝叶斯计算要更为复杂，因为需要选择一个常用分布，并确定一个初始参数集作为先验分布。</p>
+<p>再者，MAP与MLE最大区别是MAP中加入了模型参数本身的概率分布，即是否考虑了先验知识。或者说。MLE中认为模型参数本身的概率的是均匀的，即该概率为一个固定值。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>统计自然语言处理（第2版）<br><a href="https://blog.csdn.net/Mr_tyting/article/details/62882162?utm_source=blogxgwz1" target="_blank" rel="noopener">1</a><br><a href="https://blog.csdn.net/juanjuan1314/article/details/78189527" target="_blank" rel="noopener">2</a><br><a href="https://zhuanlan.zhihu.com/p/32568242" target="_blank" rel="noopener">3</a><br><a href="https://zhuanlan.zhihu.com/p/32616870" target="_blank" rel="noopener">4</a><br><a href="https://blog.csdn.net/guohecang/article/details/52313046" target="_blank" rel="noopener">5</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/">https://blog.littleji.com/2018/10/22/20181022ProbabilisticGraphicalModels1/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%8E%E7%AC%A6%E5%8F%B7%E4%B8%B2"><span class="toc-number">2.</span> <span class="toc-text">符号与符号串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AF%8D%E8%A1%A8%EF%BC%8C%E7%AC%A6%E5%8F%B7%E9%9B%86"><span class="toc-number">2.1.</span> <span class="toc-text">字母表，符号集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2"><span class="toc-number">2.2.</span> <span class="toc-text">符号串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.3.</span> <span class="toc-text">空字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2%E7%9A%84%E5%A4%B4%E3%80%81%E5%B0%BE%E3%80%81%E5%9B%BA%E6%9C%89%E5%A4%B4%E3%80%81%E5%9B%BA%E6%9C%89%E5%B0%BE"><span class="toc-number">2.4.</span> <span class="toc-text">符号串的头、尾、固有头、固有尾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.5.</span> <span class="toc-text">符号串连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2%E7%9A%84%E6%96%B9%E5%B9%82"><span class="toc-number">2.6.</span> <span class="toc-text">符号串的方幂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E4%B8%B2%E7%9A%84%E7%9B%B8%E4%B9%98"><span class="toc-number">2.7.</span> <span class="toc-text">符号串的相乘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-number">2.8.</span> <span class="toc-text">闭包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E5%92%8C%E8%AF%AD%E8%A8%80%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">3.</span> <span class="toc-text">文法和语言的形式定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%99"><span class="toc-number">3.1.</span> <span class="toc-text">规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">文法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%A5%E5%9E%8B"><span class="toc-number">3.3.</span> <span class="toc-text">句型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E8%A8%80"><span class="toc-number">3.4.</span> <span class="toc-text">语言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">文法类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E6%96%87%E6%B3%95"><span class="toc-number">4.1.</span> <span class="toc-text">上下文无关文法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E8%A7%84%E6%96%87%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">正规文法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E6%A0%91"><span class="toc-number">4.3.</span> <span class="toc-text">语法树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%B3%95%E7%9A%84%E4%BA%8C%E4%B9%89%E6%80%A7"><span class="toc-number">4.4.</span> <span class="toc-text">文法的二义性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%A5%E5%9E%8B%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">句型分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E4%B8%8A%E8%80%8C%E4%B8%8B%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">自上而下分析法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E4%B8%8B%E8%80%8C%E4%B8%8A%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text">自下而上分析法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E6%BA%AF%E6%B3%95"><span class="toc-number">5.3.</span> <span class="toc-text">回溯法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8C%96%E6%96%87%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">简化文法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%AE%B3%E8%A7%84%E5%88%99"><span class="toc-number">6.1.</span> <span class="toc-text">有害规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-10-15T16:00:00.000Z"><a href="/2018/10/16/20181016FormalLanguageGenerality/">2018-10-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/10/16/20181016FormalLanguageGenerality/">形式语法概述</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>形式语言作为精确描述语言的工具，广泛的应用在机器翻译等自然语言处理的领域</p>
+<p>描述语言的常用三个方法：</p>
+<ol>
+<li>穷举法，对于句子数目有限的语言可以使用这种方法将所有的句子进行枚举，从而定义。</li>
+<li>文法，可以理解为我们在英文、中文中学习的语法，通过严格定义规则，来生成合法的句子，<strong>重点</strong>在于生成句子。</li>
+<li>自动机，不同于文法，自动机<strong>更偏向</strong>与对于输入句子的合法性检测，从而区分哪些是语言中的句子，哪些不是。</li>
+</ol>
+<p>文法与自动机二者皆有所长，一定条件下可以相互转换。</p>
+<h2 id="符号与符号串"><a href="#符号与符号串" class="headerlink" title="符号与符号串"></a>符号与符号串</h2><h3 id="字母表，符号集"><a href="#字母表，符号集" class="headerlink" title="字母表，符号集"></a>字母表，符号集</h3><p>字母或者符号的又穷非空集合。<br>例：汉语字母表为汉字、数字、标点符号。</p>
+<h3 id="符号串"><a href="#符号串" class="headerlink" title="符号串"></a>符号串</h3><p>字母表中的符号组成的任何有穷序列。<br>例：有符号集<br><img src="https://user-images.githubusercontent.com/7655877/46996847-9314c180-d150-11e8-9367-fca90bcc4c86.png" alt="image"><br>符号串为：0，1，01，10，11，00</p>
+<h3 id="空字符串"><a href="#空字符串" class="headerlink" title="空字符串"></a>空字符串</h3><p><img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">表示，长度为0</p>
+<h3 id="符号串的头、尾、固有头、固有尾"><a href="#符号串的头、尾、固有头、固有尾" class="headerlink" title="符号串的头、尾、固有头、固有尾"></a>符号串的头、尾、固有头、固有尾</h3><p>例：如果z=abc，则<br>z的头为：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，a，ab，abc<br>z的尾为：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，c，bc，cba<br>z的固有头：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，a，ab<br>z的固有尾：<img src="https://user-images.githubusercontent.com/7655877/46997037-32d24f80-d151-11e8-8fe0-88a86046bd19.png" alt="image">，c，bc</p>
+<h3 id="符号串连接"><a href="#符号串连接" class="headerlink" title="符号串连接"></a>符号串连接</h3><p>有符号串x，y，连接xy指y符号串写在x符号串之后<br>例：x=ab，y=cd，xy=abcd</p>
+<h3 id="符号串的方幂"><a href="#符号串的方幂" class="headerlink" title="符号串的方幂"></a>符号串的方幂</h3><p>有符号串x，z=xxxx….，称z为x的方幂，记为<img src="https://user-images.githubusercontent.com/7655877/46997369-1aaf0000-d152-11e8-9fe2-15669611d07f.png" alt="image"><br>且<br><img src="https://user-images.githubusercontent.com/7655877/46997436-44682700-d152-11e8-81b0-2e666a016eda.png" alt="image"></p>
+<h3 id="符号串的相乘"><a href="#符号串的相乘" class="headerlink" title="符号串的相乘"></a>符号串的相乘</h3><p>有符号串<img src="https://user-images.githubusercontent.com/7655877/46997662-d6702f80-d152-11e8-8624-c2bd89787f26.png" alt="image"><br>例：有A={a,b} B={c,d},则AB={ac,ad,bc,bd}</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>字母表<img src="https://user-images.githubusercontent.com/7655877/46999201-98c1d580-d157-11e8-9f72-e44129b97319.png" alt="image">上所有又穷长的字符串的集合用<img src="https://user-images.githubusercontent.com/7655877/46999213-a0817a00-d157-11e8-9da5-49f7d12b8df4.png" alt="image"><br>来表示，其中正闭包<img src="https://user-images.githubusercontent.com/7655877/46999164-7af47080-d157-11e8-82d2-88a9f3c888a5.png" alt="image">不包括空集</p>
+<h2 id="文法和语言的形式定义"><a href="#文法和语言的形式定义" class="headerlink" title="文法和语言的形式定义"></a>文法和语言的形式定义</h2><h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><p>也称为产生式：<br><img src="https://user-images.githubusercontent.com/7655877/46999289-d6bef980-d157-11e8-8607-e0407655604f.png" alt="image"><br>其中，<img src="https://user-images.githubusercontent.com/7655877/46999328-f5bd8b80-d157-11e8-9468-08b46507690a.png" alt="image"></p>
+<h3 id="文法"><a href="#文法" class="headerlink" title="文法"></a>文法</h3><p>定义：G定义为四元组<img src="https://user-images.githubusercontent.com/7655877/46999397-28678400-d158-11e8-9dc1-bfbdfac5462e.png" alt="image"><br><img src="https://user-images.githubusercontent.com/7655877/46999410-30bfbf00-d158-11e8-8c83-d1f35dc4d3d8.png" alt="image"></p>
+<h3 id="句型"><a href="#句型" class="headerlink" title="句型"></a>句型</h3><p><img src="https://user-images.githubusercontent.com/7655877/46999714-0a4e5380-d159-11e8-8a22-4cac5e52f986.png" alt="image"><br>句子一定是句型，句型不一定是句子</p>
+<h3 id="语言"><a href="#语言" class="headerlink" title="语言"></a>语言</h3><p><img src="https://user-images.githubusercontent.com/7655877/46999780-336ee400-d159-11e8-8067-05c802ea65bb.png" alt="image">记为L(G)</p>
+<h2 id="文法类型"><a href="#文法类型" class="headerlink" title="文法类型"></a>文法类型</h2><p><img src="https://user-images.githubusercontent.com/7655877/47000450-e2f88600-d15a-11e8-9f6f-2c76109410e1.png" alt="image"></p>
+<h3 id="上下文无关文法"><a href="#上下文无关文法" class="headerlink" title="上下文无关文法"></a>上下文无关文法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47001280-aa59ac00-d15c-11e8-89ba-c9a2200b1f17.png" alt="image"><br>重点是在规则的左部只有一个非终结字符</p>
+<h3 id="正规文法"><a href="#正规文法" class="headerlink" title="正规文法"></a>正规文法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47001685-a0847880-d15d-11e8-87f0-fe81ca258def.png" alt="image"></p>
+<h3 id="语法树"><a href="#语法树" class="headerlink" title="语法树"></a>语法树</h3><p>语法树表明了推倒过程中使用了什么样的产生式和用到了哪些非终结字符，并不表明顺序。<br>例：有下图<br><img src="https://user-images.githubusercontent.com/7655877/47007060-f9f2a480-d169-11e8-8f60-9e1edf81a9ad.png" alt="image"><br>构造aabbaa的语法树，步骤如下<br><img src="https://user-images.githubusercontent.com/7655877/47007084-07a82a00-d16a-11e8-9aaa-8fc4df075698.png" alt="image"></p>
+<h3 id="文法的二义性"><a href="#文法的二义性" class="headerlink" title="文法的二义性"></a>文法的二义性</h3><p><img src="https://user-images.githubusercontent.com/7655877/47002932-c0696b80-d160-11e8-9759-84258745460f.png" alt="image"></p>
+<h2 id="句型分析"><a href="#句型分析" class="headerlink" title="句型分析"></a>句型分析</h2><p>识别一个符号串是否为某文法的句型是整个推导的构建过程</p>
+<h3 id="自上而下分析法"><a href="#自上而下分析法" class="headerlink" title="自上而下分析法"></a>自上而下分析法</h3><p>由非终结字符串推导至终结字符串，并查看该终结字符串是否匹配</p>
+<h3 id="自下而上分析法"><a href="#自下而上分析法" class="headerlink" title="自下而上分析法"></a>自下而上分析法</h3><p>有终结字符串进行规约，最终生成的非终结字符串，是否符合规则</p>
+<h3 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h3><p><img src="https://user-images.githubusercontent.com/7655877/47004899-2657f200-d165-11e8-94fb-5463a90dd1f7.png" alt="image"><br>这时候使用回溯法进行计算</p>
+<h2 id="简化文法"><a href="#简化文法" class="headerlink" title="简化文法"></a>简化文法</h2><p>主要是去除规则中的两种类型的规则，有害规则和多与规则</p>
+<h3 id="有害规则"><a href="#有害规则" class="headerlink" title="有害规则"></a>有害规则</h3><p>例如：<br>U->U这种产生式，会引起文法的二义性。<br>多余规则：指文法中任何句子的推倒都不会用到的规则，主要有两种：</p>
+<ol>
+<li>非终结字符不在任何规则的右部出现。</li>
+<li>非终结字符无法推出终结符号串</li>
+</ol>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>宗成庆. 统计自然语言处理[M]. 清华大学出版社, 2008.<br><a href="http://ccl.pku.edu.cn/ALCourse/Compiling/" target="_blank" rel="noopener">北京大学编译原理课程</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/10/16/20181016FormalLanguageGenerality/">https://blog.littleji.com/2018/10/16/20181016FormalLanguageGenerality/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#alpine%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">alpine系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DVWA"><span class="toc-number">1.2.</span> <span class="toc-text">DVWA</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85alpine%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.</span> <span class="toc-text">安装alpine系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F%E5%BF%85%E5%A4%87%E7%BB%84%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">安装系统必备组件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Bash%E3%80%81Vim"><span class="toc-number">3.1.</span> <span class="toc-text">安装Bash、Vim</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E8%BF%9C%E7%A8%8Broot%E7%99%BB%E5%BD%95%E7%9A%84%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E6%89%A9%E5%B1%95%E7%9A%84%E5%8C%85%E9%95%9C%E5%83%8F%E6%BA%90"><span class="toc-number">4.</span> <span class="toc-text">开启远程root登录的权限以及扩展的包镜像源</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%90%AFcommunity-testing-edge%E5%8C%85%E4%BB%93%E5%BA%93"><span class="toc-number">5.</span> <span class="toc-text">开启community testing edge包仓库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE-MySQL-MariaDB"><span class="toc-number">6.</span> <span class="toc-text">安装配置 MySQL&#x2F;MariaDB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85MariaDB"><span class="toc-number">6.1.</span> <span class="toc-text">安装MariaDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEMariaDB"><span class="toc-number">6.2.</span> <span class="toc-text">配置MariaDB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E5%AE%9A%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%8C%E7%A8%8D%E5%90%8E%E4%BD%BF%E7%94%A8"><span class="toc-number">6.2.1.</span> <span class="toc-text">设定环境变量，稍后使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AEMariaDB"><span class="toc-number">6.3.</span> <span class="toc-text">启动配置MariaDB</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-MariaDB-%E5%B9%B6%E6%B7%BB%E5%8A%A0%E9%BB%98%E8%AE%A4%E5%90%AF%E5%8A%A8"><span class="toc-number">6.4.</span> <span class="toc-text">启动 MariaDB 并添加默认启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9-root-%E5%AF%86%E7%A0%81"><span class="toc-number">6.5.</span> <span class="toc-text">改 root 密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAdvwa%E7%94%A8%E6%88%B7%EF%BC%8C%E4%BB%A5%E5%8F%8Advwa%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.6.</span> <span class="toc-text">创建一个dvwa用户，以及dvwa数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E4%B8%BB%E6%9C%BA%EF%BC%8C%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90"><span class="toc-number">6.7.</span> <span class="toc-text">重启主机，验证是否安装完成</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85PHP-%E4%BB%A5%E5%8F%8A%E6%89%80%E9%9C%80%E8%A6%81%E7%9A%84%E5%BA%93%E7%BB%84%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">安装PHP 以及所需要的库组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE-lighttp"><span class="toc-number">8.</span> <span class="toc-text">安装配置 lighttp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE-DVWA"><span class="toc-number">9.</span> <span class="toc-text">安装配置 DVWA</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">9.1.</span> <span class="toc-text">创建项目文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDDVWA"><span class="toc-number">9.2.</span> <span class="toc-text">下载DVWA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86DVWA%E6%94%BE%E5%88%B0%E6%8C%87%E5%AE%9A%E7%9A%84web%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E4%B8%AD"><span class="toc-number">9.3.</span> <span class="toc-text">将DVWA放到指定的web项目目录中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEDVWA"><span class="toc-number">9.4.</span> <span class="toc-text">配置DVWA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E5%AE%89%E8%A3%85%E6%83%85%E5%86%B5"><span class="toc-number">9.5.</span> <span class="toc-text">验证安装情况</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">10.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-09-24T16:00:00.000Z"><a href="/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">2018-09-25</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">在alpine上，从零开始安装DVWA</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><h2 id="alpine系统"><a href="#alpine系统" class="headerlink" title="alpine系统"></a>alpine系统</h2><p>目前 alpine 系统已经作为 docker 容器的默认安装系统，其最大的特点是安装的体积非常小，镜像的大小最少只有 5M ，这对于在 docker 集群中大规模使用容器的情况下，极大的降低了磁盘占用，并且其还有：</p>
+<ol>
+<li>因体积较小，从而提升了启动速度<br>2.因体积小，组件少，从而暴露面降低，最终提升系统的安全</li>
+</ol>
+<p>当我们能够熟练的配置该系统之后，可以大大加快 devops 的整体流程，迅速搭建原型系统，提高资源的利用率。</p>
+<h2 id="DVWA"><a href="#DVWA" class="headerlink" title="DVWA"></a>DVWA</h2><p>DVWA:Damn Vulnerable Web Application</p>
+<p>老牌的安全测试靶场，后端使用的是 PHP + MySQL 的组合，可以方便快捷的让安全从业者，对常见的安全漏洞的原理进行学习，并在实践中巩固自己的学习成果。</p>
+<p>DVWA的官网在<a href="2">这里</a>。</p>
+<h1 id="安装alpine系统"><a href="#安装alpine系统" class="headerlink" title="安装alpine系统"></a>安装alpine系统</h1><p>首先从 alpine 的<a href="1">官网</a>，根据需要下载指定的alpine安装包，这里选择了 3.8.1 的Extend版本。</p>
+<p>之后，可以将下载的iso文件制作成U盘启动器进行安装，这里由于演示使用 VMware Fusion 进行安装演示。</p>
+<p>虚拟机的配置为默认配置如下：<br>￼<br><img src="https://user-images.githubusercontent.com/7655877/45987778-f5285c80-c0a5-11e8-8fbe-b63975cc7999.png" alt="image"></p>
+<p>启动后直接使用 root 账号登录，并输入 <code>setup-alpine</code> ，进入配置界面，这里的操作的目的是将目前运行在内存中的系统，配置完整后安装至实际的硬盘上，如下图所示：</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/45991497-c6b37d00-c0b7-11e8-9e4e-93541bb790f3.png" alt="image"></p>
+<p>图中可根据自己的需要配置，如键盘的布局、主机名、网卡信息、时间服务器组件、root密码、时区等，本文选择时区为Asia/Shanghai，重点是选择安装的实际物理磁盘（ sda ）以及安装的用途（ sys ）</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/45996293-48aea080-c0ce-11e8-99da-a06a52475a94.png" alt="image"></p>
+<p>安装完成后 reboot</p>
+<h1 id="安装系统必备组件"><a href="#安装系统必备组件" class="headerlink" title="安装系统必备组件"></a>安装系统必备组件</h1><h2 id="安装Bash、Vim"><a href="#安装Bash、Vim" class="headerlink" title="安装Bash、Vim"></a>安装Bash、Vim</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add bash vim</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="开启远程root登录的权限以及扩展的包镜像源"><a href="#开启远程root登录的权限以及扩展的包镜像源" class="headerlink" title="开启远程root登录的权限以及扩展的包镜像源"></a>开启远程root登录的权限以及扩展的包镜像源</h1><p>方便直接通过远程终端进行操作，打开<code>vim /etc/ssh/sshd_config</code>，在配置文件的末尾添加：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PermitRootLogin yes</span><br></pre></td></tr></tbody></table></figure>
+<p>重启 ssh 服务，<code>service sshd restart</code></p>
+<h1 id="开启community-testing-edge包仓库"><a href="#开启community-testing-edge包仓库" class="headerlink" title="开启community testing edge包仓库"></a>开启community testing edge包仓库</h1><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/apk/repositories</span><br></pre></td></tr></tbody></table></figure>
+<p>将其中所有对应的库链接注释打开</p>
+<h1 id="安装配置-MySQL-MariaDB"><a href="#安装配置-MySQL-MariaDB" class="headerlink" title="安装配置 MySQL/MariaDB"></a>安装配置 MySQL/MariaDB</h1><h2 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add mariadb mariadb-client</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置MariaDB"><a href="#配置MariaDB" class="headerlink" title="配置MariaDB"></a>配置MariaDB</h2><p>MariaDB安装后还不能直接使用，需要创建用户等配置工作</p>
+<h3 id="设定环境变量，稍后使用"><a href="#设定环境变量，稍后使用" class="headerlink" title="设定环境变量，稍后使用"></a>设定环境变量，稍后使用</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export DB_DATA_PATH=/var/lib/mysql</span><br><span class="line">export DB_ROOT_PASS=root_password</span><br><span class="line">export DB_USER=dvwa</span><br><span class="line">export DB_PASS=dvwa_password</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="启动配置MariaDB"><a href="#启动配置MariaDB" class="headerlink" title="启动配置MariaDB"></a>启动配置MariaDB</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql_install_db --user=mysql --datadir=${DB_DATA_PATH} &&\</span><br><span class="line">chown -R mysql:mysql ${DB_DATA_PATH}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="启动-MariaDB-并添加默认启动"><a href="#启动-MariaDB-并添加默认启动" class="headerlink" title="启动 MariaDB 并添加默认启动"></a>启动 MariaDB 并添加默认启动</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rc-service mariadb start</span><br><span class="line">rc-update add mariadb default</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="改-root-密码"><a href="#改-root-密码" class="headerlink" title="改 root 密码"></a>改 root 密码</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password "${DB_ROOT_PASS}"</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="创建一个dvwa用户，以及dvwa数据库"><a href="#创建一个dvwa用户，以及dvwa数据库" class="headerlink" title="创建一个dvwa用户，以及dvwa数据库"></a>创建一个dvwa用户，以及dvwa数据库</h2><p><em>建议添加该用户，不建议使用 MariaDB 的 root 账户登录MariaDB</em><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo "CREATE DATABASE dvwa;" >> /tmp/sql</span><br><span class="line">echo "GRANT ALL ON *.* TO ${DB_USER}@'127.0.0.1' IDENTIFIED BY '${DB_PASS}' WITH GRANT OPTION;" > /tmp/sql</span><br><span class="line">echo "GRANT ALL ON *.* TO ${DB_USER}@'localhost' IDENTIFIED BY '${DB_PASS}' WITH GRANT OPTION;" >> /tmp/sql</span><br><span class="line">echo "GRANT ALL ON *.* TO ${DB_USER}@'::1' IDENTIFIED BY '${DB_PASS}' WITH GRANT OPTION;" >> /tmp/sql</span><br><span class="line">echo "DELETE FROM mysql.user WHERE User='';" >> /tmp/sql</span><br><span class="line">echo "DROP DATABASE test;" >> /tmp/sql</span><br><span class="line">echo "FLUSH PRIVILEGES;" >> /tmp/sql</span><br><span class="line">cat /tmp/sql | mysql -u root --password="${DB_ROOT_PASS}"</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="重启主机，验证是否安装完成"><a href="#重启主机，验证是否安装完成" class="headerlink" title="重启主机，验证是否安装完成"></a>重启主机，验证是否安装完成</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reboot</span><br><span class="line">ps -ef | grep mysql</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="安装PHP-以及所需要的库组件"><a href="#安装PHP-以及所需要的库组件" class="headerlink" title="安装PHP 以及所需要的库组件"></a>安装PHP 以及所需要的库组件</h1><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apk add lighttpd php5-common php5-iconv php5-json php5-gd php5-curl php5-xml php5-pgsql php5-mysql php5-imap php5-cgi fcgi php5-pdo php5-pdo_pgsql  php5-pdo_mysql  php5-soap php5-xmlrpc php5-posix php5-mcrypt php5-gettext php5-ldap php5-ctype php5-dom</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="安装配置-lighttp"><a href="#安装配置-lighttp" class="headerlink" title="安装配置 lighttp"></a>安装配置 lighttp</h1><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/lighttpd/lighttpd.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>取消掉注释<code>include "mod_fastcgi.conf"</code></p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/lighttpd/mod_fastcgi.conf</span><br></pre></td></tr></tbody></table></figure>
+<p>替换<code>/usr/bin/php-cgi</code> 为 <code>/usr/bin/php-cgi5</code></p>
+<p>打开对应的选项，便于漏洞学习<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/php5/php.ini</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>找到<code>allow_url_open</code> 和 <code>allow_url_include</code> 均设置为 <code>On</code></p>
+<p>启动Lighttpd<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rc-service lighttpd start && rc-update add lighttpd default</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1 id="安装配置-DVWA"><a href="#安装配置-DVWA" class="headerlink" title="安装配置 DVWA"></a>安装配置 DVWA</h1><h2 id="创建项目文件夹"><a href="#创建项目文件夹" class="headerlink" title="创建项目文件夹"></a>创建项目文件夹</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/share/webapps/</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="下载DVWA"><a href="#下载DVWA" class="headerlink" title="下载DVWA"></a>下载DVWA</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/share/webapps/</span><br><span class="line">wget https://github.com/RandomStorm/DVWA/archive/v1.9.zip</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="将DVWA放到指定的web项目目录中"><a href="#将DVWA放到指定的web项目目录中" class="headerlink" title="将DVWA放到指定的web项目目录中"></a>将DVWA放到指定的web项目目录中</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unzip v1.9.zip</span><br><span class="line">rm v1.9.zip</span><br><span class="line">chmod -R 777 /usr/share/webapps/</span><br><span class="line">ln -s /usr/share/webapps/DVWA-1.9/ /var/www/localhost/htdocs/dvwa</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置DVWA"><a href="#配置DVWA" class="headerlink" title="配置DVWA"></a>配置DVWA</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/share/webapps/DVWA-1.9/config/config.inc.php</span><br></pre></td></tr></tbody></table></figure>
+<p>设置用户名 密码 以及端口号</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/46000851-53703200-c0dc-11e8-91ad-9afe94ab15fb.png" alt="image"></p>
+<h2 id="验证安装情况"><a href="#验证安装情况" class="headerlink" title="验证安装情况"></a>验证安装情况</h2><p>打开<code>http://IP/dvwa/setup.php</code><br>查看 Setup Check  各项应均为绿色</p>
+<p><img src="https://user-images.githubusercontent.com/7655877/46001168-3b4ce280-c0dd-11e8-902d-f4516d0f6439.png" alt="image"></p>
+<p>点击Create/Reset Database，创建对应的数据库，安装完成</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://wiki.alpinelinux.org/wiki/Damn_Vulnerable_Web_Application_(DVWA" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/Damn<em>Vulnerable_Web_Application</em>(DVWA)</a>)<br><a href="https://wiki.alpinelinux.org/wiki/MariaDB" target="_blank" rel="noopener">https://wiki.alpinelinux.org/wiki/MariaDB</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/">https://blog.littleji.com/2018/09/25/20180925InstallDVWAOnAlpineFromScratch/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1. 安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E7%99%BB%E5%BD%95%E4%B8%8E%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">2. 登录与初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%9F%BA%E6%9C%AC%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">3.</span> <span class="toc-text">3. 基本的快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%9B%BF%E6%8D%A2GDM"><span class="toc-number">4.</span> <span class="toc-text">4. 替换GDM</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-09-06T16:00:00.000Z"><a href="/2018/09/07/20180907GettingStartedWithI3WindowManager/">2018-09-07</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/09/07/20180907GettingStartedWithI3WindowManager/">在Linux上使用 i3 作为窗口管理器的入门教程</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>注：本文首发于linux中国<br>本篇文章会介绍如何在Fedora系统中，安装、配置、使用i3桌面管理器。</p>
+<p><img src="https://opensource.com/sites/default/files/styles/image-full-size/public/lead-images/windows-tiling-windows-wall.png?itok=mTH7uVrn" alt></p>
+<p>在我的文章<a href="https://opensource.com/article/18/8/i3-tiling-window-manager" target="_blank" rel="noopener">i3 桌面让Linux更好的5个理由</a>，我分享了选择 <a href="https://i3wm.org" target="_blank" rel="noopener">i3 桌面管理器</a> 作为一种Linux桌面替代方案的最主要五个理由。<br>在本篇文章中，我将向大家展示，如何在 Fedora 28 上安装与配置 i3。</p>
+<h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><p>首先进入 Fedora 系统中，打开一个终端。使用 <code>dnf</code> 来安装需要的软件包，如下：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[ricardo@f28i3 ~]$ sudo dnf install -y i3 i3-ipc i3status i3lock dmenu terminator --exclude=rxvt-unicode</span><br><span class="line">Last metadata expiration check: 1:36:15 ago on Wed 08 Aug 2018 12:04:31 PM EDT.</span><br><span class="line">Dependencies resolved.</span><br><span class="line">================================================================================================</span><br><span class="line"> Package                     Arch         Version                           Repository     Size</span><br><span class="line">================================================================================================</span><br><span class="line">Installing:</span><br><span class="line"> dmenu                       x86_64       4.8-1.fc28                        fedora         33 k</span><br><span class="line"> i3                          x86_64       4.15-1.fc28                       fedora        323 k</span><br><span class="line"> i3-ipc                      noarch       0.1.4-12.fc28                     fedora         14 k</span><br><span class="line"> i3lock                      x86_64       2.9.1-2.fc28                      fedora         33 k</span><br><span class="line"> i3status                    x86_64       2.12-1.fc28                       updates        62 k</span><br><span class="line"> terminator                  noarch       1.91-4.fc28                       fedora        570 k</span><br><span class="line">Installing dependencies:</span><br><span class="line"> dzen2                       x86_64       0.8.5-21.20100104svn.fc28         fedora         60 k</span><br><span class="line"></span><br><span class="line">... Skipping dependencies/install messages</span><br><span class="line"></span><br><span class="line">Complete!</span><br><span class="line">[ricardo@f28i3 ~]$</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>注意：在这个命令中，我排除了 <code>rxvt-unicode</code> 这个包，因为我更喜欢 <code>terminator</code> 作为我的终端模拟器。</p>
+<p>据用户目前的系统状态，在命令执行过程中可能会安装很多依赖。等待所有的依赖安装完成，之后重启你的电脑。</p>
+<h3 id="2-登录与初始化"><a href="#2-登录与初始化" class="headerlink" title="2. 登录与初始化"></a>2. 登录与初始化</h3><p>在你的机器重启之后，你便可以第一次体验 i3 了。在 GNOME Display Manager （GDM），选择你的用户名，之后先别着急输密码，点击下方的密码输入框下方的小齿轮，之后选择 i3 ，像下方这样：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_first_login_small.png" alt></p>
+<p>输入你的密码，并点击 <code>Sign In</code>。在你第一次登入之后，会先看到 i3 的配置界面：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_first_configuration_small.png" alt></p>
+<p>点击 <code>ENTER</code> 就会在 <code>$HOME/.config/i3</code> 生成一个配置文件，之后你可以通过这个配置文件来定制化 i3’s 的一些行为。</p>
+<p>在下一屏，你需要选择你的 <code>Mod</code> 键。这一步很关键，因为 <code>Mod</code> 键通常都会作为 i3’s 命令快捷键的发起键。按 <code>ENTER</code> 会选择 <code>Win</code> 键作为默认的 <code>Mod</code> 键。如果你的键盘没有 <code>Win</code> 键，用 <code>Alt</code> 键做替代，用方向键键选择后按 <code>ENTER</code> 确认。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_generate_config_small.png" alt></p>
+<p>现在你就登录到了 i3 的系统中。由于 i3 是一个最小化的窗口管理器，你会看到一个黑屏窗口，以及屏幕底端显式的状态栏：</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_start_small.png" alt></p>
+<p>接下来，让我们看看 i3 的如何实际使用。</p>
+<h3 id="3-基本的快捷键"><a href="#3-基本的快捷键" class="headerlink" title="3. 基本的快捷键"></a>3. 基本的快捷键</h3><p>现在你已经登录到了 i3 的会话中，你需要几个基本的快捷键来应对基本的操作。</p>
+<p>大多数的 i3 快捷键都会用到之前配置的 <code>Mod</code> 键。在下面的例子中，当我提到 <code>Mod</code> 键，请根据情况使用你定义的做替换。通常使用 <code>Win</code> 键或者 <code>Alt</code> 键。</p>
+<p>首先，打开一个终端，使用 <code>Mod+ENTER</code>。重复打开几个终端，观察 i3 是如何自动将它们在桌面中排列。默认情况下， i3 会在水平的方向分割屏幕；使用 <code>Mod + v</code> 来垂直分割，再按 <code>Mod + h</code> 会恢复水平分割模式。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_3terminal_tiled_small.png" alt></p>
+<p>当需要启动其他的应用，按 <code>Mod + d</code> 来打开 <code>dmenu</code>，一个简单的文字应用菜单。默认情况下，<code>dmenu</code> 会呈现出所有在你 <code>$PATH</code> 中设置的应用。使用方向键来选择你想启动的应用，同时你可以键入应用的名称，来缩小选择的范围，之后按 <code>ENTER</code> 来启动选择的应用。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_dmenu.png" alt></p>
+<p>如果你的应用没有提供退出的方法，你可以使用 i3 来关闭对应的窗口，通过按 <code>Mod + Shift +q</code>。注意，你可能会丢失未保存的工作内容。</p>
+<p>最后，当你想关闭会话并退出 i3，按 <code>Mod + Shift +e</code>。之后会在窗口的上方提示你是否退出。点击 <code>Yes, exit i3</code> 退出，或选择 <code>X</code> 来取消。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_exit_small.png" alt></p>
+<p>这些就是 i3 中最基本的快捷键，如果想了解更多，请查阅官方文档 <a href="https://i3wm.org/docs/userguide.html#_default_keybindings" target="_blank" rel="noopener">documentation</a>。</p>
+<h3 id="4-替换GDM"><a href="#4-替换GDM" class="headerlink" title="4. 替换GDM"></a>4. 替换GDM</h3><p>使用 i3 window manager 会降低你操作系统的内存占用；然而，Fedora 依然会使用 GDM 作为登录的窗口。GDM 会载入几个与 GNOME 相关的库从而占用内存。</p>
+<p>如果你想进一步的降低你的内存占用，你可以使用一些更轻量级的窗口管理器来替换 GDM，比如 <code>lightdm</code>：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ricardo@f28i3 ~]$ sudo dnf install -y lightdm</span><br><span class="line">[ricardo@f28i3 ~]$ sudo systemctl disable gdm</span><br><span class="line">Removed /etc/systemd/system/display-manager.service.</span><br><span class="line">[ricardo@f28i3 ~]$ sudo systemctl enable lightdm</span><br><span class="line">Created symlink /etc/systemd/system/display-manager.service -> /usr/lib/systemd/system/lightdm.service.</span><br><span class="line">[ricardo@f28i3 ~]$</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>之后重启你的机器来使用 Lightdm 的登录界面。</p>
+<p>现在你可以继续登录并使用 i3了。</p>
+<p><img src="https://opensource.com/sites/default/files/uploads/i3_lightdm_small.png" alt></p>
+<hr>
+<p>via: <a href="https://opensource.com/article/18/8/getting-started-i3-window-manager" target="_blank" rel="noopener">https://opensource.com/article/18/8/getting-started-i3-window-manager</a></p>
+<p>作者：<a href="https://opensource.com/users/rgerardi" target="_blank" rel="noopener">Ricardo Gerardi</a><br>选题：<a href="https://github.com/lujun9972" target="_blank" rel="noopener">lujun9972</a><br>译者：<a href="https://github.com/littleji" target="_blank" rel="noopener">littleji</a><br>校对：<a href="https://github.com/校对者ID" target="_blank" rel="noopener">校对者ID</a></p>
+<p>本文由 <a href="https://github.com/LCTT/TranslateProject" target="_blank" rel="noopener">LCTT</a> 原创编译，<a href="https://linux.cn/" target="_blank" rel="noopener">Linux中国</a> 荣誉推出</p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/">https://blog.littleji.com/2018/09/07/20180907GettingStartedWithI3WindowManager/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E4%B8%BE%E4%BE%8B"><span class="toc-number">1.1.</span> <span class="toc-text">第一章 举例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%B8%83%E5%B0%94%E4%B8%8E%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">第二章 布尔与数值类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-%E6%B3%A8%E9%87%8A%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 注释风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 标识符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">2.1.3 常量和变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B8%83%E5%B0%94%E5%80%BC%E5%92%8C%E5%B8%83%E5%B0%94%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 布尔值和布尔表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 数值类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1%E6%95%B4%E5%9E%8B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">2.3.1整型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-03T16:00:00.000Z"><a href="/2018/02/04/20180204ProgrammingInGo1/">2018-02-04</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/02/04/20180204ProgrammingInGo1/">Go语言程序设计(1)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>有一点是要说明的,Java无意间成了更好的C++(开发角度来说),Go的目标则是充当更好的C,虽然垠神喷了又喷go的这与那,但作为一门工程师气息很重的语言,社区也越发强大的语言,为了更好的工程实践,需要深刻学习,并尝试替换后端难以维护的C写的后端.<br>最后,选择一门语言不是选择一门语言本身,更多的是选择社区.称为开发人员的社会性?</p>
+<h2 id="第一章-举例"><a href="#第一章-举例" class="headerlink" title="第一章 举例"></a>第一章 举例</h2><p>Go的HelloWorld.go</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">    who := <span class="string">"World!"</span></span><br><span class="line">    fmt.Println(<span class="string">"Hello"</span>, who)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="第二章-布尔与数值类型"><a href="#第二章-布尔与数值类型" class="headerlink" title="第二章 布尔与数值类型"></a>第二章 布尔与数值类型</h2><h3 id="2-1-基础"><a href="#2-1-基础" class="headerlink" title="2.1 基础"></a>2.1 基础</h3><h4 id="2-1-1-注释风格"><a href="#2-1-1-注释风格" class="headerlink" title="2.1.1 注释风格"></a>2.1.1 注释风格</h4><ul>
+<li>采用了C的方式,行注释为//,块注释为/**/</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//行注释</span></span><br><span class="line"><span class="comment">//fmt.Println("Hello!")</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*块注释*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">fmt.Println("Hello!")</span></span><br><span class="line"><span class="comment">fmt.Println("World!")</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>同样的块注释也不可以嵌套比如下面的代码会报错</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*块注释</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">fmt.Println("Hello!")</span></span><br><span class="line"><span class="comment">fmt.Println("World!")</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">*/</span><br><span class="line">syntax error: unexpected /, expecting expression</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-1-2-标识符"><a href="#2-1-2-标识符" class="headerlink" title="2.1.2 标识符"></a>2.1.2 标识符</h4><p>标识符需要使用字母为开头的,使用Unicode编码分类中的任何字符组成.<br>标识符不可以同关键字的名称相同.<br>标识符区分大小写,下面几个各不相同</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hello</span><br><span class="line">Hello <span class="comment">//其中该以大写字母开头的标识符是公开的,其他的为私有的.</span></span><br><span class="line">hEllo</span><br></pre></td></tr></tbody></table></figure>
+<p>其中下划线’_’在go中为占位符,当在调用一个赋值操作的时候,使用占位符,则忽略该值,被赋值的值保持原来的值, 如下所示</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">count, err = fmt.Println(x) <span class="comment">//获取打印的字节数和error值</span></span><br><span class="line">count, _ = fmt.Println(x) <span class="comment">//忽略error值</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-1-3-常量和变量"><a href="#2-1-3-常量和变量" class="headerlink" title="2.1.3 常量和变量"></a>2.1.3 常量和变量</h4><ul>
+<li>变量声明与赋值</li>
+</ul>
+<p>由于go是强类型的语言,变量使用前必须要进行声明和赋值,如果用户不进行赋值,则默认置为0(整形等)或””(字符串)或nil(指针),不用担心C语言中的垃圾值</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确做法1</span></span><br><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span></span><br><span class="line">i = <span class="number">10</span> <span class="comment">//变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法2</span></span><br><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法3, 由于赋值的时候可以通过赋值符号右边的值进行类型推倒</span></span><br><span class="line"><span class="keyword">var</span> i = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法4, 最简单的方法, :=表明声明为变量并进行类型推倒,最终赋值,于是可以省略var</span></span><br><span class="line">i := <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误示范1,在声明的时候没有指定类型</span></span><br><span class="line"><span class="keyword">var</span> i</span><br><span class="line">i = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误示范2,不声明直接赋值</span></span><br><span class="line">i = <span class="number">10</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>常量声明和赋值</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确做法1</span></span><br><span class="line"><span class="keyword">const</span> x = <span class="number">0</span></span><br><span class="line"><span class="keyword">const</span> y = <span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> z = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法2, 可以使用小括号的方式来声明一组变量</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    y = <span class="number">1</span></span><br><span class="line">    z = <span class="number">2</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法3,将括号内声明的变量初始化为一个值,下面的x y z 均初始化为0</span></span><br><span class="line"><span class="keyword">const</span> {</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    y</span><br><span class="line">    z</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法4, 使用iota标识符进行初始化,</span></span><br><span class="line"><span class="comment">//iota是一个无类型整数常量,每次const关键字出现的时候,其值自增1</span></span><br><span class="line"><span class="keyword">const</span> {</span><br><span class="line">    x = <span class="literal">iota</span></span><br><span class="line">    y</span><br><span class="line">    z</span><br><span class="line">}</span><br><span class="line"><span class="comment">//即</span></span><br><span class="line"><span class="keyword">const</span> {</span><br><span class="line">    x = <span class="literal">iota</span> <span class="comment">// 0</span></span><br><span class="line">    y = <span class="literal">iota</span> <span class="comment">// 1</span></span><br><span class="line">    z = <span class="literal">iota</span> <span class="comment">// 2</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误1, :=符号无法用在const初始化中</span></span><br><span class="line"><span class="keyword">const</span> x := <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误2, 未初始化完成就使用, 必须声明初始化一起完成</span></span><br><span class="line"><span class="keyword">const</span> x</span><br><span class="line">x = <span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-2-布尔值和布尔表达式"><a href="#2-2-布尔值和布尔表达式" class="headerlink" title="2.2 布尔值和布尔表达式"></a>2.2 布尔值和布尔表达式</h3><ul>
+<li>布尔值:true和false</li>
+<li>布尔表达式:</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!b</span><br><span class="line">a||b</span><br><span class="line">a&&b</span><br><span class="line">x<y</span><br><span class="line">x>y</span><br></pre></td></tr></tbody></table></figure>
+<p>需要注意的是==和!=可以比较任何两个类型,只要被比较的双方兼容这两个操作符<br>< <= >= >只能比较数字和字符串</p>
+<h3 id="2-3-数值类型"><a href="#2-3-数值类型" class="headerlink" title="2.3 数值类型"></a>2.3 数值类型</h3><p>不同的类型之间不允许进行二进制运算和比较操作,在操作之前必须转为相同的类型</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//错误1, 两个不同类型之间, 不可以进行运算</span></span><br><span class="line">x := <span class="number">1</span> <span class="comment">//自动推断为int类型</span></span><br><span class="line">y := <span class="keyword">int16</span>(<span class="number">2</span>)</span><br><span class="line">z := x + y</span><br><span class="line"></span><br><span class="line"><span class="comment">//正确</span></span><br><span class="line">x := <span class="number">1</span></span><br><span class="line">y := <span class="keyword">int16</span>(<span class="number">2</span>)</span><br><span class="line">z := x + <span class="keyword">int</span>(y)</span><br></pre></td></tr></tbody></table></figure>
+<p>其他的算术运算符</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x++ <span class="comment">//没有++x</span></span><br><span class="line">x--</span><br><span class="line">x /= y <span class="comment">//x/y的结果返回给x,如果分母为0,发出异常,如果两个值为整数,丢弃余数</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-3-1整型"><a href="#2-3-1整型" class="headerlink" title="2.3.1整型"></a>2.3.1整型</h4><ul>
+<li>有符号的类型</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="keyword">int8</span> <span class="keyword">int32</span> <span class="keyword">int64</span></span><br><span class="line"><span class="keyword">int</span><span class="comment">//默认是int32或者是int64 依赖平台</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>无符号的类型</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint</span> <span class="keyword">uint8</span> <span class="keyword">uint32</span> <span class="keyword">uint64</span></span><br><span class="line"><span class="keyword">byte</span><span class="comment">//等于uint8</span></span><br><span class="line"><span class="keyword">rune</span> <span class="comment">//等于uint32</span></span><br><span class="line"><span class="keyword">uintptr</span><span class="comment">//(32位下uint32 64位下uint64)</span></span><br></pre></td></tr></tbody></table></figure>
+<p>需要注意的是 默认使用int就足够,并且其速度是可以保证的<br>将小的整数转换为大整数总是安全的,但是如果向下转换会产生截断或者得到一个不可预期的值,如果想使用一个完美的精度,可以使用big.Rat或者big.Int类型,该类型只受限于机器的内存大小</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://book.douban.com/subject/24869910/" target="_blank" rel="noopener">Go语言程序设计</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/02/04/20180204ProgrammingInGo1/">https://blog.littleji.com/2018/02/04/20180204ProgrammingInGo1/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E7%99%BD%E7%9A%AE%E4%B9%A6"><span class="toc-number">1.</span> <span class="toc-text">比特币白皮书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x00%E6%91%98%E8%A6%81"><span class="toc-number">1.1.</span> <span class="toc-text">0x00摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01%E8%AF%B4%E6%98%8E"><span class="toc-number">1.2.</span> <span class="toc-text">0x01说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02%E4%BA%A4%E6%98%93"><span class="toc-number">1.3.</span> <span class="toc-text">0x02交易</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03%E6%97%B6%E9%97%B4%E6%88%B3%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.4.</span> <span class="toc-text">0x03时间戳服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.5.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-17T16:00:00.000Z"><a href="/2018/01/18/20180117BitCoin/">2018-01-18</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/18/20180117BitCoin/">比特币白皮书</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="比特币白皮书"><a href="#比特币白皮书" class="headerlink" title="比特币白皮书"></a>比特币白皮书</h1><h2 id="0x00摘要"><a href="#0x00摘要" class="headerlink" title="0x00摘要"></a>0x00摘要</h2><p>一个真正意义上的点对点的在线电子交易系统，应该满足交易的双方在不需第三方金融机构介入的情况下进行。虽说数字签名技术，部分解决了这个问题，但是又需要面临，在离线交易过程中可能出现的“重复支付”（double-spending ）问题。我们在这里给出了一种解决的办法，这种方法将网络时间戳通过hash转换，加入到一种基于hash的、持续伸展的“工作证明链”（以下简称工作链）中。攻击者除非能够将之前所做的工作再做一遍，否则无法更改这个工作证明链中已有的工作证明记录。也就是说，最长的工作链一方面证明了其见证了最多的交易记录，另一方面也说明了其所掌握的CPU计算能力（译注：HASH的计算能力）。只要大多数的CPU计算能力掌握在各个交易的个体手中，那么攻击者无法对该交易网络进行攻击。当然，这个交易系统也需要最基本的结构，个个节点也会最大范围的通知自己所记录的交易行为。由于最长的工作链存有所有的交易记录，所以每个节点可以在任意的时间脱离或者回到这个交易系统，而不会丢失其未曾见证的交易记录。</p>
+<h2 id="0x01说明"><a href="#0x01说明" class="headerlink" title="0x01说明"></a>0x01说明</h2><p>目前，互联网上的电子商务几乎完全依赖作为可信第三方的金融机构来处理电子支付。在大多数情况下，该交易模式可以应对，但它仍然受到基于信任模型的固有弱点的影响。比如，不可避免的调解纠纷，而调解成本又增加了交易成本，限制了最小的实际交易规模，并且切断了小型临时交易的可能性。尤其是，当需要运作而又无法正常的运作一笔“不可逆的交易”时，交易成本会大大的增加。由于该系统的提供信息有可能存在掺了假的或者过时的信息，所以交易的双方都需要花更多的成本在获取双方的信任上，进一步增加了交易的成本。这种交易机制在没有任何可信任的第三方见证的情况下，交易无法进行下去。<br>事实上，目前所需要的是一种基于密码证明而不是信任的电子支付系统，这个系统允许任何两个愿意相互交易的双方，在不需要可信任的第三方的情况下进行交易。一方面，由于在实施欺骗需要付出巨大的计算代价，从而保护了卖家免受欺诈；另一方面，使容易被采用的常规托管机制，来保护买家。在本文中，我们提出了一个解决重复支付问题的解决方案，这个方案使用分布式时间戳服务器来顺序生成基于交易时间的工作证明。并且只要该系统中的所有坏人节点的计算能力不超过系统内的其他节点，那么就能保证这个系统是安全的。（译注：51%攻击）</p>
+<h2 id="0x02交易"><a href="#0x02交易" class="headerlink" title="0x02交易"></a>0x02交易</h2><p>这里定义一种电子货币保存一系列的数字签名。在交易的过程中，交易中的付款方首先将之前的交易与付款方的公钥一同进行hash，最终添加到付款方所持有的电子货币中，并传给收款方，收款方使用付款方的公钥对该电子货币进行验证是否为收款方的身份。<br>问题在于，收款方无法确认付款方是否多花了钱。一般的解决方法是引入一个可信的第三方，或者说造币厂，对每一笔交易进行审查。具体过程是，每一笔交易发生时，付款方将所持有的货币传回给造币厂，造币厂则将这个货币摧毁，产生一个新的货币给收款方。这样以来，整个交易的过程安全性完全依赖于造币厂。<br>而我们需要一种让收款者知道付款方没有进行二次交易。为了这个目的，我们可以在交易的过程中认为，只有最早的那笔交易是算数的，这样避免了二次交易情况的发生。收款方通过遍历所有的交易来验证付款方发出交易请求而收款方没有收到这一情况。要想脱离造币厂的模型，交易必须被广而告之，并且需要一个系统来帮助所有的参与者决策交易的到达顺序，收款方在判断一个交易的到达时间时需要这个系统内的其他节点进行投票决定，少数服从多数。</p>
+<h2 id="0x03时间戳服务器"><a href="#0x03时间戳服务器" class="headerlink" title="0x03时间戳服务器"></a>0x03时间戳服务器</h2><p>时间戳服务器是一切的开始，时间戳服务器工作原理是对一个block进行hash，并对其结果进行广播。建立时间戳服务器的意义主要是为了证明某一个数据在一个时间点一定存在。在组成一个链的时候，每一个时间戳的生成都会考虑到之前时间戳的信息。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">比特币白皮书</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/01/18/20180117BitCoin/">https://blog.littleji.com/2018/01/18/20180117BitCoin/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x00-%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">0x00 写在前面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-%E8%88%8D%E5%BE%97%E4%B9%9F%E6%98%AF%E5%85%AC%E5%B9%B3"><span class="toc-number">2.</span> <span class="toc-text">0x01 舍得也是公平</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0101-A%E4%B8%8E%E8%80%81%E6%9D%BF%E7%9A%84%E5%9C%B0%E4%BD%8D%E5%B9%B3%E7%AD%89"><span class="toc-number">2.1.</span> <span class="toc-text">0x0101 A与老板的地位平等</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0102-B%E3%80%81C%E4%B8%8E%E8%80%81%E6%9D%BF%E4%B9%8B%E5%89%8D%E5%9C%B0%E4%BD%8D%E4%B8%8D%E5%B9%B3%E7%AD%89"><span class="toc-number">2.2.</span> <span class="toc-text">0x0102 B、C与老板之前地位不平等</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0103-%E8%AF%A5%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="toc-number">2.3.</span> <span class="toc-text">0x0103 该怎么做？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-01-13T16:00:00.000Z"><a href="/2018/01/14/20180114ThereAndBackAgain/">2018-01-14</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2018/01/14/20180114ThereAndBackAgain/">舍得</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="0x00-写在前面"><a href="#0x00-写在前面" class="headerlink" title="0x00 写在前面"></a>0x00 写在前面</h1><p>2017,眨眼便逝.</p>
+<p>今年文章产出为1,无法回避这个问题,为什么呢?懒亦有了些自知之明.</p>
+<ol>
+<li>懒是自制力的问题,这也是我自身亟待解决的问题,事实上在自身的方法论体系中对于自我的改造,自制力是要排在第一位的,没有自制力之后的所有学习方法都无法展开,或者说将事倍功半,可以说是内功中的”易筋经”,俗话说:脱胎换骨,内壮神勇.</li>
+<li>由于在网上或书上看了不少的文章,发现均是良莠不齐,而这人一旦有了坏名声,再想改变人们的坏印象那可难喽.于是我心中也忐忑起来,不敢再有所造次.怕是污了各位看官的火眼.但又觉得污不污的也是真我,到了这把年纪再不折腾,怕是没时间了.</li>
+</ol>
+<p>那在这个年初,便总结下有得有失的这一年:得是侥幸,失则是得的对立.</p>
+<p>下面列举这一年几个对我影响较深思考:</p>
+<ol>
+<li>舍得,有舍方有得.</li>
+<li>选择、方法、努力缺一不可.</li>
+<li>极小点.</li>
+<li>人本身是工作问题的思考前提.</li>
+<li>参差多态乃是幸福本源.</li>
+<li>复盘,真正地找到自身的不足.</li>
+<li>决定你的不是你,而是你的周遭.</li>
+</ol>
+<p>上面几项,并非完全独立的关系,比如复盘于我自身的知识体系中在方法-实践方法-学习方法中.</p>
+<p>下面简单地讲讲我对舍得的理解,其他几个留到之后一一细谈.</p>
+<h1 id="0x01-舍得也是公平"><a href="#0x01-舍得也是公平" class="headerlink" title="0x01 舍得也是公平"></a>0x01 舍得也是公平</h1><p>舍得舍得,有舍有得.其实跟此相似的概念还有等价交换.</p>
+<p>舍得讲的是公平问题,这也是基本的商品交换规律,只有付出什么才能等到什么. </p>
+<p>马云也说过：“员工离职就是两点：1.钱没给够 2.干的不爽”，事实上合起来也是公平二字，只不过一方面说的是钱，另一方面说的是心境。</p>
+<p>供求双方在平等的条件下进行对彼此均有益的交易,符合囚徒理论中”双赢”的概念,双方在均获得一定利润的情况下,继续在合作巩固社会发展.</p>
+<p>但理论归理论,实际上孰不想独拿那份最大的蛋糕?</p>
+<p>举个生活中的例子:老板付工资,员工ABC干活.其中ABC干的是同一种活.<br>其中老板付出总共15000的情况下,公司的总利润是1500,其中,A正常工作、B偷懒工作、C勤奋工作.</p>
+<h2 id="0x0101-A与老板的地位平等"><a href="#0x0101-A与老板的地位平等" class="headerlink" title="0x0101 A与老板的地位平等"></a>0x0101 A与老板的地位平等</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">老板付出5000的工资,得到了员工A产出的5500的收益.老板很高兴.</span><br><span class="line">员工A正常工作,付出4500的精力,得到了老板给出的5000的工资.员工A很开心.</span><br><span class="line">二者携手共创美好的明天.</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="0x0102-B、C与老板之前地位不平等"><a href="#0x0102-B、C与老板之前地位不平等" class="headerlink" title="0x0102 B、C与老板之前地位不平等"></a>0x0102 B、C与老板之前地位不平等</h2><p>还是上面的例子<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">员工B偷懒,员工C勤奋.</span><br><span class="line">员工B由于频繁偷懒,拿着5000的工资,付出4500精力，产出了5000的收益.员工地位被抬高，老板觉得自己的利益受到侵害，很生气将其开除.</span><br><span class="line">员工C由于非常勤奋,拿着5000的工资,付出了5500精力，产出了6000的收益.老板地位被抬高，员工觉得干了那么多活，依然拿着一样的工资，心生委屈愤而离职.</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>由此发现,由于两个员工离职,老板的利润只有每个月500,事实上比之前ABC三个员工均在时的收益1500降低了2/3.双方不平等的的结果只有双输：老板收益降低，员工没了工作。</p>
+<h2 id="0x0103-该怎么做？"><a href="#0x0103-该怎么做？" class="headerlink" title="0x0103 该怎么做？"></a>0x0103 该怎么做？</h2><p>无他，对于交易的双方来说，都应该关注好交易的彼此，莫让对方受了委屈，才是持续推动双方进步的不二法门。切莫为了蝇头甜点，预支了未来的大块蛋糕。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://wiki.mbalib.com/wiki/%E7%AD%89%E4%BB%B7%E4%BA%A4%E6%8D%A2" target="_blank" rel="noopener">等价交换</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/01/14/20180114ThereAndBackAgain/">https://blog.littleji.com/2018/01/14/20180114ThereAndBackAgain/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">计算机原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java"><span class="toc-number">3.</span> <span class="toc-text">Java</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python"><span class="toc-number">4.</span> <span class="toc-text">Python</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-C"><span class="toc-number">5.</span> <span class="toc-text">C&#x2F;C++</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">6.</span> <span class="toc-text">数据库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E5%85%A8"><span class="toc-number">7.</span> <span class="toc-text">安全</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B"><span class="toc-number">8.</span> <span class="toc-text">软件工程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UI%E8%AE%BE%E8%AE%A1"><span class="toc-number">9.</span> <span class="toc-text">UI设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%90%A5%E9%94%80"><span class="toc-number">10.</span> <span class="toc-text">营销</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E5%87%86"><span class="toc-number">11.</span> <span class="toc-text">标准</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1"><span class="toc-number">11.1.</span> <span class="toc-text">软件设计</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%90%E7%BB%B4"><span class="toc-number">12.</span> <span class="toc-text">运维</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">13.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%91%98%E5%AE%9E%E8%B7%B5"><span class="toc-number">14.</span> <span class="toc-text">程序员实践</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%91%98%E6%B3%9B%E8%AF%BB"><span class="toc-number">15.</span> <span class="toc-text">程序员泛读</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-05-10T09:50:20.000Z"><a href="/2017/05/10/20170510MyBookList/">2017-05-10</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2017/05/10/20170510MyBookList/">我的程序员书单(My Programmer Book List)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><p>程序员实用算法 原书<br>算法导论->大餐 9.4<br>Algorithms Unlocked->开胃<br>算法引论——一种创造性方法（建议先看第5章，真是爽爆了）<br>The Science of Programming<br>求解数学题《怎样解题》<br>计算机程序设计艺术 9.3<br>基础数学 9.5<br>怎样解题 9.1<br>An Introduction to Probability Theory and Its Applications, Vol. 1, 3rd Edition 9.6<br>如何求解问题 8.5<br>数理逻辑 8.9<br>集合论基础 9.1<br>概率论及其应用 9.1<br>图论导引 8.8<br>来自圣经的证明 9.4</p>
+<h1 id="计算机原理"><a href="#计算机原理" class="headerlink" title="计算机原理"></a>计算机原理</h1><p>计算机程序的构造与解释 9.5<br>领域特定语言 9.1<br>编译原理 9.1</p>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><p>Effective Akka<br>Java 8 in action<br>java puzz<br>java 并发编程实战 9.0<br>effective java 9.1</p>
+<h1 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h1><p>Learning Python<br>Python Programming</p>
+<h1 id="C-C"><a href="#C-C" class="headerlink" title="C/C++"></a>C/C++</h1><p>Effective C++/STL</p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><p>高性能MySQL 第三版</p>
+<h1 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h1><p>白帽子讲web安全 8.2<br>黑客攻防技术宝典：web实战篇(第2版) 8.6<br>加密与解密(第3版) 8.4<br>Web之困 - 现代Web应用安全指南<br>Web前端黑客技术揭秘<br>码的奥秘 9.2<br>Web安全深度剖析 7.9<br>SQL注入攻击与防御（第2版） 7.8<br>精通脚本黑客 8.0<br>0day安全 （第2版） 8.4<br>社会工程 8.0</p>
+<h1 id="软件工程"><a href="#软件工程" class="headerlink" title="软件工程"></a>软件工程</h1><p>教科书:构建之法<a href="http://www.cnblogs.com/xinz/p/4470424.html" target="_blank" rel="noopener">构建之法中提到的书单</a><br>参考书:代码大全 Rapid Development 快速软件开发 项目管理艺术 人件<br>敏捷软件开发 原则，模式与实践<br>硝烟中的Scrum和XP : 我们如何实施Scrum 8.6<br>认知与设计 8.6<br>门后的秘密 8.2<br>点石成金 8.5<br>启示录 8.5<br>项目百态 8.3<br>精益开发实战 8.3<br>敏捷武士 7.7<br>敏捷软件开发 9.1<br>持续交付 8.6<br>精益企业 8.8<br>精益思想 8.6<br>看板方法 7.8<br>系统的思考 8.0<br>管理3.0 8.0<br>第五项修炼</p>
+<h1 id="UI设计"><a href="#UI设计" class="headerlink" title="UI设计"></a>UI设计</h1><p>简约至上 8.4</p>
+<h1 id="营销"><a href="#营销" class="headerlink" title="营销"></a>营销</h1><p>增长黑客 7.9</p>
+<h1 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h1><p>HTTP 权威指南 8.7<br>TCP/IP详解 9.2</p>
+<h2 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h2><p>设计模式 : 可复用面向对象软件的基础 9.4<br>企业应用架构模式 9.0<br>软件框架设计的艺术<br>发布!软件的设计与部署 7.7<br>实现领域驱动设计 8.8</p>
+<h1 id="运维"><a href="#运维" class="headerlink" title="运维"></a>运维</h1><p>网站运维 8.3</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>Google软件测试之道 8.1</p>
+<h1 id="程序员实践"><a href="#程序员实践" class="headerlink" title="程序员实践"></a>程序员实践</h1><p>卓有成效的程序员<br>高效程序员的修炼<br>程序员的思维训练 8.3<br>程序员的职业素养 8.6<br>高效程序员的45个习惯——敏捷开发修炼之道<br>程序员修炼之道——从小工到专家<br>重构 9.0(《重构与模式》一样，充其量只是一本案例集，无法达到《重构》的高度)<br>编写可读代码的艺术 8.6<br>编程珠玑 9.2<br>编码 9.2</p>
+<h1 id="程序员泛读"><a href="#程序员泛读" class="headerlink" title="程序员泛读"></a>程序员泛读</h1><p>哥德尔、艾舍尔、巴赫 9.4<br>暗时间 8.4<br>把时间当朋友<br>影响力 8.6<br>黑客 8.3<br>编程人生 8.4</p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2017/05/10/20170510MyBookList/">https://blog.littleji.com/2017/05/10/20170510MyBookList/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0-abstract"><span class="toc-number">1.</span> <span class="toc-text">概述(abstract)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B31-figure-it-1"><span class="toc-number">2.</span> <span class="toc-text">解决1(figure it 1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B32-figure-it-2"><span class="toc-number">3.</span> <span class="toc-text">解决2(figure it 2)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B33-figure-it-3"><span class="toc-number">4.</span> <span class="toc-text">解决3(figure it 3)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-12-19T09:50:20.000Z"><a href="/2016/12/19/20161219MySQL-#1146-#1017/">2016-12-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/12/19/20161219MySQL-#1146-#1017/">使用navicat 修改MySQL数据库的某个表后,无法再读取该表(MySQL-#1146-#1017)</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="概述-abstract"><a href="#概述-abstract" class="headerlink" title="概述(abstract)"></a>概述(abstract)</h2><p>问题的产生原因是由于在Windows下使用Navicat客户端,操作位于CentOS上MySQL 5.6时,具体的执行一个重命名字段的操作时,Navicat停止了运行,然后将该Navicat强制的关闭后,再运行Navicat打开刚才重命名字段所在的表,再次卡死,反复操作几次,结果并没有改变.</p>
+<h2 id="解决1-figure-it-1"><a href="#解决1-figure-it-1" class="headerlink" title="解决1(figure it 1)"></a>解决1(figure it 1)</h2><p>首先,去MySQL数据库所在的服务器,对MySQL服务进行重启<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>再去用Navicat操作MySQL ,报 ERROR 1146 table ‘’ doesn’t exist 的错误</p>
+<h2 id="解决2-figure-it-2"><a href="#解决2-figure-it-2" class="headerlink" title="解决2(figure it 2)"></a>解决2(figure it 2)</h2><p>之后,通过查阅stackoverflow,可能是数据库文件权限的问题,然后照葫芦画瓢,使用下面的命令对其进行修改:<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown mysql:mysql /var/lib/mysql/ci/*</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>直接报,没有该文件</p>
+<h2 id="解决3-figure-it-3"><a href="#解决3-figure-it-3" class="headerlink" title="解决3(figure it 3)"></a>解决3(figure it 3)</h2><p>需要通过下面的命令查询mysql data文件具体在什么位置<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>找到下面这行<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datadir = /opt/mysql/db/data</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>再通过语句修改对应数据表所在数据库的权限,比如出现错误的表所在数据库的名字是’tmp_db’<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown mysql:mysql /opt/mysql/db/data/tmp_db/*</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>重新启动数据库<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld restart</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://stackoverflow.com/questions/6443428/cant-find-file-ci-users-frm-errno-13" target="_blank" rel="noopener">stackoverflow#1</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2016/12/19/20161219MySQL-#1146-#1017/">https://blog.littleji.com/2016/12/19/20161219MySQL-#1146-#1017/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+
+<nav id="pagination">
+  
+    <a href="/" class="alignleft prev">上一页</a>
+  
+  
+    <a href="/page/3/" class="alignright next">下一页</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Go语言程序设计(1) | littleji</title>
+  <meta name="author" content="littleji">
+  
+  <meta name="description" content="littleji&#39;s blog">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Go语言程序设计(1)"/>
+  <meta property="og:site_name" content="littleji"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="littleji" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-77530561-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-127734909-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-127734909-1');
+</script>
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+  <h1><a href="/">littleji</a></h1>
+  <h2><a href="/">a blog</a></h2>
+  <h2><a href="https://github.com/littleji" title="GithubID:littleji" target="_blank"><i class="fa fa-3x fa-github"></i></a> &nbsp;</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/booklist">Booklist</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    
+    <div id="toc" class="toc-article">
+      <strong class="toc-title">目录</strong>
+      <a class="js-toggle-toc" href="javascript:void(0)"></a>
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E4%B8%BE%E4%BE%8B"><span class="toc-number">1.1.</span> <span class="toc-text">第一章 举例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%B8%83%E5%B0%94%E4%B8%8E%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">第二章 布尔与数值类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%9F%BA%E7%A1%80"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-%E6%B3%A8%E9%87%8A%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 注释风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 标识符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">2.1.3 常量和变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%B8%83%E5%B0%94%E5%80%BC%E5%92%8C%E5%B8%83%E5%B0%94%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 布尔值和布尔表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 数值类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1%E6%95%B4%E5%9E%8B"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">2.3.1整型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">1.3.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+      </div>
+    </div>
+  
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-02-03T16:00:00.000Z"><a href="/2018/02/04/20180204ProgrammingInGo1/">2018-02-04</a></time>
+      
+      
+  
+    <h1 class="title">Go语言程序设计(1)</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>有一点是要说明的,Java无意间成了更好的C++(开发角度来说),Go的目标则是充当更好的C,虽然垠神喷了又喷go的这与那,但作为一门工程师气息很重的语言,社区也越发强大的语言,为了更好的工程实践,需要深刻学习,并尝试替换后端难以维护的C写的后端.<br>最后,选择一门语言不是选择一门语言本身,更多的是选择社区.称为开发人员的社会性?</p>
+<h2 id="第一章-举例"><a href="#第一章-举例" class="headerlink" title="第一章 举例"></a>第一章 举例</h2><p>Go的HelloWorld.go</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> {</span><br><span class="line">    who := <span class="string">"World!"</span></span><br><span class="line">    fmt.Println(<span class="string">"Hello"</span>, who)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="第二章-布尔与数值类型"><a href="#第二章-布尔与数值类型" class="headerlink" title="第二章 布尔与数值类型"></a>第二章 布尔与数值类型</h2><h3 id="2-1-基础"><a href="#2-1-基础" class="headerlink" title="2.1 基础"></a>2.1 基础</h3><h4 id="2-1-1-注释风格"><a href="#2-1-1-注释风格" class="headerlink" title="2.1.1 注释风格"></a>2.1.1 注释风格</h4><ul>
+<li>采用了C的方式,行注释为//,块注释为/**/</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//行注释</span></span><br><span class="line"><span class="comment">//fmt.Println("Hello!")</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*块注释*/</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">fmt.Println("Hello!")</span></span><br><span class="line"><span class="comment">fmt.Println("World!")</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>同样的块注释也不可以嵌套比如下面的代码会报错</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*块注释</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">fmt.Println("Hello!")</span></span><br><span class="line"><span class="comment">fmt.Println("World!")</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">*/</span><br><span class="line">syntax error: unexpected /, expecting expression</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-1-2-标识符"><a href="#2-1-2-标识符" class="headerlink" title="2.1.2 标识符"></a>2.1.2 标识符</h4><p>标识符需要使用字母为开头的,使用Unicode编码分类中的任何字符组成.<br>标识符不可以同关键字的名称相同.<br>标识符区分大小写,下面几个各不相同</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hello</span><br><span class="line">Hello <span class="comment">//其中该以大写字母开头的标识符是公开的,其他的为私有的.</span></span><br><span class="line">hEllo</span><br></pre></td></tr></tbody></table></figure>
+<p>其中下划线’_’在go中为占位符,当在调用一个赋值操作的时候,使用占位符,则忽略该值,被赋值的值保持原来的值, 如下所示</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">count, err = fmt.Println(x) <span class="comment">//获取打印的字节数和error值</span></span><br><span class="line">count, _ = fmt.Println(x) <span class="comment">//忽略error值</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-1-3-常量和变量"><a href="#2-1-3-常量和变量" class="headerlink" title="2.1.3 常量和变量"></a>2.1.3 常量和变量</h4><ul>
+<li>变量声明与赋值</li>
+</ul>
+<p>由于go是强类型的语言,变量使用前必须要进行声明和赋值,如果用户不进行赋值,则默认置为0(整形等)或””(字符串)或nil(指针),不用担心C语言中的垃圾值</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确做法1</span></span><br><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span></span><br><span class="line">i = <span class="number">10</span> <span class="comment">//变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法2</span></span><br><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span> = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法3, 由于赋值的时候可以通过赋值符号右边的值进行类型推倒</span></span><br><span class="line"><span class="keyword">var</span> i = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法4, 最简单的方法, :=表明声明为变量并进行类型推倒,最终赋值,于是可以省略var</span></span><br><span class="line">i := <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误示范1,在声明的时候没有指定类型</span></span><br><span class="line"><span class="keyword">var</span> i</span><br><span class="line">i = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误示范2,不声明直接赋值</span></span><br><span class="line">i = <span class="number">10</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>常量声明和赋值</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//正确做法1</span></span><br><span class="line"><span class="keyword">const</span> x = <span class="number">0</span></span><br><span class="line"><span class="keyword">const</span> y = <span class="number">1</span></span><br><span class="line"><span class="keyword">const</span> z = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法2, 可以使用小括号的方式来声明一组变量</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    y = <span class="number">1</span></span><br><span class="line">    z = <span class="number">2</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法3,将括号内声明的变量初始化为一个值,下面的x y z 均初始化为0</span></span><br><span class="line"><span class="keyword">const</span> {</span><br><span class="line">    x = <span class="number">0</span></span><br><span class="line">    y</span><br><span class="line">    z</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//正确做法4, 使用iota标识符进行初始化,</span></span><br><span class="line"><span class="comment">//iota是一个无类型整数常量,每次const关键字出现的时候,其值自增1</span></span><br><span class="line"><span class="keyword">const</span> {</span><br><span class="line">    x = <span class="literal">iota</span></span><br><span class="line">    y</span><br><span class="line">    z</span><br><span class="line">}</span><br><span class="line"><span class="comment">//即</span></span><br><span class="line"><span class="keyword">const</span> {</span><br><span class="line">    x = <span class="literal">iota</span> <span class="comment">// 0</span></span><br><span class="line">    y = <span class="literal">iota</span> <span class="comment">// 1</span></span><br><span class="line">    z = <span class="literal">iota</span> <span class="comment">// 2</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误1, :=符号无法用在const初始化中</span></span><br><span class="line"><span class="keyword">const</span> x := <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//错误2, 未初始化完成就使用, 必须声明初始化一起完成</span></span><br><span class="line"><span class="keyword">const</span> x</span><br><span class="line">x = <span class="number">1</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-2-布尔值和布尔表达式"><a href="#2-2-布尔值和布尔表达式" class="headerlink" title="2.2 布尔值和布尔表达式"></a>2.2 布尔值和布尔表达式</h3><ul>
+<li>布尔值:true和false</li>
+<li>布尔表达式:</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!b</span><br><span class="line">a||b</span><br><span class="line">a&&b</span><br><span class="line">x<y</span><br><span class="line">x>y</span><br></pre></td></tr></tbody></table></figure>
+<p>需要注意的是==和!=可以比较任何两个类型,只要被比较的双方兼容这两个操作符<br>< <= >= >只能比较数字和字符串</p>
+<h3 id="2-3-数值类型"><a href="#2-3-数值类型" class="headerlink" title="2.3 数值类型"></a>2.3 数值类型</h3><p>不同的类型之间不允许进行二进制运算和比较操作,在操作之前必须转为相同的类型</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//错误1, 两个不同类型之间, 不可以进行运算</span></span><br><span class="line">x := <span class="number">1</span> <span class="comment">//自动推断为int类型</span></span><br><span class="line">y := <span class="keyword">int16</span>(<span class="number">2</span>)</span><br><span class="line">z := x + y</span><br><span class="line"></span><br><span class="line"><span class="comment">//正确</span></span><br><span class="line">x := <span class="number">1</span></span><br><span class="line">y := <span class="keyword">int16</span>(<span class="number">2</span>)</span><br><span class="line">z := x + <span class="keyword">int</span>(y)</span><br></pre></td></tr></tbody></table></figure>
+<p>其他的算术运算符</p>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x++ <span class="comment">//没有++x</span></span><br><span class="line">x--</span><br><span class="line">x /= y <span class="comment">//x/y的结果返回给x,如果分母为0,发出异常,如果两个值为整数,丢弃余数</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-3-1整型"><a href="#2-3-1整型" class="headerlink" title="2.3.1整型"></a>2.3.1整型</h4><ul>
+<li>有符号的类型</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="keyword">int8</span> <span class="keyword">int32</span> <span class="keyword">int64</span></span><br><span class="line"><span class="keyword">int</span><span class="comment">//默认是int32或者是int64 依赖平台</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>无符号的类型</li>
+</ul>
+<figure class="highlight go"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">uint</span> <span class="keyword">uint8</span> <span class="keyword">uint32</span> <span class="keyword">uint64</span></span><br><span class="line"><span class="keyword">byte</span><span class="comment">//等于uint8</span></span><br><span class="line"><span class="keyword">rune</span> <span class="comment">//等于uint32</span></span><br><span class="line"><span class="keyword">uintptr</span><span class="comment">//(32位下uint32 64位下uint64)</span></span><br></pre></td></tr></tbody></table></figure>
+<p>需要注意的是 默认使用int就足够,并且其速度是可以保证的<br>将小的整数转换为大整数总是安全的,但是如果向下转换会产生截断或者得到一个不可预期的值,如果想使用一个完美的精度,可以使用big.Rat或者big.Int类型,该类型只受限于机器的内存大小</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://book.douban.com/subject/24869910/" target="_blank" rel="noopener">Go语言程序设计</a></p>
+<hr>
+<p>版权声明:本文由littleji.com创作并发表,转载请注明作者及出处,欢迎关注公众号:littleji_com<br><a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">本文遵守CC BY0SA 4.0</a><br>if you have any questions, please leave a message behind or give an <a href="https://github.com/littleji/littleji.github.io/issues" target="_blank" rel="noopener">issue</a></p>
+<p>本文链接为：<a href="https://blog.littleji.com/2018/02/04/20180204ProgrammingInGo1/">https://blog.littleji.com/2018/02/04/20180204ProgrammingInGo1/</a></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/2018-02/">2018-02</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/计算机语言/">计算机语言</a>, <a href="/tags/Golang/">Golang</a>
+  </div>
+
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+  
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+  
+</section>
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//baidu.com" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:blog.littleji.com">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/2019-04/">2019-04</a><small>1</small></li>
+  
+    <li><a href="/categories/2019-03/">2019-03</a><small>3</small></li>
+  
+    <li><a href="/categories/2019-02/">2019-02</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-12/">2018-12</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-11/">2018-11</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-10/">2018-10</a><small>3</small></li>
+  
+    <li><a href="/categories/2018-09/">2018-09</a><small>2</small></li>
+  
+    <li><a href="/categories/2018-02/">2018-02</a><small>1</small></li>
+  
+    <li><a href="/categories/2018-01/">2018-01</a><small>2</small></li>
+  
+    <li><a href="/categories/2017-05/">2017-05</a><small>1</small></li>
+  
+    <li><a href="/categories/2016-12/">2016-12</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-11/">2016-11</a><small>4</small></li>
+  
+    <li><a href="/categories/2016-05/">2016-05</a><small>2</small></li>
+  
+    <li><a href="/categories/2016-04/">2016-04</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/Algorithm/">Algorithm</a><small>1</small></li>
+  
+    <li><a href="/tags/BookList/">BookList</a><small>1</small></li>
+  
+    <li><a href="/tags/DataMining/">DataMining</a><small>1</small></li>
+  
+    <li><a href="/tags/DataStructure/">DataStructure</a><small>1</small></li>
+  
+    <li><a href="/tags/DistributedComputation/">DistributedComputation</a><small>3</small></li>
+  
+    <li><a href="/tags/ELK/">ELK</a><small>3</small></li>
+  
+    <li><a href="/tags/ElasticSearch/">ElasticSearch</a><small>2</small></li>
+  
+    <li><a href="/tags/Error/">Error</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Golang/">Golang</a><small>1</small></li>
+  
+    <li><a href="/tags/Graph/">Graph</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>2</small></li>
+  
+    <li><a href="/tags/Linux/">Linux</a><small>2</small></li>
+  
+    <li><a href="/tags/Logstash/">Logstash</a><small>2</small></li>
+  
+    <li><a href="/tags/MachineLearning/">MachineLearning</a><small>5</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Mybatis/">Mybatis</a><small>1</small></li>
+  
+    <li><a href="/tags/NLP/">NLP</a><small>6</small></li>
+  
+    <li><a href="/tags/Navicat/">Navicat</a><small>1</small></li>
+  
+    <li><a href="/tags/ORM/">ORM</a><small>1</small></li>
+  
+    <li><a href="/tags/Programmer/">Programmer</a><small>1</small></li>
+  
+    <li><a href="/tags/Programming/">Programming</a><small>5</small></li>
+  
+    <li><a href="/tags/Rpc/">Rpc</a><small>2</small></li>
+  
+    <li><a href="/tags/Security/">Security</a><small>1</small></li>
+  
+    <li><a href="/tags/SiteManagement/">SiteManagement</a><small>1</small></li>
+  
+    <li><a href="/tags/SoftwareEngineering/">SoftwareEngineering</a><small>3</small></li>
+  
+    <li><a href="/tags/Translate/">Translate</a><small>2</small></li>
+  
+    <li><a href="/tags/jsonrpc4j/">jsonrpc4j</a><small>2</small></li>
+  
+    <li><a href="/tags/life/">life</a><small>1</small></li>
+  
+    <li><a href="/tags/信息安全/">信息安全</a><small>1</small></li>
+  
+    <li><a href="/tags/区块链/">区块链</a><small>1</small></li>
+  
+    <li><a href="/tags/图/">图</a><small>1</small></li>
+  
+    <li><a href="/tags/思考/">思考</a><small>1</small></li>
+  
+    <li><a href="/tags/数据挖掘/">数据挖掘</a><small>1</small></li>
+  
+    <li><a href="/tags/数据结构/">数据结构</a><small>1</small></li>
+  
+    <li><a href="/tags/框架/">框架</a><small>1</small></li>
+  
+    <li><a href="/tags/算法/">算法</a><small>1</small></li>
+  
+    <li><a href="/tags/自然语言处理/">自然语言处理</a><small>1</small></li>
+  
+    <li><a href="/tags/计算机语言/">计算机语言</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2019/04/27/20190427SomethingBeforeTheNlpPipline/">实施NLP流水线之前干点什么</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/15/20190318HeadFirstForGitLab/">Gitlab 入门与 工作流</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/05/20190305DataWhaleNLPTask2/">常见的分词方法与文本向量化</a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/03/20190303DataWhaleNLPTask1/">windows下TensorFlow安装与imdb文本分类</a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/19/20190219HandoverMemoList/">软件项目交接清单</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget links">
+  <h3 class="title">友链</h3>
+  <ul class="entry">
+    
+      <li><a target="_blank" rel="noopener" href="http://www.xiaobaidonghui.cn">小白</a></li>
+    
+  </ul>
+</div>
+
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2021 littleji
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'littleji';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
